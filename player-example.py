@@ -109,7 +109,7 @@ while running:
     water.draw(screen)
 
     # Merge check
-    if fire.rect.colliderect(merge_zone) and water.rect.colliderect(merge_zone):
+    if fire.rect.colliderect(merge_zone) and water.rect.colliderect(merge_zone) and abs(fire.rect.centerx - water.rect.centerx) < 40:
         print("LEVEL COMPLETE!")
         running = False
 
