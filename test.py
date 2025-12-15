@@ -30,9 +30,10 @@ def main():
         render_frame(surface, x)
         x += 0.1
 
-        clear_surface(surface)
+        
 
     pygame.quit()
 
 
+main()
 main()
