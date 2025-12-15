@@ -1,14 +1,13 @@
 import pygame
 
-x = 1000
-y = 800
+
 def create_main_surface():
-    surface = pygame.display.set_mode((x,y))
+    surface = pygame.display.set_mode((800, 600))
     return surface
 
 
-def render_frame(surface):
-    pygame.draw.circle(surface, (255, 0, 0), (x/2, y/2), 40)
+def render_frame(surface, x):
+    pygame.draw.circle(surface, (255, 0, 0), (x, 300), 50)
     pygame.display.flip()
 
 
@@ -16,6 +15,7 @@ def main():
     pygame.init()
 
     surface = create_main_surface()
+    x = 0
 
     running = True
     while running:
@@ -23,7 +23,8 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        render_frame(surface)
+        render_frame(surface, x)
+        x += 0.1
 
     pygame.quit()
 
