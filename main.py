@@ -6,7 +6,6 @@ from entities.Box import Box
 from entities.Wall import Wall
 from entities.MenuController import MenuController
 from entities.SettingsMap import SettingsMap
-from entities.GoalArea import GoalArea
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 from entities.Spike import Spike
 from entities.PlayerMerge import PlayerMerge
