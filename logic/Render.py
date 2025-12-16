@@ -20,21 +20,19 @@ class Render:
         # Clear screen
         self.__screen.fill((30, 30, 30))
 
-        # Draw map background
+        # Draw map background first
         pygame.draw.rect(self.__screen, (50, 50, 50), (offset_x, offset_y, screen_width, screen_height))
+        
+        # front image (background)
+        scaled_image = pygame.transform.scale(map.get_image(),(screen_width, screen_height))
+        self.__screen.blit(scaled_image, (offset_x, offset_y))
 
-
-        # Draw entities
+        # Draw entities on top
         for entity in map.get_entities():
             x, y, width, height = entity.get_render_data()
             if entity.get_texture() is not None:
                 scaled_entity_image = pygame.transform.scale(entity.get_texture(), (int(width * pixelsize), int(height * pixelsize)))
                 self.__screen.blit(scaled_entity_image, (offset_x + int(x * pixelsize), offset_y + int(y * pixelsize)))
-
-
-        # front image
-        scaled_image = pygame.transform.scale(map.get_image(),(screen_width, screen_height))
-        self.__screen.blit(scaled_image, (offset_x, offset_y))
         
  
         print("Rendering frame..." + str(random.randint(0, 100)))
