@@ -2,18 +2,21 @@ from Map import Map
 from entities.Player import Player
 from logic.Loop_controller import Loop_controller
 from logic.Logic_runner import LogicManager
-from entities.Box import Box
+from entities.Button import Box
 from entities.Wall import Wall
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 
 def build_maps(main):
     maps = []
+    map0 = Map("map0", 400, 250)
+    maps.append(map0)
     map1 = Map("map1", 400, 250)
     map1.add_entity(Player(50, 50, main, 1))
     map1.add_entity(Player(100, 50, main, 2))
     map1.add_entity(Box(200, 200, main))
     map1.add_entity(Wall(-2, 200, 400, 20, main))
     maps.append(map1)
+    
     
 
     return maps
