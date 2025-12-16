@@ -6,10 +6,12 @@ class SoundLibrary:
             'footstep': 'footstep.wav',
         }
         self.tracks = {
-            'background1': 'soft-background-music-409193.mp3'
+            'background1': 'soft-background-music-409193.mp3',
+            'mijnbeat': 'beat.wav',
         }
         self.loaded_sfx = {}
         self.current_track = None
+        self.total_time = 0
         self.__load_sounds()
 
 
@@ -28,5 +30,15 @@ class SoundLibrary:
                 pygame.mixer.music.play()
                 self.current_track = name
 
+    def stop(self):
+        pygame.mixer.music.stop()
+
+    def pause(self):
+        pygame.mixer.music.pause()
+
+    def unpause(self):
+        pygame.mixer.music.unpause()
+
     def sound_loop(self, past_time):
+        self.total_time += past_time
         self.play('background1')
