@@ -3,21 +3,30 @@ import pygame
 class SoundLibrary:
     def __init__(self):
         self.sfx = {
-            'footstep': 'sfx/footstep.wav',
+            'footstep': 'footstep.wav',
         }
+        self.tracks = {
+            'background1': 'soft-background-music-409193.mp3'
+        }
+        self.loaded_sfx = {}
+        self.current_track = None
         self.__load_sounds()
 
 
     def __load_sounds(self):
-        self.loaded_sfx = {}
         for key, path in self.sfx.items():
-            self.loaded_sfx[key] = pygame.mixer.Sound(f'assets/audio/{path}')
-            
+            self.loaded_sfx[key] = pygame.mixer.Sound(f'assets/audio/sfx/{path}')
 
-    def play(self, sfx_name):
-        if sfx_name in self.loaded_sfx:
-            pygame.mixer.Sound.play(self.loaded_sfx[sfx_name])
+    def play(self, name):
+        if name in self.loaded_sfx:
+            pygame.mixer.Sound.play(self.loaded_sfx[name])
+            return
+        
+        if name in self.tracks:
+            if not pygame.mixer.music.get_busy() or self.current_track != name:
+                pygame.mixer.music.load(f'assets/audio/music/{self.tracks[name]}')
+                pygame.mixer.music.play()
+                self.current_track = name
 
     def sound_loop(self, past_time):
-        pass
-
+        self.play('background1')

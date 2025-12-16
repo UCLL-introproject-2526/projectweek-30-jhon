@@ -37,5 +37,3 @@ class Main:
     
 
 main = Main()
-
-
