@@ -1,6 +1,7 @@
 import pygame
 from time import time
 from logic.Render import Render
+from SoundLibrary import SoundLibrary
 from logic.Logic_runner import LogicManager
 
 class Loop_controller:
@@ -8,7 +9,8 @@ class Loop_controller:
         self.fps = 1
         self.main = main
         self.__renderer = Render(name, 600, 260)
-        self.__logic_manager =LogicManager(main)
+        self.__logic_manager = LogicManager(main)
+        self.__sound_library = SoundLibrary()
         self.__time = time()
 
     def start(self):
@@ -20,6 +22,7 @@ class Loop_controller:
             print("past time:", past_time)
             self.__time = time()
             events = pygame.event.get()
+            self.__sound_library.sound_loop(past_time)
             for event in events:
                 if event.type == pygame.QUIT:
                     self.__renderer.quit()
