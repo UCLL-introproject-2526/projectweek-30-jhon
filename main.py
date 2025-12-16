@@ -9,8 +9,8 @@ from settings.keyboard_layout import keybinds_player1, keybinds_player2
 
 def build_maps(main):
     maps = []
-    map0 = Map("map0", 400, 250)
-    maps.append(map0)
+    # map0 = Map("map0", 400, 250)
+    # maps.append(map0)
     map1 = Map("map1", 400, 250)
     map1.add_entity(Player(50, 50, main, 1))
     map1.add_entity(Player(100, 50, main, 2))

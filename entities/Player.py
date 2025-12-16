@@ -17,7 +17,6 @@ class Player(Entity):
             self.controls = keybinds_player1()
         else:
             self.controls = keybinds_player2()
-        self.controls = {"left": pygame.K_a, "right": pygame.K_d, "jump": pygame.K_w}
     def get_texture(self):
         return self.__texture
     

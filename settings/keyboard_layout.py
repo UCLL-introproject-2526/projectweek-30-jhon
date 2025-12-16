@@ -1,5 +1,5 @@
 import pygame
-keyboard_layout = "querty"
+keyboard_layout = "qwerty"
 def keybinds_player1():
     if keyboard_layout == "azerty":
         return {"left": pygame.K_q, "right": pygame.K_d, "jump": pygame.K_z}

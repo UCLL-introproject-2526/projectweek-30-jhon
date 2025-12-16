@@ -52,7 +52,7 @@ class Entity:
         coliding_entities = []
         for entity in self.__main.get_current_map().get_entities():
             entity_x, entity_y, entity_width, entity_height =  entity.get_render_data()
-#            if(entity_x > )
+            #if 
 
 
 
