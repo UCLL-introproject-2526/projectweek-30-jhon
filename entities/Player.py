@@ -1,5 +1,9 @@
 # from entities.Entity import Entity
 from entities.Entity import Entity
+
+# temporary movement to test maps (movement.py)
+from entities.Movement import Movement
+# -----------------------------
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 import pygame
 
@@ -7,7 +11,6 @@ class Player(Entity):
     def __init__(self, x, y, main, keybinds):
         super().__init__(x, y, 15 , 25, main, solid=True, gravitation=1)
         self.__main = main
-        # Nick - movement + physics
         self.velocity_y = 0
         self.on_ground = True
         self.gravity = 1
@@ -40,17 +43,21 @@ class Player(Entity):
         self.set_y(self.get_y() + self.velocity_y)
 
     def game_loop(self, delta_time, events):
-        self.moveee(delta_time)
-        # Continue acties (elke frame)
-        # keys = pygame.key.get_pressed()
-        # self.move(keys)
-        # self.apply_gravity()
-
-        # Eenmalige acties (per event)
-        # for event in events:
-        #     if event.type == pygame.KEYDOWN:
-        #         if event.key == self.controls["jump"]:
-        #             self.jump()
+        # Get input and handle movement
+        keys = pygame.key.get_pressed()
+        Movement.handle_movement(self, keys)
+        
+        # Apply gravity
+        Movement.handle_gravity(self)
+        
+        # Check collisions with walls
+        Movement.check_wall_collisions(self, self.__main)
+        
+        # Handle jump input
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == self.controls["jump"]:
+                    Movement.handle_jump(self)
 
     def run_with_delay(self):
         print("value")
