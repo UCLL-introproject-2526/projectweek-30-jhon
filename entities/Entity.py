@@ -3,7 +3,7 @@ import pygame
 from tools.importer import image
 
 class Entity:
-    def __init__(self, x, y, width, height, main, solid=True, texture=None, gravitation = False, weight = 10):
+    def __init__(self, x, y, width, height, main, solid=True, texture=None, gravitation = False, weight = 10, bounce = 0):
         self.__x = x
         self.__y = y
         self.__width = width
@@ -11,6 +11,7 @@ class Entity:
         self.__solid = solid
         self.__texture = texture
         self.__gravitation = gravitation
+        self.__bounce = bounce
         self.__speed_x = 0
         self.__speed_y = 0
         self.__main = main
@@ -60,7 +61,7 @@ class Entity:
 
     def moveee(self, delta_time):
         if self.__gravitation:
-            self.__speed_y -= self.__width * delta_time
+            self.__speed_y += self.__width * delta_time
         self.__y += self.__speed_y
         self.__x += self.__speed_x
 
