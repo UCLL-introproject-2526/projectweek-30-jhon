@@ -12,7 +12,7 @@ def build_maps(main):
     map1.add_entity(Player(50, 50, main, 1))
     map1.add_entity(Player(100, 50, main, 2))
     map1.add_entity(Box(200, 200, ))
-    map1.add_entity(Wall(-2, 200, 400, 20))
+    map1.add_entity(Wall(-2, 200, 400, 20, main))
     maps.append(map1)
     
 

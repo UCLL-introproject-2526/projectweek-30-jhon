@@ -1,11 +1,11 @@
 # from entities.Entity import Entity
-from .Entity import Entity
+from entities.Entity import Entity
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 import pygame
 
 class Player(Entity):
     def __init__(self, x, y, main, keybinds):
-        super().__init__(x, y, 15 , 25, solid=True)
+        super().__init__(x, y, 15 , 25, main, solid=True)
         self.__main = main
         self.__texture = pygame.image.load("assets/textures/entities/player/eyes_open.png").convert_alpha()
         # Nick - movement + physics
@@ -17,6 +17,7 @@ class Player(Entity):
             self.controls = keybinds_player1()
         else:
             self.controls = keybinds_player2()
+        self.controls = {"left": pygame.K_a, "right": pygame.K_d, "jump": pygame.K_w}
     def get_texture(self):
         return self.__texture
     
