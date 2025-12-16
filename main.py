@@ -5,6 +5,7 @@ from logic.Logic_runner import LogicManager
 from entities.Box import Box
 from entities.Wall import Wall
 from entities.MenuController import MenuController
+from entities.SettingsMap import SettingsMap
 from entities.GoalArea import GoalArea
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 
@@ -18,6 +19,7 @@ def build_maps(main):
     
     def settings():
         print("Settings clicked")
+        main.select_map(3)
     
     def quit_game():
         import sys
@@ -105,6 +107,11 @@ def build_maps(main):
     map2.add_entity(GoalArea(340, 15, 60, 25, main, lambda: main.select_map(0)))  # Back to menu
     
     maps.append(map2)
+
+    # Map 3: Settings
+    map3 = Map("settings", 400, 250)
+    SettingsMap(main, map3)
+    maps.append(map3)
     
     
 

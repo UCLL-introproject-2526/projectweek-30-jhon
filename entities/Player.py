@@ -7,7 +7,6 @@ class Player(Entity):
     def __init__(self, x, y, main, keybinds):
         super().__init__(x, y, 15 , 25, main, solid=True, gravitation=1)
         self.__main = main
-        self.__texture = pygame.image.load("assets/textures/entities/player/eyes_open.png").convert_alpha()
         # Nick - movement + physics
         self.velocity_y = 0
         self.on_ground = True
@@ -15,8 +14,11 @@ class Player(Entity):
         self.speed = 5
         if keybinds == 1:
             self.controls = keybinds_player1()
+            texture_path = "assets/textures/entities/Player/Player_01.png"
         else:
             self.controls = keybinds_player2()
+            texture_path = "assets/textures/entities/Player/Player_02.png"
+        self.__texture = pygame.image.load(texture_path).convert_alpha()
     def get_texture(self):
         return self.__texture
     
