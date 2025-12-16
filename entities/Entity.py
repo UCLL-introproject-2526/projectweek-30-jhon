@@ -30,4 +30,15 @@ class Entity:
 
     def get_render_data(self):
         return self.__x, self.__y, self.__width, self.__height
+    
+    def get_x(self):
+        return self.__x
+    def set_x(self, x):
+        self.__x = x
+    def get_y(self):
+        return self.__y
+    def set_y(self, y):
+        self.__y = y
+    
+    
 
