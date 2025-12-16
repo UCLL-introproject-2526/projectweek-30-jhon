@@ -39,6 +39,9 @@ class SoundLibrary:
     def unpause(self):
         pygame.mixer.music.unpause()
 
+    def set_volume(self, volume):
+        pygame.mixer.music.set_volume(volume)
+
     def sound_loop(self, past_time):
         self.total_time += past_time
         self.play('background1')
