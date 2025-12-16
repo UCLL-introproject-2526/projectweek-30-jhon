@@ -8,6 +8,7 @@ from entities.MenuController import MenuController
 from entities.SettingsMap import SettingsMap
 from entities.GoalArea import GoalArea
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
+from entities.Spike import Spike
 
 def build_maps(main):
     maps = []
@@ -32,35 +33,21 @@ def build_maps(main):
     
     # Map 1: Level 1 - Platform Challenge
     map1 = Map("map1", 400, 250)
-    
-    # Players start position
+
     map1.add_entity(Player(20, 180, main, 1))
     map1.add_entity(Player(40, 180, main, 2))
     
     # Ground floor
     map1.add_entity(Wall(0, 220, 400, 30, main))
     
-    # Left side platforms
-    map1.add_entity(Wall(0, 180, 60, 10, main))
-    map1.add_entity(Wall(20, 140, 50, 10, main))
+    # # Obstacles - boxes to push/avoid
+    # map1.add_entity(Box(130, 190, main))
+    # map1.add_entity(Box(200, 160, main))
+    # map1.add_entity(Box(270, 130, main))
     
-    # Middle platforms (gaps to jump across)
-    map1.add_entity(Wall(100, 200, 50, 10, main))
-    map1.add_entity(Wall(170, 170, 50, 10, main))
-    map1.add_entity(Wall(240, 140, 50, 10, main))
-    
-    # Right side platforms
-    map1.add_entity(Wall(310, 110, 60, 10, main))
-    map1.add_entity(Wall(340, 70, 60, 10, main))
-    
-    # Obstacles - boxes to push/avoid
-    map1.add_entity(Box(130, 190, main))
-    map1.add_entity(Box(200, 160, main))
-    map1.add_entity(Box(270, 130, main))
-    
-    # Top platform - goal area
-    map1.add_entity(Wall(350, 40, 50, 10, main))
-    map1.add_entity(GoalArea(350, 20, 50, 20, main, lambda: main.select_map(2)))
+    # # Top platform - goal area
+    # map1.add_entity(Wall(350, 40, 50, 10, main))
+    # map1.add_entity(GoalArea(350, 20, 50, 20, main, lambda: main.select_map(2)))
     
     maps.append(map1)
     
