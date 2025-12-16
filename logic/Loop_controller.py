@@ -16,16 +16,19 @@ class Loop_controller:
         clock = pygame.time.Clock()
 
         while True:
-            print(time() - self.__time)
+            past_time = time() - self.__time
+            print("past time:", past_time)
             self.__time = time()
-            for event in pygame.event.get():
+            events = pygame.event.get()
+            for event in events:
                 if event.type == pygame.QUIT:
                     self.__renderer.quit()
                 if event.type == pygame.FULLSCREEN:
                     self.__renderer.toggle_fullscreen()
+            self.__logic_manager.execute_loop(past_time, events)
 
             self.__renderer.update(self.main)
             clock.tick(self.fps)
 
-    def adds_later_task(self, task, delay):
+    def add_later_task(self, task, delay):
         self.__logic_manager.add_later_taks(task, delay)
