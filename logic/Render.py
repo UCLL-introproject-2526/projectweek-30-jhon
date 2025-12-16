@@ -26,12 +26,10 @@ class Render:
 
         # Draw entities
         for entity in map.get_entities():
-            x, y, width, height = entity.getRenderData()
+            x, y, width, height = entity.get_render_data()
             if entity.get_texture() is not None:
-                scaledEntityImage = pygame.transform.scale(entity.get_texture(), (int(width * pixelsize), int(height * pixelsize)))
-                self.__screen.blit(scaledEntityImage, (offset_x + int(x * pixelsize), offset_y + int(y * pixelsize)))
-
-
+                scaled_entity_image = pygame.transform.scale(entity.get_texture(), (int(width * pixelsize), int(height * pixelsize)))
+                self.__screen.blit(scaled_entity_image, (offset_x + int(x * pixelsize), offset_y + int(y * pixelsize)))
 
 
         # front image

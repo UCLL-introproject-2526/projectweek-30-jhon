@@ -32,15 +32,7 @@ class Block:
                 player.rect.bottom = self.rect.top
             elif player.rect.top < self.rect.bottom and player.rect.bottom > self.rect.bottom:
                 player.rect.top = self.rect.bottom
-        # collide with walls
-        if player.rect.left < 0:
-            player.rect.left = 0
-        if player.rect.right > WIDTH:
-            player.rect.right = WIDTH
-        if player.rect.top < 0:
-            player.rect.top = 0
-        if player.rect.bottom > HEIGHT:
-            player.rect.bottom = HEIGHT
+
 class Player:
     def __init__(self, x, y, color, controls):
         self.rect = pygame.Rect(x, y, 40, 40)
@@ -50,14 +42,14 @@ class Player:
 
     def move(self, keys):
         # Horizontal movement
-        if keys[self.controls["left"]]:
+        if keys[self.controls["left"]] and self.rect.x > 0:
             self.rect.x -= self.speed
-        if keys[self.controls["right"]]:
+        if keys[self.controls["right"]] and self.rect.x < WIDTH - self.rect.width:
             self.rect.x += self.speed
         # Vertical movement
-        if keys[self.controls["up"]]:
+        if keys[self.controls["up"]] and self.rect.y > 0:
             self.rect.y -= self.speed
-        if keys[self.controls["down"]]:
+        if keys[self.controls["down"]] and self.rect.y < HEIGHT - self.rect.height:
             self.rect.y += self.speed
 
     def draw(self, surface):
@@ -67,7 +59,7 @@ def collide_all_blocks(player, blocks):
     for block in blocks:
         block.collide(player)
 
-# ----- CREATE BLOCKS -----
+# ----- CREATE BLOCKS -----aaaaa
 block1 = Block(200, 500, 400, 20, (100, 100, 100))
 block2 = Block(0, 300, 300, 20, (100, 100, 100))
 blocks = [block1, block2]
@@ -117,7 +109,7 @@ while running:
     water.draw(screen)
 
     # Merge check
-    if fire.rect.colliderect(merge_zone) and water.rect.colliderect(merge_zone) and abs(fire.rect.centerx - water.rect.centerx) < 40:
+    if fire.rect.colliderect(merge_zone) and water.rect.colliderect(merge_zone):
         print("LEVEL COMPLETE!")
         running = False
 
