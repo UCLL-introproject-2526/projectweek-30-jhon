@@ -1,0 +1,26 @@
+import pygame
+from time import time
+from logic.Render import Render
+
+class Loop_controller:
+    def __init__(self, main, name):
+        self.fps = 1
+        self.main = main
+        self.__renderer = Render(name, 600, 260)
+        self.__time = time()
+
+    def start(self):
+        pygame.init()
+        clock = pygame.time.Clock()
+
+        while True:
+            print(time() - self.__time)
+            self.__time = time()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.__renderer.quit()
+                if event.type == pygame.FULLSCREEN:
+                    self.__renderer.toggle_fullscreen()
+
+            self.__renderer.update(self.main)
+            clock.tick(self.fps)
