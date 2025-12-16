@@ -1,3 +1,5 @@
+import pygame
+
 from tools.importer import image
 
 class Entity:
@@ -29,6 +31,6 @@ class Entity:
     def get_render_data(self):
         return self.__x, self.__y, self.__width, self.__height
 
-    def game_loop(self, past_time):
+    def game_loop(self, past_time, events):
         print("running enity loop....")
         pass

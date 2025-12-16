@@ -10,8 +10,11 @@ class Player(Entity):
     def get_texture(self):
         return self.__texture
 
-    def game_loop(self, past_time):
+    def game_loop(self, past_time, events):
         print("Player game loop...")
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                print(event.key)
         self.__main.add_later_task(self.run_with_delay, 10)
         pass
 

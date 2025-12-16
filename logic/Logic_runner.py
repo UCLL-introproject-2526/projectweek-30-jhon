@@ -4,9 +4,9 @@ class LogicManager:
         self.__main = main
 
 
-    def execute_loop(self, delta_time):
+    def execute_loop(self, delta_time, events):
         for entity in self.__main.get_current_map().get_entities():
-            entity.game_loop(delta_time)
+            entity.game_loop(delta_time, events)
 
         for task in self.__opentasks:
             if task.check_and_run(delta_time):

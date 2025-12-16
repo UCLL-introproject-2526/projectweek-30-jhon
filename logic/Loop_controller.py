@@ -19,12 +19,13 @@ class Loop_controller:
             past_time = time() - self.__time
             print("past time:", past_time)
             self.__time = time()
-            for event in pygame.event.get():
+            events = pygame.event.get()
+            for event in events:
                 if event.type == pygame.QUIT:
                     self.__renderer.quit()
                 if event.type == pygame.FULLSCREEN:
                     self.__renderer.toggle_fullscreen()
-            self.__logic_manager.execute_loop(past_time)
+            self.__logic_manager.execute_loop(past_time, events)
 
             self.__renderer.update(self.main)
             clock.tick(self.fps)
