@@ -5,7 +5,6 @@ from logic.Logic_runner import LogicManager
 
 class Main:
     def __init__(self):
-
         self.__loop_controller = Loop_controller(self, "Projectweek Jhon")
         map1 = Map.Map("map1", 400, 250)
         map1.add_entity(Player(50, 50))
