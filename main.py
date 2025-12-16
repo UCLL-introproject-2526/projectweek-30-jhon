@@ -12,7 +12,7 @@ from entities.PlayerMerge import PlayerMerge
 
 def build_maps(main):
     maps = []
-    map0 = Map("map0", 400, 250)
+    map0 = Map("start_menu", 400, 250)
     
     def play_game():
         print("Starting game!")
@@ -32,7 +32,7 @@ def build_maps(main):
     maps.append(map0)
     
     # Map 1: Level 1 - Platform Challenge
-    map1 = Map("map1", 400, 250)
+    map1 = Map("background", 400, 250)
 
     # Players start at OPPOSITE sides
     map1.add_entity(Player(20, 180, main, 1))  # Left side
