@@ -42,11 +42,20 @@ class Entity:
     def colishion(self, other):
         pass
 
-    def move(self, other, delta_time):
+    def moveee(self, other, delta_time):
         if self.__gravitation:
             self.__speed_y -= self.__width * delta_time
         self.__y += self.__speed_y
         self.__x += self.__speed_x
+
+    def colision(self):
+        coliding_entities = []
+        for entity in self.__main.get_current_map().get_entities():
+            entity_x, entity_y, entity_width, entity_height =  entity.get_render_data()
+#            if(entity_x > )
+
+
+
 
     def game_loop(self, past_time, events):
         print("Entiry game loop...")
