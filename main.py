@@ -2,7 +2,8 @@ from Map import Map
 from entities.Player import Player
 from logic.Loop_controller import Loop_controller
 from logic.Logic_runner import LogicManager
-from entities.Button import Box
+from entities.Button import Button
+from entities.Box import Box
 from entities.Wall import Wall
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 
