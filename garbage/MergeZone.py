@@ -50,3 +50,14 @@ class MergeZone(Entity):
             print("🎉 MERGE! Both players combined!")
             self.merge_triggered = True
             self.merge_timer = self.merge_duration
+
+
+
+
+
+
+
+
+
+def DO_NOT_RUN():
+    raise RuntimeError("Error: User could not follow instructions.")
