@@ -38,25 +38,25 @@ class Player(Entity):
     #     if keys[self.controls["jump"]]:
     #         self.jump()
 
-    # def game_loop(self, past_time, events):
-    #     print("Player game loop...")
-    #     for event in events:
-    #         if event.type == pygame.KEYDOWN:
-    #             print(event.key)
-    #     self.__main.add_later_task(self.run_with_delay, 10)
-    #     pass
-
-    def game_loop(self, events):
-        # Continue acties (elke frame)
-        keys = pygame.key.get_pressed()
-        self.move(keys)
-        self.apply_gravity()
-
-        # Eenmalige acties (per event)
+    def game_loop(self, past_time, events):
+        print("Player game loop...")
         for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == self.controls["jump"]:
-                    self.jump()
+                print(event.key)
+        self.__main.add_later_task(self.run_with_delay, 10)
+        pass
+
+    # def game_loop(self, events):
+    #     # Continue acties (elke frame)
+    #     keys = pygame.key.get_pressed()
+    #     self.move(keys)
+    #     self.apply_gravity()
+
+    #     # Eenmalige acties (per event)
+    #     for event in events:
+    #         if event.type == pygame.KEYDOWN:
+    #             if event.key == self.controls["jump"]:
+    #                 self.jump()
 
     def run_with_delay(self):
         print("value")
