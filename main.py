@@ -1,4 +1,4 @@
-import Map
+from Map import Map
 from entities.Player import Player
 from logic.Loop_controller import Loop_controller
 from logic.Logic_runner import LogicManager
@@ -6,8 +6,8 @@ from entities.Box import Box
 
 def build_maps(main):
     maps = []
-    map1 = Map.Map("map1", 400, 250)
-    map1.add_entity(Player(50, 50))
+    map1 = Map("map1", 400, 250)
+    map1.add_entity(Player(50, 50, main))
     map1.add_entity(Box(100,100))
 
     maps.append(map1)

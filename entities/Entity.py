@@ -39,6 +39,10 @@ class Entity:
         return self.__y
     def set_y(self, y):
         self.__y = y
+
+    def game_loop(self, past_time, events):
+        print("Entiry game loop...")
+        pass
     
-    
+
 
