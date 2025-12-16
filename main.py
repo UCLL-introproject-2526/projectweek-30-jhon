@@ -8,7 +8,7 @@ class Main:
 
         self.__loop_controller = Loop_controller(self, "Projectweek Jhon")
         map1 = Map.Map("map1", 400, 250)
-        map1.add_entity(Player(50, 50))
+        map1.add_entity(Player(50, 50, self))
         self.__maps = [map1]
         self.__selected_map = 0
 
@@ -16,7 +16,7 @@ class Main:
     def get_current_map(self):
         return self.__maps[self.__selected_map]
 
-    def add_runtask(self, task, delay):
+    def add_later_task(self, task, delay):
         self.__loop_controller.add_later_task(task, delay)
 
 main = Main()

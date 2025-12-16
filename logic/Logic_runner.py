@@ -5,6 +5,9 @@ class LogicManager:
 
 
     def execute_loop(self, delta_time):
+        for entity in self.__main.get_current_map().get_entities():
+            entity.game_loop(delta_time)
+
         for task in self.__opentasks:
             if task.check_and_run(delta_time):
                 self.__opentasks.remove(task)
@@ -13,7 +16,7 @@ class LogicManager:
         self.__opentasks.append(LaterTask(task, time))
 
 class LaterTask:
-    def __init__(self, delay, task):
+    def __init__(self, task, delay):
         self.__time = delay
         self.__task = task
 

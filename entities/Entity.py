@@ -1,4 +1,4 @@
-import pygame
+from tools.importer import image
 
 class Entity:
     def __init__(self, x, y, width, height, solid=True, texture=None):
@@ -24,10 +24,11 @@ class Entity:
         return self.__texture
 
     def set_texture(self, texture):
-        self.__texture = pygame.image.load(f"assets/textures/entities/{texture}").convert_alpha()
+        self.__texture = image(f"assets/textures/entities/{texture}")
 
     def get_render_data(self):
         return self.__x, self.__y, self.__width, self.__height
 
-    def game_loop(self):
+    def game_loop(self, past_time):
+        print("running enity loop....")
         pass
