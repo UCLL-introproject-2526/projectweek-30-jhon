@@ -101,7 +101,7 @@ def collide_all_blocks(player, blocks):
     for block in blocks:
         block.collide(player)
 
-# ----- CREATE BLOCKS -----aaaaa
+# ----- CREATE BLOCKS -----
 block1 = Block(200, 500, 400, 20, (100, 100, 100))
 block2 = Block(0, 300, 300, 20, (100, 100, 100))
 blocks = [block1, block2]
