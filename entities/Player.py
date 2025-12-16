@@ -7,10 +7,10 @@ class Player(Entity):
         self.__main = main
         self.__texture = pygame.image.load("assets/textures/entities/player/eyes_open.png").convert_alpha()
         # Nick - movement + physics
-        self.velocity_y = 0
-        self.on_ground = True
-        self.gravity = 1
-        self.speed = 5
+        # self.velocity_y = 0
+        # self.on_ground = True
+        # self.gravity = 1
+        # self.speed = 5
         self.controls = {"left": pygame.K_a, "right": pygame.K_d, "jump": pygame.K_SPACE}
 
     def get_texture(self):
