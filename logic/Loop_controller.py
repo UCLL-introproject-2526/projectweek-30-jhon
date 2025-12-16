@@ -8,13 +8,13 @@ class Loop_controller:
     def __init__(self, main, name):
         self.fps = 1
         self.main = main
+        pygame.init()
         self.__renderer = Render(name, 600, 260)
         self.__logic_manager = LogicManager(main)
         self.__sound_library = SoundLibrary()
         self.__time = time()
 
     def start(self):
-        pygame.init()
         clock = pygame.time.Clock()
 
         while True:
