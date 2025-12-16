@@ -9,6 +9,20 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("JHON")
 clock = pygame.time.Clock()
 
+# --- PHYSICS ---
+# class Physics:
+#     def __init__(self, gravity=1):
+#         self.gravity = gravity
+
+#     def apply_gravity(self, entity):
+#         x, y, width, height = entity.get_render_data()
+#         entity.set_height(height + self.gravity)
+    
+#     def get_gravity(self):
+#         return self.gravity
+
+
+
 # ----- BLOCK CLASS -----
 class Block:
     def __init__(self, x, y, width, height, color):
@@ -28,10 +42,13 @@ class Block:
 
         # Vertical collision
         if player.rect.colliderect(self.rect):
-            if player.rect.bottom > self.rect.top and player.rect.top < self.rect.top:
+            if player.velocity_y > 0 and player.rect.bottom >= self.rect.top:
                 player.rect.bottom = self.rect.top
-            elif player.rect.top < self.rect.bottom and player.rect.bottom > self.rect.bottom:
+                player.velocity_y = 0
+                player.on_ground = True
+            elif player.velocity_y < 0 and player.rect.top <= self.rect.bottom:
                 player.rect.top = self.rect.bottom
+                player.velocity_y = 0
 
 class Player:
     def __init__(self, x, y, color, controls):
@@ -40,20 +57,45 @@ class Player:
         self.controls = controls
         self.speed = 4
 
+        self.velocity_y = 0
+        self.on_ground = False
+        self.gravity = 1
+
+
     def move(self, keys):
-        # Horizontal movement
-        if keys[self.controls["left"]] and self.rect.x > 0:
+        if keys[self.controls["left"]]:
             self.rect.x -= self.speed
-        if keys[self.controls["right"]] and self.rect.x < WIDTH - self.rect.width:
+        if keys[self.controls["right"]]:
             self.rect.x += self.speed
-        # Vertical movement
-        if keys[self.controls["up"]] and self.rect.y > 0:
-            self.rect.y -= self.speed
-        if keys[self.controls["down"]] and self.rect.y < HEIGHT - self.rect.height:
-            self.rect.y += self.speed
+
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.color, self.rect)
+
+    def dont_go_outside(self):
+        if self.rect.left < 0:
+            self.rect.left = 0
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+
+        if self.rect.bottom >= HEIGHT:
+            self.rect.bottom = HEIGHT
+            self.velocity_y = 0
+            self.on_ground = True
+
+    def jump(self):
+        if self.on_ground:
+            self.velocity_y = -25
+            self.on_ground = False
+
+    def apply_gravity(self):
+        self.velocity_y += self.gravity
+        self.rect.y += self.velocity_y
+
+    
+    
+
+
 
 def collide_all_blocks(player, blocks):
     for block in blocks:
@@ -87,12 +129,25 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        
+        if event.type == pygame.KEYDOWN:
+            if event.key == fire.controls["up"]:
+                fire.jump()
+            if event.key == water.controls["up"]:
+                water.jump()
+        
 
     keys = pygame.key.get_pressed()
 
     # Move players
     fire.move(keys)
     water.move(keys)
+
+    fire.apply_gravity()
+    water.apply_gravity()
+
+    fire.dont_go_outside()
+    water.dont_go_outside()
 
     # Collision with blocks
     collide_all_blocks(fire, blocks)

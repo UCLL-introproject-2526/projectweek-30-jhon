@@ -1,5 +1,7 @@
 import pygame
 
+from tools.importer import image
+
 class Entity:
     def __init__(self, x, y, width, height, solid=True, texture=None):
         self.__x = x
@@ -24,10 +26,19 @@ class Entity:
         return self.__texture
 
     def set_texture(self, texture):
-        self.__texture = pygame.image.load(f"assets/textures/entities/{texture}").convert_alpha()
+        self.__texture = image(f"assets/textures/entities/{texture}")
 
     def get_render_data(self):
         return self.__x, self.__y, self.__width, self.__height
+    
+    def get_x(self):
+        return self.__x
+    def set_x(self, x):
+        self.__x = x
+    def get_y(self):
+        return self.__y
+    def set_y(self, y):
+        self.__y = y
+    
+    
 
-    def game_loop(self):
-        pass

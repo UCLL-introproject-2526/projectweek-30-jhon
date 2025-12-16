@@ -18,14 +18,20 @@ def build_maps(main):
 class Main:
     def __init__(self):
         self.__loop_controller = Loop_controller(self, "Projectweek Jhon")
+<<<<<<< HEAD
         self.__maps = build_maps(self)
+=======
+        map1 = Map.Map("map1", 400, 250)
+        map1.add_entity(Player(50, 50, self))
+        self.__maps = [map1]
+>>>>>>> 50f1c13ff837f10eebf899df3c0dfdc069f775d8
         self.__selected_map = 0
 
         self.__loop_controller.start()
     def get_current_map(self):
         return self.__maps[self.__selected_map]
 
-    def add_runtask(self, task, delay):
+    def add_later_task(self, task, delay):
         self.__loop_controller.add_later_task(task, delay)
     
 
