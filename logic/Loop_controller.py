@@ -1,12 +1,14 @@
 import pygame
 from time import time
 from logic.Render import Render
+from logic.Logic_runner import LogicManager
 
 class Loop_controller:
     def __init__(self, main, name):
         self.fps = 1
         self.main = main
         self.__renderer = Render(name, 600, 260)
+        self.__logic_manager =LogicManager(main)
         self.__time = time()
 
     def start(self):
@@ -24,3 +26,6 @@ class Loop_controller:
 
             self.__renderer.update(self.main)
             clock.tick(self.fps)
+
+    def adds_later_task(self, task, delay):
+        self.__logic_manager.add_later_taks(task, delay)

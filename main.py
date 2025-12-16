@@ -6,7 +6,6 @@ from logic.Logic_runner import LogicManager
 class Main:
     def __init__(self):
 
-        self.__logic_runner = LogicManager(self)
         self.__loop_controller = Loop_controller(self, "Projectweek Jhon")
         map1 = Map.Map("map1", 400, 250)
         map1.add_entity(Player(50, 50))
@@ -16,5 +15,8 @@ class Main:
         self.__loop_controller.start()
     def get_current_map(self):
         return self.__maps[self.__selected_map]
+
+    def add_runtask(self, task, delay):
+        self.__loop_controller.add_later_task(task, delay)
 
 main = Main()

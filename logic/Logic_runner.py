@@ -6,8 +6,11 @@ class LogicManager:
 
     def execute_loop(self, delta_time):
         for task in self.__opentasks:
-            task.check_and_run(delta_time)
+            if task.check_and_run(delta_time):
+                self.__opentasks.remove(task)
 
+    def add_later_taks(self, task, time):
+        self.__opentasks.append(LaterTask(task, time))
 
 class LaterTask:
     def __init__(self, delay, task):
