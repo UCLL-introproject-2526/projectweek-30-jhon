@@ -1,9 +1,10 @@
 # from entities.Entity import Entity
 from .Entity import Entity
+from settings.keyboard_layout import keybinds_player1, keybinds_player2
 import pygame
 
 class Player(Entity):
-    def __init__(self, x, y, main):
+    def __init__(self, x, y, main, keybinds):
         super().__init__(x, y, 15 , 25, solid=True)
         self.__main = main
         self.__texture = pygame.image.load("assets/textures/entities/player/eyes_open.png").convert_alpha()
@@ -12,8 +13,10 @@ class Player(Entity):
         self.on_ground = True
         self.gravity = 1
         self.speed = 5
-        self.controls = {"left": pygame.K_a, "right": pygame.K_d, "jump": pygame.K_w}
-
+        if keybinds == 1:
+            self.controls = keybinds_player1()
+        else:
+            self.controls = keybinds_player2()
     def get_texture(self):
         return self.__texture
     
@@ -21,7 +24,7 @@ class Player(Entity):
         if keys[self.controls["left"]]:
             self.set_x(self.get_x() - self.speed)
         if keys[self.controls["right"]]:
-            self.set_x(self.get_x() + self.speed)
+            self.set_x(self.get_x() + self.speed)   
 
     def jump(self):
         if self.on_ground:
