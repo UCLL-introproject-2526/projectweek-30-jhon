@@ -32,6 +32,7 @@ class Entity:
         return self.__texture
     
     def set_texture(self, texture):
+        """Set texture from filename relative to assets/textures/entities/."""
         self.__texture = image(f"assets/textures/entities/{texture}")
 
     def get_render_data(self):

@@ -9,6 +9,7 @@ from entities.SettingsMap import SettingsMap
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 from entities.Spike import Spike
 from entities.PlayerMerge import PlayerMerge
+from entities.PressurePlate import PressurePlate 
 
 def build_maps(main):
     maps = []
@@ -109,6 +110,8 @@ def build_maps(main):
     # spike bottom
     map3.add_entity(Spike(300, 221, main))
     map3.add_entity(Spike(150, 221, main))
+    # Add a Pressure Plate at the bottom left (unpressed is always 'block_models/pressureplate_in.png')
+    map3.add_entity(PressurePlate(40, 220, main))
 
 
     # Merge to return to menu
