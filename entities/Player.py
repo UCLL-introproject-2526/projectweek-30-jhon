@@ -14,7 +14,7 @@ class Player(Entity):
         self.velocity_y = 0
         self.on_ground = True
         self.gravity = 1
-        self.speed = 5
+        self.speed = 3
         if keybinds == 1:
             self.controls = keybinds_player1()
             texture_path = "assets/textures/entities/Player/Player_01.png"

@@ -20,7 +20,7 @@ def handle_gravity(player):
 def handle_jump(player):
     """Jump if on ground"""
     if player.on_ground:
-        player.velocity_y = -15
+        player.velocity_y = -13
         player.on_ground = False
 
 
@@ -35,7 +35,7 @@ def check_wall_collisions(player, main):
     dx = px - prev_x
     dy = py - prev_y
 
-    # --- Horizontal sweep/resolution ---
+    # --- Horizontal sweep/resolution
     if dx != 0:
         for entity in main.get_current_map().get_entities():
             if hasattr(entity, '__class__') and entity.__class__.__name__ == 'Wall':
