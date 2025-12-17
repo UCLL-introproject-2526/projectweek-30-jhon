@@ -138,11 +138,10 @@ class Entity:
             self.__x += allowed_dx
 
     def calc_movement(self, delta_time):
-        self.speed_y += self.__gravitation * delta_time * 20
+        self.speed_y += self.__gravitation * delta_time * 40
         print(delta_time)
         dx = int(round(self.speed_x))
         dy = int(round(self.speed_y))
-        self.calc_friction(delta_time)
         self.move(dx, dy)
 
     def gravity(self, delta_time):
@@ -155,7 +154,9 @@ class Entity:
 
     def calc_friction(self, delta_time):
         if self.on_floor:
-            self.speed_x *= delta_time * 0.8
+            self.speed_x *= 1 - (0.3 / delta_time)
+        else:
+            self.speed_x *= 1 - (0.4 / delta_time)
 
     def game_loop(self, past_time, events):
         pass
