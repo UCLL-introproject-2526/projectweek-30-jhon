@@ -117,25 +117,44 @@ def build_maps(main):
     map4.add_entity(Wall(0, 240, 400, 30, main))
     map4.add_entity(Wall(-20, 0, 30, 250, main))
     map4.add_entity(Wall(400, 0, 30, 250, main))
+    map4.add_entity(Wall(0, 0, 10, 250, main))
 
     # Platforms layout
-    map4.add_entity(Wall(0, 150, 250, 10, main))
     map4.add_entity(Wall(250, 75, 150, 10, main))
+    map4.add_entity(Wall(0, 200, 200, 10, main))
+    map4.add_entity(Wall(250, 35, 10, 50, main))
+    map4.add_entity(Wall(200, 0, 10, 50, main))
+    map4.add_entity(Wall(210, 110, 40, 10, main))
 
     # removable wall (will be removed by the pressure plate)
     removable_wall = Wall(325, 0, 10, 80, main)
     map4.add_entity(removable_wall)
 
+    # wall that will be spawned by append_wall_plate (not added to map initially)
+    spawnable_wall = Wall(170, 75, 90, 10, main)
+
     #Spikes
     map4.add_entity(Spike(280, 55, main))
-
+    map4.add_entity(Spike(70, 220, main, removable=True))
+    map4.add_entity(Spike(120, 220, main, removable=True))
+    map4.add_entity(Spike(150, 180, main))
+    map4.add_entity(Spike(125, 180, main))
+    map4.add_entity(Spike(210, 90, main))
+    map4.add_entity(Spike(230, 90, main))
+    
     # pressure plate that removes the wall on activation
-    map4.add_entity(PressurePlate(60, 233, main, remove_target=removable_wall))
+    map4.add_entity(PressurePlate(50, 233, main, remove_target=removable_wall))
 
+    # pressure plate that spawns a new wall when activated
+    append_wall_plate = PressurePlate(170, 193, main, add_target=spawnable_wall)
+    map4.add_entity(append_wall_plate)
 
-    map4.add_entity(Wall(100, 200, 200, 10, main))
+    # pressure plate that removes spikes
+    map4.add_entity(PressurePlate(260, 68, main, remove_spikes=True))
+
 
     maps.append(map4)
+
 
 
     # map 100 - Ending screen
