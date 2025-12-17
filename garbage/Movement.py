@@ -1,6 +1,5 @@
 import pygame
 
-
 def handle_movement(player, keys):
     """Handle left/right movement"""
     moving_left = keys[player.controls["left"]]

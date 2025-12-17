@@ -8,6 +8,8 @@ from garbage.Movement import Movement
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 import pygame
 
+from SoundLibrary import SoundLibrary
+
 class Player(Entity):
     def __init__(self, x, y, main, keybinds):
         super().__init__(x, y, 15 , 25, main, solid=True, gravitation=1)
@@ -15,7 +17,9 @@ class Player(Entity):
         self.moving_left = False
         self.moving_right = False
         self.moving_up = False
-
+        self.__sound_library = SoundLibrary()
+        self.__footstep_cooldown = 0
+        self.__footstep_delay = 0.3
 
 
 
@@ -100,7 +104,12 @@ class Player(Entity):
             self.speed_x = 3
         elif self.moving_left:
             self.speed_x = -3
-
+        # Walking sound
+        if self.on_floor and (self.moving_right or self.moving_left):
+            if self.__footstep_cooldown <= 0:
+                self.__sound_library.play('footstep')
+                self.__footstep_cooldown = self.__footstep_delay
+        self.__footstep_cooldown -= delta_time
 
 
 
