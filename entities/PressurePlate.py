@@ -11,6 +11,7 @@ class PressurePlate(Entity):
         self.main_ref = main
         self.activated = False
         # Optional: remove a specific entity (e.g., a Wall) on first activation
+        # Store position for dynamic lookup to survive map rebuilds
         self.remove_target = remove_target
         self._removed_done = False
         self.unpressed_texture_path = "block_models/pressureplate_out.png"
@@ -35,9 +36,16 @@ class PressurePlate(Entity):
                     self.main_ref.get_current_map().remove_entity(e)
 
         # One-shot removal of the configured target (e.g., a Wall)
+        # Search by position to handle map rebuilds where the object reference changes
         if self.remove_target is not None and not self._removed_done:
-            self.main_ref.get_current_map().remove_entity(self.remove_target)
-            self._removed_done = True
+            target_x = self.remove_target.get_x()
+            target_y = self.remove_target.get_y()
+            for e in list(self.main_ref.get_current_map().get_entities()):
+                if hasattr(e, '__class__') and e.__class__.__name__ == 'Wall':
+                    if e.get_x() == target_x and e.get_y() == target_y:
+                        self.main_ref.get_current_map().remove_entity(e)
+                        self._removed_done = True
+                        break
 
     def deactivate(self):
         if not self.activated:
@@ -49,10 +57,22 @@ class PressurePlate(Entity):
 
         # If we previously removed the target wall, add it back when the plate is released
         if self.remove_target is not None and self._removed_done:
+            target_x, target_y, target_w, target_h = self.remove_target.get_render_data()
             current_map = self.main_ref.get_current_map()
-            # Only add back if it's not already present
-            if self.remove_target not in current_map.get_entities():
-                current_map.add_entity(self.remove_target)
+            # Check if wall at that position exists; if not, recreate it
+            wall_exists = False
+            for e in current_map.get_entities():
+                if hasattr(e, '__class__') and e.__class__.__name__ == 'Wall':
+                    if e.get_x() == target_x and e.get_y() == target_y:
+                        wall_exists = True
+                        break
+            if not wall_exists:
+                # Recreate the wall at the same position
+                from entities.Wall import Wall
+                new_wall = Wall(target_x, target_y, target_w, target_h, self.main_ref)
+                current_map.add_entity(new_wall)
+                # Update reference for next cycle
+                self.remove_target = new_wall
             self._removed_done = False
 
     def game_loop(self, delta_time, events):

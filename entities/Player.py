@@ -16,8 +16,8 @@ class Player(Entity):
         self.moving_left = False
         self.moving_right = False
         self.moving_up = False
-        # Prevent accidental merge right after (re)spawn or restart
-        self._merge_cooldown = 0.75
+        # Prevent accidental merge right after (re)spawn or restart (reduced to allow faster usage)
+        self._merge_cooldown = 0.3
         self.__sound_library = SoundLibrary()
         self.__footstep_cooldown = 0
         self.__footstep_delay = 0.3
