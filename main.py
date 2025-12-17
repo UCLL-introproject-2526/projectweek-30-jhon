@@ -53,7 +53,7 @@ def build_maps(main):
 
     
     # Merge detector - triggers when players touch ANYWHERE
-    map1.add_entity(PlayerMerge(main, lambda: main.select_map(2)))
+    map1.add_entity(PlayerMerge(main, lambda: main.select_map(0)))
     
     maps.append(map1)
     
@@ -83,7 +83,7 @@ def build_maps(main):
     map2.add_entity(Wall(330, 170, 30, 8, main))
     
     # Merge detector for level 2 -> proceed to level 3
-    map2.add_entity(PlayerMerge(main, lambda: main.select_map(3)))
+    map2.add_entity(PlayerMerge(main, lambda: main.select_map(1)))
     maps.append(map2)
 
     # Map 3: Level 3 - Spikes and Platforms
@@ -112,7 +112,7 @@ def build_maps(main):
 
 
     # Merge to return to menu
-    map3.add_entity(PlayerMerge(main, lambda: main.select_map(0)))
+    map3.add_entity(PlayerMerge(main, lambda: main.select_map(2)))
     maps.append(map3)
     
     # Map 101: Settings
