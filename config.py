@@ -185,9 +185,9 @@ def build_maps(main):
     map5.add_entity(Wall(100, 685, 100, 20, main))
     map5.add_entity(Wall(250, 620, 100, 20, main))
     map5.add_entity(Wall(400, 555, 100, 20, main)) 
-    # map5.add_entity(Wall(120, 5520, 100, 20, main)) 
-    # map5.add_entity(Wall(10, 505, 100, 20, main))
-    # map5.add_entity(Wall(120, 460, 100, 20, main))
+    map5.add_entity(Wall(250, 500, 100, 20, main)) 
+    map5.add_entity(Wall(100, 445, 100, 20, main))
+    map5.add_entity(Wall(0, 390, 100, 20, main))
     # map5.add_entity(Wall(230, 415, 100, 20, main))
     # map5.add_entity(Wall(120, 370, 100, 20, main))
 
