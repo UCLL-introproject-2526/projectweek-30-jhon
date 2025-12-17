@@ -157,23 +157,6 @@ def build_maps(main):
 
 
 
-<<<<<<< Updated upstream
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     # Map 5: New level (added)
     map5 = Map("map5", 1000, 750)
 
@@ -220,7 +203,6 @@ def build_maps(main):
     maps.append(map5)
 
 
->>>>>>> Stashed changes
     # map 100 - Ending screen
     map100 = Map("ending", 400, 250)
     map100.add_entity(EndingScreen(
