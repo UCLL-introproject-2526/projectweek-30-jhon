@@ -64,6 +64,7 @@ class Player(Entity):
         self.__footstep_cooldown -= delta_time
 
         if self.get_y() > self.main.get_current_map().get_height() + self.get_height():
+            self.__sound_library.play('willhelm')
             self.player_death()
 
     def player_death(self):

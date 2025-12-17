@@ -6,6 +6,7 @@ class SoundLibrary:
             'footstep': 'footstep.wav',
             'jump': 'boink.wav',
             'death': 'willhelm.wav',
+            'spikestab': 'spikedeath.wav'
         }
         self.tracks = {
             'background1': 'soft-background-music-409193.mp3',
