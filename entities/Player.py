@@ -21,31 +21,18 @@ class Player(Entity):
         self.__footstep_cooldown = 0
         self.__footstep_delay = 0.3
 
-
-
-
-        self.velocity_y = 0
-        self.on_ground = True
-        self.gravity = 1
-        self.speed = 3
+        self.__textures = []
         if keybinds == 1:
             self.controls = keybinds_player1()
-            texture_path = "assets/textures/entities/Player/Player_01.png"
+            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_01.png"))
+            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_01_Left.png"))
+            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_01_Right.png"))
         else:
             self.controls = keybinds_player2()
-            texture_path = "assets/textures/entities/Player/Player_02.png"
-        self.__texture = pygame.image.load(texture_path).convert_alpha()
+            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_02.png"))
+            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_02_Left.png"))
+            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_02_Right.png"))
 
-
-
-        self.__textures = [
-            tools.importer.image("assets/textures/entities/Player/Player_01.png"),
-            tools.importer.image("assets/textures/entities/Player/Player_01_Left.png"),
-            tools.importer.image("assets/textures/entities/Player/Player_01_Right.png"),
-        ]
-        # Track previous position for collision resolution; updated at start of each game loop
-        self.prev_x = self.get_x()
-        self.prev_y = self.get_y()
     def get_texture(self):
         if not self.moving_right and not self.moving_left or (self.moving_right and self.moving_left):
             return self.__textures[0]
