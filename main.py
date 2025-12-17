@@ -42,7 +42,7 @@ def build_maps(main):
     map1.add_entity(Wall(0, 240, 400, 30, main))
     
     # Left & right boundary walls to prevent players from falling off the sides
-    map1.add_entity(Wall(0, 0, 30, 250, main))     # Left wall
+    map1.add_entity(Wall(-20, 0, 30, 250, main))     # Left wall
     map1.add_entity(Wall(400, 0, 30, 250, main))   # Right wall
     
     # Middle platforms to cross
@@ -110,6 +110,16 @@ class Main:
 
     def add_later_task(self, task, delay):
         self.__loop_controller.add_later_task(task, delay)
+
+    def restart_map(self):
+        current = self.__selected_map
+        self.__maps = build_maps(self)
+        if 0 <= current < len(self.__maps):
+            self.__selected_map = current
+        else:
+            self.__selected_map = 0
+
+
     
 
 main = Main()

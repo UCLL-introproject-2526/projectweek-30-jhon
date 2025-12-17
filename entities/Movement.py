@@ -86,6 +86,9 @@ def check_wall_collisions(player, main):
         player.set_x(0)
     elif player.get_x() + pw > map_width:
         player.set_x(map_width - pw)
+    if player.get_y() > map_height + 50:
+        main.restart_map()
+        return
 
 
 class Movement:
