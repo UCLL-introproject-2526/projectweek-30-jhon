@@ -1,57 +1,59 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/kRqbU8nc)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=22056864&assignment_repo_type=AssignmentRepo)
-# JHON: a Pygame Multiplayer Merge Game
+<div align="center">
+  <h1>JHON</h1>
+  <p><strong>A local co-op merge platformer built with Pygame</strong></p>
+</div>
 
-## About This Game
+## Overview
 
-This project is a **multiplayer puzzle platformer** inspired by *Fireboy and Watergirl*. The game is played by **two players on the same keyboard**. Each player controls one character with unique abilities. The goal of each level is to solve puzzles together and **merge the two characters at the end** to progress to the next level.
+JHON is a two-player puzzle platformer inspired by classic dual-character games. Each player controls their own character on the same keyboard; the goal is to navigate the level together and physically touch to merge. Two handcrafted levels are included plus a simple settings screen for toggling keyboard layout.
 
-### Core Features
+### Highlights
 
-* Two-player local multiplayer
-* Puzzle-based levels
-* Character-specific hazards and platforms
-* Level completion by merging both characters
-
----
-
-## Install
-
-### Requirements
-
-* Python 3.x
-* Pygame
-
-### Installing Pygame
-
-Install Pygame using pip:
-
-```bash
-pip install pygame
-```
-
-### Running the Game
-
-Navigate to the project folder and run:
-
-```bash
-python main.py
-```
-
-Pygame supports Windows, macOS, and Linux. Prebuilt binaries are automatically installed when using pip on most systems.
-
----
+- Local co-op: two players on one keyboard
+- Compact loop: menu → level 1 → level 2 → back to menu
+- Merge-to-finish mechanic; touching advances to the next map
+- Settings screen to swap QWERTY/AZERTY for Player 1
+- Resizable window with automatic letterboxing; looping background music
 
 ## Controls
 
-* **Player 1 (Fire character):** Arrow keys
-* **Player 2 (Water character):** WASD keys
+- Player 1 (QWERTY): move A/D, jump W
+- Player 1 (AZERTY via settings): move Q/D, jump Z
+- Player 2: move arrows left/right, jump arrow up
+- Menu shortcuts: P = play, S = settings, Q = quit, ESC = back from settings
+- Mouse: click the green buttons in settings (layout toggle, back)
 
-Both players must cooperate to solve puzzles and reach the merge point.
+## Running the game
 
----
+1. Ensure Python 3.10+ is installed.
+2. (Recommended) Create and activate a virtual environment:
+   - Windows: `python -m venv .venv` then `.venv\Scripts\activate`
+   - macOS/Linux: `python -m venv .venv` then `source .venv/bin/activate`
+3. Install dependencies (only Pygame is required):
+   - `pip install pygame`
+   - Or run the helper file `install` if you prefer (`pip install -r` is not needed).
+4. Launch: `python main.py`
+
+## Gameplay flow
+
+- Menu (background image `map0`): start with P or use the settings shortcut.
+- Level 1 (`map1`): reach each other; merging loads Level 2.
+- Level 2 (`map1` background, harder platforms): merging sends you back to the menu.
+- Settings (`settings`): toggle keyboard layout button; ESC or Back returns to the menu.
+
+## Project layout
+
+- `main.py` bootstraps the loop, builds maps, and handles map switching.
+- `entities/` contains players, walls, spikes, merge trigger, menu/settings controllers, and buttons.
+- `logic/` runs the game loop, rendering, and scheduled tasks.
+- `assets/` holds textures (backgrounds and entities) and audio (music + sfx).
+
+## Notes
+
+- The render window is resizable and maintains the map aspect ratio with letterboxing.
+- Background music loops automatically; volume controls are not exposed yet.
+- If assets are missing or renamed, keep the expected paths under `assets/` (see `Map` and entity textures).
 
 ## Authors
 
-This game was created as a school project using Python and Pygame.
-By Jurian, Wannes, Tjorre, Nick, Ayman
+Jurian, Wannes, Tjorre, Nick, Ayman
