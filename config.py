@@ -1,3 +1,7 @@
+
+# ============================================================================
+# IMPORTS
+# ============================================================================
 from Map import Map
 from entities.Spike import Spike
 from entities.Wall import Wall
@@ -8,210 +12,215 @@ from entities.SettingsMap import SettingsMap
 from entities.EndingScreen import EndingScreen
 
 
+# ============================================================================
+# MAIN MAP BUILDER
+# ============================================================================
 def build_maps(main):
     maps = []
+    # ========================================================================
+    # MAP 0: MAIN MENU
+    # ========================================================================
     map0 = Map("start_menu", 400, 250)
 
+    # Menu button callbacks
     def play_game():
+        """Start the game from level 1"""
         print("Starting game!")
         main.next_map()
 
     def settings():
+        """Open settings screen (Map 101)"""
         print("Settings clicked")
-        # Settings map sits after level 3
         main.select_map(101)
 
     def quit_game():
+        """Exit the game"""
         import sys
         print("Quitting...")
         sys.exit()
 
+    # Add menu controller with buttons
     map0.add_entity(MenuController(play_game, settings, quit_game))
     maps.append(map0)
 
-    # Map 1: Level 1 - Platform Challenge
+    # ========================================================================
+    # MAP 1: LEVEL 1 - Platform Challenge
+    # ========================================================================
     map1 = Map("background", 400, 250)
 
-    # Players start at OPPOSITE sides
-    map1.add_entity(Player(20, 180, main, 1))  # Left side
-    map1.add_entity(Player(360, 180, main, 2))  # Right side
+    map1.add_entity(Player(20, 180, main, 1))
+    map1.add_entity(Player(360, 180, main, 2))
 
     # Ground floor
     map1.add_entity(Wall(0, 240, 400, 30, main))
 
-    # Left & right boundary walls to prevent players from falling off the sides
-    map1.add_entity(Wall(-20, 0, 30, 250, main))  # Left wall
-    map1.add_entity(Wall(400, 0, 30, 250, main))  # Right wall
+    # Boundary walls (prevent falling off edges)
+    map1.add_entity(Wall(-20, 0, 30, 250, main))   # Left boundary
+    map1.add_entity(Wall(400, 0, 30, 250, main))   # Right boundary
 
-    # Middle platforms to cross
-    map1.add_entity(Wall(100, 180, 30, 60, main))
-    map1.add_entity(Wall(190, 160, 30, 90, main))
-    map1.add_entity(Wall(280, 180, 30, 60, main))
+    # Middle platforms
+    map1.add_entity(Wall(100, 180, 30, 60, main))  # Left platform
+    map1.add_entity(Wall(190, 160, 30, 90, main))  # Center platform (higher)
+    map1.add_entity(Wall(280, 180, 30, 60, main))  # Right platform
 
-    # Merge detector - triggers when players touch ANYWHERE
     maps.append(map1)
 
-    # Map 2: Level 2 - Advanced Challenge (HARDER!)
+    # ========================================================================
+    # MAP 2: LEVEL 2 - Advanced Challenge
+    # ========================================================================
     map2 = Map("background", 400, 250)
 
-    # Players start at opposite ends AGAIN
-    map2.add_entity(Player(10, 200, main, 1))  # Far left
-    map2.add_entity(Player(370, 200, main, 2))  # Far right
+    # Players (starting at far opposite ends)
+    map2.add_entity(Player(10, 200, main, 1))
+    map2.add_entity(Player(370, 200, main, 2))
 
-    # Ground floor - multiple gaps!
-    map2.add_entity(Wall(0, 230, 80, 20, main))
-    map2.add_entity(Wall(120, 230, 60, 20, main))
-    map2.add_entity(Wall(220, 230, 80, 20, main))
-    map2.add_entity(Wall(340, 230, 60, 20, main))
+    # Ground floor
+    map2.add_entity(Wall(0, 230, 80, 20, main))      # Left segment
+    map2.add_entity(Wall(120, 230, 60, 20, main))    # Center-left segment
+    map2.add_entity(Wall(220, 230, 80, 20, main))    # Center-right segment
+    map2.add_entity(Wall(340, 230, 60, 20, main))    # Right segment
 
-    # Left & right boundary walls to prevent players from falling off the sides
-    map2.add_entity(Wall(0, 0, 10, 250, main))  # Left wall
-    map2.add_entity(Wall(390, 0, 10, 250, main))  # Right wall
+    # Boundary walls
+    map2.add_entity(Wall(0, 0, 10, 250, main))       # Left boundary
+    map2.add_entity(Wall(390, 0, 10, 250, main))     # Right boundary
 
-    # Challenging platforms to cross
-    map2.add_entity(Wall(30, 190, 30, 8, main))
-    map2.add_entity(Wall(90, 180, 25, 8, main))
-    map2.add_entity(Wall(145, 165, 30, 8, main))
-    map2.add_entity(Wall(200, 150, 40, 8, main))
-    map2.add_entity(Wall(270, 130, 35, 8, main))
-    map2.add_entity(Wall(330, 170, 30, 8, main))
+    # Challenging platforms
+    map2.add_entity(Wall(30, 190, 30, 8, main))      # Step 1
+    map2.add_entity(Wall(90, 180, 25, 8, main))      # Step 2 (higher)
+    map2.add_entity(Wall(145, 165, 30, 8, main))     # Step 3 (higher)
+    map2.add_entity(Wall(200, 150, 40, 8, main))     # Step 4 (highest)
+    map2.add_entity(Wall(270, 130, 35, 8, main))     # Step 5 (peak)
+    map2.add_entity(Wall(330, 170, 30, 8, main))     # Step 6 (descending)
 
-    # Merge detector for level 2 -> proceed to level 3
     maps.append(map2)
 
-    # Map 3: Level 3 - Spikes and Platforms
+    # ========================================================================
+    # MAP 3: LEVEL 3 - Spikes and Platforms
+    # ========================================================================
     map3 = Map("map3", 400, 250)
 
-    # Players
+    # Players (different starting heights)
     map3.add_entity(Player(20, 180, main, 1))
     map3.add_entity(Player(380, 50, main, 2))
 
     # Ground and boundaries
-    map3.add_entity(Wall(0, 240, 400, 30, main))
-    map3.add_entity(Wall(-20, 0, 30, 250, main))
-    map3.add_entity(Wall(400, 0, 30, 250, main))
+    map3.add_entity(Wall(0, 240, 400, 30, main))     # Ground floor
+    map3.add_entity(Wall(-20, 0, 30, 250, main))     # Left boundary
+    map3.add_entity(Wall(400, 0, 30, 250, main))     # Right boundary
 
-    # Platforms layout
-    map3.add_entity(Wall(0, 150, 250, 10, main))
-    map3.add_entity(Wall(350, 200, 50, 10, main))
-    map3.add_entity(Wall(50, 75, 350, 10, main))
+    # Platform layout
+    map3.add_entity(Wall(0, 150, 250, 10, main))     # Lower left platform
+    map3.add_entity(Wall(350, 200, 50, 10, main))    # Right mid platform
+    map3.add_entity(Wall(50, 75, 350, 10, main))     # Upper long platform
 
-    # spike top
-    map3.add_entity(Spike(150, 55, main))
-    map3.add_entity(Spike(200, 55, main))
-    # spike bottom
-    map3.add_entity(Spike(300, 221, main))
-    map3.add_entity(Spike(150, 221, main))
-    # Add a Pressure Plate at the bottom left (unpressed is always 'block_models/pressureplate_in.png')
-    # map3.add_entity(PressurePlate(60, 233, main))
+    # Spikes
+    map3.add_entity(Spike(150, 55, main))            # Top spike 1
+    map3.add_entity(Spike(200, 55, main))            # Top spike 2
+    map3.add_entity(Spike(300, 221, main))           # Bottom spike 1
+    map3.add_entity(Spike(150, 221, main))           # Bottom spike 2
 
-
-    # Merge to return to menu
     maps.append(map3)
 
-     # map 4
+    # ========================================================================
+    # MAP 4: LEVEL 4 - Pressure Plates and Puzzles
+    # ========================================================================
     map4 = Map("map4", 400, 250)
+
+    # Players
     map4.add_entity(Player(20, 180, main, 1))
     map4.add_entity(Player(380, 50, main, 2))
 
-    map4.add_entity(Wall(0, 240, 400, 30, main))
-    map4.add_entity(Wall(-20, 0, 30, 250, main))
-    map4.add_entity(Wall(400, 0, 30, 250, main))
-    map4.add_entity(Wall(0, 0, 10, 250, main))
+    # Ground and boundaries
+    map4.add_entity(Wall(0, 240, 400, 30, main))     # Ground floor
+    map4.add_entity(Wall(-20, 0, 30, 250, main))     # Left outer boundary
+    map4.add_entity(Wall(400, 0, 30, 250, main))     # Right boundary
+    map4.add_entity(Wall(0, 0, 10, 250, main))       # Left inner boundary
 
-    # Platforms layout
-    map4.add_entity(Wall(250, 75, 150, 10, main))
-    map4.add_entity(Wall(0, 200, 200, 10, main))
-    map4.add_entity(Wall(250, 35, 10, 50, main))
-    map4.add_entity(Wall(200, 0, 10, 50, main))
-    map4.add_entity(Wall(210, 110, 40, 10, main))
+    # Static platforms
+    map4.add_entity(Wall(250, 75, 150, 10, main))    # Upper right platform
+    map4.add_entity(Wall(0, 200, 200, 10, main))     # Left mid platform
+    map4.add_entity(Wall(250, 35, 10, 50, main))     # Vertical wall right
+    map4.add_entity(Wall(200, 0, 10, 50, main))      # Vertical wall center
+    map4.add_entity(Wall(210, 110, 40, 10, main))    # Small center platform
 
-    # removable wall (will be removed by the pressure plate)
-    removable_wall = Wall(325, 0, 10, 80, main)
+    # Interactive walls
+    removable_wall = Wall(325, 0, 10, 80, main)      # Will be removed by pressure plate
     map4.add_entity(removable_wall)
-
-    # wall that will be spawned by append_wall_plate (not added to map initially)
-    spawnable_wall = Wall(170, 75, 90, 10, main)
-
-    #Spikes
-    map4.add_entity(Spike(280, 55, main))
-    map4.add_entity(Spike(70, 220, main, removable=True))
-    map4.add_entity(Spike(120, 220, main, removable=True))
-    map4.add_entity(Spike(150, 180, main))
-    map4.add_entity(Spike(125, 180, main))
-    map4.add_entity(Spike(210, 90, main))
-    map4.add_entity(Spike(230, 90, main))
     
-    # pressure plate that removes the wall on activation
-    map4.add_entity(PressurePlate(50, 233, main, remove_target=removable_wall))
+    spawnable_wall = Wall(170, 75, 90, 10, main)     # Will appear when plate activated
 
-    # pressure plate that spawns a new wall when activated
-    append_wall_plate = PressurePlate(170, 193, main, add_target=spawnable_wall)
-    map4.add_entity(append_wall_plate)
-
-    # pressure plate that removes spikes
-    map4.add_entity(PressurePlate(260, 68, main, remove_spikes=True))
-
+    # Spikes (some removable)
+    map4.add_entity(Spike(280, 55, main))                    # Top spike (permanent)
+    map4.add_entity(Spike(70, 220, main, removable=True))    # Bottom spike 1 (removable)
+    map4.add_entity(Spike(120, 220, main, removable=True))   # Bottom spike 2 (removable)
+    map4.add_entity(Spike(150, 180, main))                   # Mid spike 1 (permanent)
+    map4.add_entity(Spike(125, 180, main))                   # Mid spike 2 (permanent)
+    map4.add_entity(Spike(210, 90, main))                    # Center spike 1 (permanent)
+    map4.add_entity(Spike(230, 90, main))                    # Center spike 2 (permanent)
+    
+    # Pressure plates
+    map4.add_entity(PressurePlate(50, 233, main, remove_target=removable_wall))  # Removes wall
+    map4.add_entity(PressurePlate(170, 193, main, add_target=spawnable_wall))    # Spawns platform
+    map4.add_entity(PressurePlate(260, 68, main, remove_spikes=True))            # Removes spikes
 
     maps.append(map4)
 
 
 
-    # Map 5: New level (added)
+    # ========================================================================
+    # MAP 5: LEVEL 5 - Mirrored Towers
+    # ========================================================================
+
     map5 = Map("map5", 1000, 750)
 
-# 1. SPELERS
+    # Players
     map5.add_entity(Player(50, 700, main, 1))
     map5.add_entity(Player(900, 700, main, 2))
 
-    # 2. BASIS (Grond en Middenmuur)
-    map5.add_entity(Wall(0, 730, 1000, 50, main))
-    map5.add_entity(Wall(490, 0, 20, 730, main)) # Middenmuur
+    # Base structure
+    map5.add_entity(Wall(0, 730, 1000, 50, main))      # Ground floor
+    map5.add_entity(Wall(490, 0, 20, 730, main))       # Center dividing wall
 
-    # 3. LINKER KANT (Speler 1)
-    # De sprongen zijn nu max 45 pixels hoog
-    map5.add_entity(Wall(10, 685, 100, 20, main))
-    map5.add_entity(Wall(120, 640, 100, 20, main))
-    map5.add_entity(Wall(230, 595, 100, 20, main)) # Dicht bij midden
-    map5.add_entity(Wall(120, 550, 100, 20, main)) # Terug naar links
-    map5.add_entity(Wall(10, 505, 100, 20, main))
-    map5.add_entity(Wall(120, 460, 100, 20, main))
-    map5.add_entity(Wall(230, 415, 100, 20, main))
-    map5.add_entity(Wall(120, 370, 100, 20, main))
-    # Finish Links
-    map5.add_entity(Wall(50, 300, 200, 20, main))
+    # Left side - Player 1
+    map5.add_entity(Wall(10, 685, 100, 20, main))      # Step 1
+    map5.add_entity(Wall(120, 640, 100, 20, main))     # Step 2
+    map5.add_entity(Wall(230, 595, 100, 20, main))     # Step 3 (near center)
+    map5.add_entity(Wall(120, 550, 100, 20, main))     # Step 4 (back left)
+    map5.add_entity(Wall(10, 505, 100, 20, main))      # Step 5
+    map5.add_entity(Wall(120, 460, 100, 20, main))     # Step 6
+    map5.add_entity(Wall(230, 415, 100, 20, main))     # Step 7
+    map5.add_entity(Wall(120, 370, 100, 20, main))     # Step 8
+    map5.add_entity(Wall(50, 300, 200, 20, main))      # Finish platform (left)
 
-    # 4. RECHTER KANT (Speler 2 - Gespiegeld)
-    map5.add_entity(Wall(890, 685, 100, 20, main))
-    map5.add_entity(Wall(780, 640, 100, 20, main))
-    map5.add_entity(Wall(670, 595, 100, 20, main)) # Dicht bij midden
-    map5.add_entity(Wall(780, 550, 100, 20, main)) # Terug naar rechts
-    map5.add_entity(Wall(890, 505, 100, 20, main))
-    map5.add_entity(Wall(780, 460, 100, 20, main))
-    map5.add_entity(Wall(670, 415, 100, 20, main))
-    map5.add_entity(Wall(780, 370, 100, 20, main))
-    # Finish Rechts
-    map5.add_entity(Wall(750, 300, 200, 20, main))
+    # Right side - Player 2
+    map5.add_entity(Wall(890, 685, 100, 20, main))     # Step 1
+    map5.add_entity(Wall(780, 640, 100, 20, main))     # Step 2
+    map5.add_entity(Wall(670, 595, 100, 20, main))     # Step 3 (near center)
+    map5.add_entity(Wall(780, 550, 100, 20, main))     # Step 4 (back right)
+    map5.add_entity(Wall(890, 505, 100, 20, main))     # Step 5
+    map5.add_entity(Wall(780, 460, 100, 20, main))     # Step 6
+    map5.add_entity(Wall(670, 415, 100, 20, main))     # Step 7
+    map5.add_entity(Wall(780, 370, 100, 20, main))     # Step 8
+    map5.add_entity(Wall(750, 300, 200, 20, main))     # Finish platform (right)
 
-
-    # removable wall (will be removed by the pressure plate)
-
-    # A spike to increase challenge
-
-    # pressure plate that removes the wall on activation
 
     maps.append(map5)
 
 
-    # map 100 - Ending screen
+    # ========================================================================
+    # MAP 100: ENDING SCREEN
+    # ========================================================================
     map100 = Map("ending", 400, 250)
     map100.add_entity(EndingScreen(
-        lambda: main.select_map(1),  # Replay: go back to level 1
-        lambda: main.select_map(0),  # Menu: go to main menu
-        lambda: __import__('sys').exit()  # Quit
+        lambda: main.select_map(1),              # Replay button: restart from level 1
+        lambda: main.select_map(0),              # Menu button: return to main menu
+        lambda: __import__('sys').exit()         # Quit button: exit game
     ))
     maps.append(map100)
-    # Map 101: Settings
+
+    # ========================================================================
+    # MAP 101: SETTINGS SCREEN
+    # ========================================================================
     map101 = Map("settings", 400, 250)
     SettingsMap(main, map101)
     maps.append(map101)
