@@ -111,7 +111,7 @@ def build_maps(main):
     map3.add_entity(Spike(300, 221, main))
     map3.add_entity(Spike(150, 221, main))
     # Add a Pressure Plate at the bottom left (unpressed is always 'block_models/pressureplate_in.png')
-    map3.add_entity(PressurePlate(40, 220, main))
+    map3.add_entity(PressurePlate(60, 233, main))
 
 
     # Merge to return to menu
