@@ -86,5 +86,11 @@ class Player(Entity):
                 if event.key == self.controls["jump"]:
                     self.moving_up = False
 
+    def detect_merge(self):
+        for entity in self.main.get_current_map().get_entities():
+            if entity.get_name() == "Player" and entity is not self:
+                print("MERGEEEEE")
+
+
     def run_with_delay(self):
         print("value")

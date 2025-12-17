@@ -18,6 +18,7 @@ class PlayerMerge(Entity):
         if self.merge_triggered:
             self.merge_timer -= delta_time
             if self.merge_timer <= 0:
+                self.main.next_map()
             return
         
         players = []
