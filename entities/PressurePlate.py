@@ -10,9 +10,9 @@ class PressurePlate(Entity):
         super().__init__(x, y, width, height, main, solid=False, texture=None)
         self.main_ref = main
         self.activated = False
-        self.unpressed_texture_path = "block_models/pressureplate_in.png"
+        self.unpressed_texture_path = "block_models/pressureplate_out.png"
         # Always use this activated texture (entity-relative path)
-        self.activated_texture_path = "block_models/pressureplate_out.png"
+        self.activated_texture_path = "block_models/pressureplate_in.png"
 
         # set initial unpressed texture (may raise if missing)
         self.set_texture(self.unpressed_texture_path)
