@@ -4,6 +4,7 @@ class SoundLibrary:
     def __init__(self):
         self.sfx = {
             'footstep': 'footstep.wav',
+            'jump': 'boink.wav'
         }
         self.tracks = {
             'background1': 'soft-background-music-409193.mp3',
