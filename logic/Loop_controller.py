@@ -6,7 +6,7 @@ from logic.Logic_runner import LogicManager
 
 class Loop_controller:
     def __init__(self, main, name):
-        self.fps = 60
+        self.fps = 5
         self.main = main
         pygame.init()
         self.__renderer = Render(name, 600, 260)

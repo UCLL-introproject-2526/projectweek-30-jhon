@@ -14,7 +14,7 @@ class Entity:
         self.speed_x = 0
         self.speed_y = 0
         self.on_floor = False
-        self.__main = main
+        self.main = main
         self.__weight = weight
         if texture:
             self.set_texture(texture)
@@ -62,7 +62,7 @@ class Entity:
 
     def move(self, dx, dy):
 
-        entities = self.__main.get_current_map().get_entities()
+        entities = self.main.get_current_map().get_entities()
 
         # Y-Sweep
         if dy != 0:

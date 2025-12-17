@@ -24,3 +24,9 @@ class Map:
     
     def get_entities(self):
         return self.entities
+
+    def get_height(self):
+        return self.__height
+
+    def get_width(self):
+        return self.__width
