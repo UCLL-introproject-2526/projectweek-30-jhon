@@ -5,8 +5,10 @@ class SoundLibrary:
         self.sfx = {
             'footstep': 'footstep.wav',
             'jump': 'boink.wav',
-            'death': 'willhelm.wav',
-            'spikestab': 'spikedeath.wav'
+            'willhelm': 'willhelm.wav',
+            'spikestab': 'spikedeath.wav',
+            'merge': 'slimeysfx.wav',
+            'spikeretract': 'swordsheathing.wav',
         }
         self.tracks = {
             'background1': 'soft-background-music-409193.mp3',
