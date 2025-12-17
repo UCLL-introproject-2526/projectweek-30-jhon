@@ -16,11 +16,12 @@ def build_maps(main):
     
     def play_game():
         print("Starting game!")
-        main.select_map(1)
+        main.select_map(3)
     
     def settings():
         print("Settings clicked")
-        main.select_map(3)
+        # Settings map sits after level 3
+        main.select_map(101)
     
     def quit_game():
         import sys
@@ -81,15 +82,43 @@ def build_maps(main):
     map2.add_entity(Wall(270, 130, 35, 8, main))
     map2.add_entity(Wall(330, 170, 30, 8, main))
     
-    # Merge detector for level 2
-    map2.add_entity(PlayerMerge(main, lambda: main.select_map(0)))  # Back to menu after level 2
-    
+    # Merge detector for level 2 -> proceed to level 3
+    map2.add_entity(PlayerMerge(main, lambda: main.select_map(3)))
     maps.append(map2)
 
-    # Map 3: Settings
-    map3 = Map("settings", 400, 250)
-    SettingsMap(main, map3)
+    # Map 3: Level 3 - Spikes and Platforms
+    map3 = Map("map3", 400, 250)
+
+    # Players
+    map3.add_entity(Player(20, 180, main, 1))
+    map3.add_entity(Player(380, 50, main, 2))
+
+    # Ground and boundaries
+    map3.add_entity(Wall(0, 240, 400, 30, main))
+    map3.add_entity(Wall(-20, 0, 30, 250, main))
+    map3.add_entity(Wall(400, 0, 30, 250, main))
+
+    # Platforms layout
+    map3.add_entity(Wall(0, 150, 250, 10, main))
+    map3.add_entity(Wall(350, 200, 50, 10, main))
+    map3.add_entity(Wall(50, 75, 350, 10, main))
+
+    # spike top
+    map3.add_entity(Spike(150, 55, main))
+    map3.add_entity(Spike(200, 55, main))
+    # spike bottom
+    map3.add_entity(Spike(300, 221, main))
+    map3.add_entity(Spike(150, 221, main))
+
+
+    # Merge to return to menu
+    map3.add_entity(PlayerMerge(main, lambda: main.select_map(0)))
     maps.append(map3)
+    
+    # Map 101: Settings
+    map101 = Map("settings", 400, 250)
+    SettingsMap(main, map101)
+    maps.append(map101)
     
     
 
