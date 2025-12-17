@@ -4,7 +4,7 @@ from entities.Entity import Entity
 class MenuController(Entity):
     """Handles keyboard shortcuts for menu"""
     def __init__(self, play_callback, settings_callback, quit_callback):
-        super().__init__(0, 0, 0, 0, main=None, solid=False)
+        super().__init__(0, 0, 0, 0, main=None, solid=False, name="MenuController")
         self.play_callback = play_callback
         self.settings_callback = settings_callback
         self.quit_callback = quit_callback

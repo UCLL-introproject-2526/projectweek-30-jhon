@@ -3,7 +3,7 @@ from entities.Entity import Entity
 
 class Button(Entity):
     def __init__(self, x, y, width, height, texture=None, main=None, callback=None):
-        super().__init__(x, y, width, height, solid=False, texture=None, main=main)
+        super().__init__(x, y, width, height, main, name="button", solid=False, texture=None)
         self.label = texture
         self._main = main
         self.callback = callback

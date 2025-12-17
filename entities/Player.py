@@ -12,7 +12,7 @@ from SoundLibrary import SoundLibrary
 
 class Player(Entity):
     def __init__(self, x, y, main, keybinds):
-        super().__init__(x, y, 15 , 25, main, solid=False, gravitation=1)
+        super().__init__(x, y, 15 , 25, main, solid=False, gravitation=1, name="Player")
         self.moving_left = False
         self.moving_right = False
         self.moving_up = False

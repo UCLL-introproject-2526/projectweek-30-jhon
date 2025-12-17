@@ -4,7 +4,7 @@ from entities.Player import Player
 
 class Spike(Entity):
     def __init__ (self, x, y, main):
-        super().__init__(x, y, 20, 20, main,solid=False,texture="block_models/Spike_model.png")
+        super().__init__(x, y, 20, 20, main,solid=False,texture="block_models/Spike_model.png", name="Spike")
         self._main = main
         self._active = True
     

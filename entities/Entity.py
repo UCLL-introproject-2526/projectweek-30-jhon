@@ -3,7 +3,7 @@ import pygame
 from tools.importer import image
 
 class Entity:
-    def __init__(self, x, y, width, height, main, solid=True, texture=None, gravitation = False, weight = 100):
+    def __init__(self, x, y, width, height, main, name = "noname", solid=True, texture=None, gravitation = False, weight = 100):
         self.__x = x
         self.__y = y
         self.__width = width
@@ -15,9 +15,13 @@ class Entity:
         self.speed_y = 0
         self.on_floor = False
         self.main = main
+        self.__name = name
         self.__weight = weight
         if texture:
             self.set_texture(texture)
+
+    def get_name(self):
+        return self.__name
 
     def is_solid(self):
         return self.__solid
@@ -153,7 +157,6 @@ class Entity:
         dx = int(round(self.speed_x))
         dy = int(round(self.speed_y))
         self.move(dx, dy)
-
 
     def calc_friction(self, delta_time):
         if self.on_floor:

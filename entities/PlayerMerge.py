@@ -4,7 +4,7 @@ from entities.Entity import Entity
 class PlayerMerge(Entity):
     """Detects when both players touch anywhere and merges them"""
     def __init__(self, main, next_level_callback):
-        super().__init__(0, 0, 0, 0, main, solid=False)
+        super().__init__(0, 0, 0, 0, main, solid=False, name="PlayerMerge")
         self._main = main
         self.next_level_callback = next_level_callback
         self.merge_triggered = False

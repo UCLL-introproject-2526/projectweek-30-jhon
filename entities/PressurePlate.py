@@ -7,7 +7,7 @@ class PressurePlate(Entity):
         The activated texture is always 'block_models/pressureplate_out.png'.
         Plate deactivates again when no player stands on it.
         """
-        super().__init__(x, y, width, height, main, solid=False, texture=None)
+        super().__init__(x, y, width, height, main, solid=False, texture=None, name="PressurePlate")
         self.main_ref = main
         self.activated = False
         self.unpressed_texture_path = "block_models/pressureplate_out.png"
