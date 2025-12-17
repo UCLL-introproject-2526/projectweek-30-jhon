@@ -22,6 +22,9 @@ class Player(Entity):
             self.controls = keybinds_player2()
             texture_path = "assets/textures/entities/Player/Player_02.png"
         self.__texture = pygame.image.load(texture_path).convert_alpha()
+        # Track previous position for collision resolution; updated at start of each game loop
+        self.prev_x = self.get_x()
+        self.prev_y = self.get_y()
     def get_texture(self):
         return self.__texture
     
@@ -42,7 +45,13 @@ class Player(Entity):
         self.velocity_y += self.gravity
         self.set_y(self.get_y() + self.velocity_y)
 
+    def save_prev_position(self):
+        self.prev_x = self.get_x()
+        self.prev_y = self.get_y()
+
     def game_loop(self, delta_time, events):
+        # Save previous position for collision resolution
+        self.save_prev_position()
         # Get input and handle movement
         keys = pygame.key.get_pressed()
         Movement.handle_movement(self, keys)

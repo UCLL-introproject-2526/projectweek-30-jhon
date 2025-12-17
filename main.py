@@ -39,7 +39,11 @@ def build_maps(main):
     map1.add_entity(Player(360, 180, main, 2))  # Right side
     
     # Ground floor
-    map1.add_entity(Wall(0, 220, 400, 30, main))
+    map1.add_entity(Wall(0, 240, 400, 30, main))
+    
+    # Left & right boundary walls to prevent players from falling off the sides
+    map1.add_entity(Wall(0, 0, 30, 250, main))     # Left wall
+    map1.add_entity(Wall(400, 0, 30, 250, main))   # Right wall
     
     # Middle platforms to cross
     map1.add_entity(Wall(100, 180, 30, 10, main))
@@ -63,6 +67,10 @@ def build_maps(main):
     map2.add_entity(Wall(120, 230, 60, 20, main))
     map2.add_entity(Wall(220, 230, 80, 20, main))
     map2.add_entity(Wall(340, 230, 60, 20, main))
+
+    # Left & right boundary walls to prevent players from falling off the sides
+    map2.add_entity(Wall(0, 0, 10, 250, main))     # Left wall
+    map2.add_entity(Wall(390, 0, 10, 250, main))   # Right wall
     
     # Challenging platforms to cross
     map2.add_entity(Wall(30, 190, 30, 8, main))
