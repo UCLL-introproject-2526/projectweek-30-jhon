@@ -157,6 +157,70 @@ def build_maps(main):
 
 
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # Map 5: New level (added)
+    map5 = Map("map5", 1000, 750)
+
+# 1. SPELERS
+    map5.add_entity(Player(50, 700, main, 1))
+    map5.add_entity(Player(900, 700, main, 2))
+
+    # 2. BASIS (Grond en Middenmuur)
+    map5.add_entity(Wall(0, 730, 1000, 50, main))
+    map5.add_entity(Wall(490, 0, 20, 730, main)) # Middenmuur
+
+    # 3. LINKER KANT (Speler 1)
+    # De sprongen zijn nu max 45 pixels hoog
+    map5.add_entity(Wall(10, 685, 100, 20, main))
+    map5.add_entity(Wall(120, 640, 100, 20, main))
+    map5.add_entity(Wall(230, 595, 100, 20, main)) # Dicht bij midden
+    map5.add_entity(Wall(120, 550, 100, 20, main)) # Terug naar links
+    map5.add_entity(Wall(10, 505, 100, 20, main))
+    map5.add_entity(Wall(120, 460, 100, 20, main))
+    map5.add_entity(Wall(230, 415, 100, 20, main))
+    map5.add_entity(Wall(120, 370, 100, 20, main))
+    # Finish Links
+    map5.add_entity(Wall(50, 300, 200, 20, main))
+
+    # 4. RECHTER KANT (Speler 2 - Gespiegeld)
+    map5.add_entity(Wall(890, 685, 100, 20, main))
+    map5.add_entity(Wall(780, 640, 100, 20, main))
+    map5.add_entity(Wall(670, 595, 100, 20, main)) # Dicht bij midden
+    map5.add_entity(Wall(780, 550, 100, 20, main)) # Terug naar rechts
+    map5.add_entity(Wall(890, 505, 100, 20, main))
+    map5.add_entity(Wall(780, 460, 100, 20, main))
+    map5.add_entity(Wall(670, 415, 100, 20, main))
+    map5.add_entity(Wall(780, 370, 100, 20, main))
+    # Finish Rechts
+    map5.add_entity(Wall(750, 300, 200, 20, main))
+
+
+    # removable wall (will be removed by the pressure plate)
+
+    # A spike to increase challenge
+
+    # pressure plate that removes the wall on activation
+
+    maps.append(map5)
+
+
+>>>>>>> Stashed changes
     # map 100 - Ending screen
     map100 = Map("ending", 400, 250)
     map100.add_entity(EndingScreen(

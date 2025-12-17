@@ -5,7 +5,11 @@ class Main:
     def __init__(self):
         self.__loop_controller = Loop_controller(self, "Merge Conflict")
         self.__maps = build_maps(self)
+<<<<<<< Updated upstream
         self.__selected_map = 4
+=======
+        self.__selected_map = 5
+>>>>>>> Stashed changes
         self.__loop_controller.start()
     def get_current_map(self):
         return self.__maps[self.__selected_map]
@@ -32,3 +36,5 @@ class Main:
 
 
 main = Main()
+
+
