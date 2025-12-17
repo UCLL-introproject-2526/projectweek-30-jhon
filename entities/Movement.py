@@ -3,10 +3,21 @@ import pygame
 
 def handle_movement(player, keys):
     """Handle left/right movement"""
-    if keys[player.controls["left"]]:
+    moving_left = keys[player.controls["left"]]
+    moving_right = keys[player.controls["right"]]
+
+    if moving_left and not moving_right:
         player.set_x(player.get_x() - player.speed)
-    if keys[player.controls["right"]]:
+        if hasattr(player, 'set_direction'):
+            player.set_direction('left')
+    elif moving_right and not moving_left:
         player.set_x(player.get_x() + player.speed)
+        if hasattr(player, 'set_direction'):
+            player.set_direction('right')
+    else:
+        # No horizontal input (or conflicting inputs) → show front/idle
+        if hasattr(player, 'set_direction'):
+            player.set_direction('idle')
 
 
 def handle_gravity(player):
