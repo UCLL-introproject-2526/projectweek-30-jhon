@@ -63,9 +63,8 @@ class Player(Entity):
                 self.__footstep_cooldown = self.__footstep_delay
         self.__footstep_cooldown -= delta_time
 
-        if self.get_x() > self.main.get_current_map().get_height() * 1.5:
-            print(f"lol: {self.get_x()} and {self.main.get_current_map().get_height()}")
-            # self.player_death()
+        if self.get_y() > self.main.get_current_map().get_height() + self.get_height():
+            self.player_death()
 
     def player_death(self):
         self.main.restart_map()

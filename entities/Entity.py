@@ -28,6 +28,12 @@ class Entity:
     def set_height(self, height):
         self.__height = height
 
+    def get_height(self):
+        return self.__height
+
+    def set_weight(self, weight):
+        self.__weight = weight
+
     def get_texture(self):
         return self.__texture
     
