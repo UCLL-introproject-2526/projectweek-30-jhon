@@ -61,6 +61,7 @@ class Entity:
         self.__y = y
 
     def collision(self, other):
+
         x1, y1, w1, h1 = self.get_render_data()
         x2, y2, w2, h2 = other.get_render_data()
 

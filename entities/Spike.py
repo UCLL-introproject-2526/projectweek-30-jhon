@@ -21,6 +21,7 @@ class Spike(Entity):
         return super().get_texture()
 
     def game_loop(self, delta_time, events):
+
         """Check collision with players (instant death -> restart level)"""
         if not self._active:
             return

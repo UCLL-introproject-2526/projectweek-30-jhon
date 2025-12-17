@@ -44,6 +44,7 @@ class Player(Entity):
         return self.__textures[0]
 
     def game_loop(self, delta_time, events):
+        self.detect_merge()
         self.calc_movement(delta_time)
         self.keyboard_input(events)
 
@@ -90,7 +91,9 @@ class Player(Entity):
     def detect_merge(self):
         for entity in self.main.get_current_map().get_entities():
             if entity.get_name() == "Player" and entity is not self:
-                print("MERGEEEEE")
+                if self.collision(entity):
+                    self.__sound_library.play('willhelm')
+                    # self.main.next_map()
 
 
     def run_with_delay(self):
