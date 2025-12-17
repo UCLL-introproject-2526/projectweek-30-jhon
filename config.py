@@ -5,6 +5,7 @@ from entities.Player import Player
 from entities.MenuController import MenuController
 from entities.PressurePlate import PressurePlate
 from entities.SettingsMap import SettingsMap
+from entities.EndingScreen import EndingScreen
 
 
 def build_maps(main):
@@ -136,6 +137,15 @@ def build_maps(main):
 
     maps.append(map4)
 
+
+    # map 100 - Ending screen
+    map100 = Map("ending", 400, 250)
+    map100.add_entity(EndingScreen(
+        lambda: main.select_map(1),  # Replay: go back to level 1
+        lambda: main.select_map(0),  # Menu: go to main menu
+        lambda: __import__('sys').exit()  # Quit
+    ))
+    maps.append(map100)
     # Map 101: Settings
     map101 = Map("settings", 400, 250)
     SettingsMap(main, map101)

@@ -34,6 +34,12 @@ class Render:
                 scaled_entity_image = pygame.transform.scale(entity.get_texture(), (int(width * pixelsize), int(height * pixelsize)))
                 self.__screen.blit(scaled_entity_image, (offset_x + int(x * pixelsize), offset_y + int(y * pixelsize)))
 
+        # Draw ending screen text overlay if present
+        if hasattr(map, 'get_entities'):
+            for entity in map.get_entities():
+                if hasattr(entity, '__class__') and entity.__class__.__name__ == 'EndingScreen':
+                    entity.render_ending_text(self.__screen)
+                    break
 
         pygame.display.flip()
     
