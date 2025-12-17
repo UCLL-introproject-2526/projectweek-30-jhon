@@ -7,7 +7,7 @@ class SoundLibrary:
         }
         self.tracks = {
             'background1': 'soft-background-music-409193.mp3',
-            'mijnbeat': 'beat.wav',
+            'backgroundmain': 'please-calm-my-mind-125566.mp3',
         }
         self.loaded_sfx = {}
         self.current_track = None
@@ -44,4 +44,4 @@ class SoundLibrary:
 
     def sound_loop(self, past_time):
         self.total_time += past_time
-        self.play('background1')
+        self.play('backgroundmain')
