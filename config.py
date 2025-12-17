@@ -109,7 +109,6 @@ def build_maps(main):
     # map3.add_entity(PressurePlate(60, 233, main))
 
     # Merge to return to menu
-    map3.add_entity(PlayerMerge(main, lambda: main.select_map(2)))
     maps.append(map3)
 
     # Map 101: Settings
