@@ -182,15 +182,14 @@ def build_maps(main):
     map5.add_entity(Wall(490, 0, 20, 730, main))       # Center dividing wall
 
     # Left side - Player 1
-    map5.add_entity(Wall(10, 685, 100, 20, main))      # Step 1
-    map5.add_entity(Wall(120, 640, 100, 20, main))     # Step 2
-    map5.add_entity(Wall(230, 595, 100, 20, main))     # Step 3 (near center)
-    map5.add_entity(Wall(120, 550, 100, 20, main))     # Step 4 (back left)
-    map5.add_entity(Wall(10, 505, 100, 20, main))      # Step 5
-    map5.add_entity(Wall(120, 460, 100, 20, main))     # Step 6
-    map5.add_entity(Wall(230, 415, 100, 20, main))     # Step 7
-    map5.add_entity(Wall(120, 370, 100, 20, main))     # Step 8
-    map5.add_entity(Wall(50, 300, 200, 20, main))      # Finish platform (left)
+    map5.add_entity(Wall(100, 685, 100, 20, main))
+    map5.add_entity(Wall(250, 620, 100, 20, main))
+    map5.add_entity(Wall(400, 555, 100, 20, main)) 
+    # map5.add_entity(Wall(120, 5520, 100, 20, main)) 
+    # map5.add_entity(Wall(10, 505, 100, 20, main))
+    # map5.add_entity(Wall(120, 460, 100, 20, main))
+    # map5.add_entity(Wall(230, 415, 100, 20, main))
+    # map5.add_entity(Wall(120, 370, 100, 20, main))
 
     # Right side - Player 2
     map5.add_entity(Wall(890, 685, 100, 20, main))     # Step 1
