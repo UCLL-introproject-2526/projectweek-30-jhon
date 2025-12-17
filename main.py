@@ -5,7 +5,7 @@ class Main:
     def __init__(self):
         self.__loop_controller = Loop_controller(self, "Merge Conflict")
         self.__maps = build_maps(self)
-        self.__selected_map = 4
+        self.__selected_map = 0
 
         self.__loop_controller.start()
     def get_current_map(self):
