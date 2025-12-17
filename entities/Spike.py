@@ -3,16 +3,20 @@ from entities.Entity import Entity
 from entities.Player import Player
 
 class Spike(Entity):
-    def __init__ (self, x, y, main):
+    def __init__ (self, x, y, main, removable: bool = False):
         super().__init__(x, y, 20, 20, main,solid=False,texture="block_models/Spike_model.png", name="Spike")
         self._main = main
         self._active = True
+        self.removable = bool(removable)
     
     def set_active(self, active: bool):
         self._active = bool(active)
 
     def is_active(self):
         return self._active
+
+    def is_removable(self):
+        return self.removable
 
     def get_texture(self):
         # Hide texture when inactive so render skips it

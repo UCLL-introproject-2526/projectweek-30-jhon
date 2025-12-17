@@ -48,7 +48,6 @@ def build_maps(main):
     map1.add_entity(Wall(280, 180, 30, 60, main))
 
     # Merge detector - triggers when players touch ANYWHERE
-
     maps.append(map1)
 
     # Map 2: Level 2 - Advanced Challenge (HARDER!)
@@ -105,8 +104,37 @@ def build_maps(main):
     # Add a Pressure Plate at the bottom left (unpressed is always 'block_models/pressureplate_in.png')
     # map3.add_entity(PressurePlate(60, 233, main))
 
+
     # Merge to return to menu
     maps.append(map3)
+
+     # map 4
+    map4 = Map("map4", 400, 250)
+    map4.add_entity(Player(20, 180, main, 1))
+    map4.add_entity(Player(380, 50, main, 2))
+
+    map4.add_entity(Wall(0, 240, 400, 30, main))
+    map4.add_entity(Wall(-20, 0, 30, 250, main))
+    map4.add_entity(Wall(400, 0, 30, 250, main))
+
+    # Platforms layout
+    map4.add_entity(Wall(0, 150, 250, 10, main))
+    map4.add_entity(Wall(250, 75, 150, 10, main))
+
+    # removable wall (will be removed by the pressure plate)
+    removable_wall = Wall(325, 0, 10, 80, main)
+    map4.add_entity(removable_wall)
+
+    #Spikes
+    map4.add_entity(Spike(280, 55, main))
+
+    # pressure plate that removes the wall on activation
+    map4.add_entity(PressurePlate(60, 233, main, remove_target=removable_wall))
+
+
+    map4.add_entity(Wall(100, 200, 200, 10, main))
+
+    maps.append(map4)
 
     # Map 101: Settings
     map101 = Map("settings", 400, 250)

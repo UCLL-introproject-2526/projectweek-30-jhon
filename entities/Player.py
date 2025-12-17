@@ -16,6 +16,8 @@ class Player(Entity):
         self.moving_left = False
         self.moving_right = False
         self.moving_up = False
+        # Prevent accidental merge right after (re)spawn or restart
+        self._merge_cooldown = 0.75
         self.__sound_library = SoundLibrary()
         self.__footstep_cooldown = 0
         self.__footstep_delay = 0.3
@@ -44,6 +46,9 @@ class Player(Entity):
         return self.__textures[0]
 
     def game_loop(self, delta_time, events):
+        # tick merge cooldown
+        if self._merge_cooldown > 0:
+            self._merge_cooldown -= delta_time
         self.detect_merge()
         self.calc_movement(delta_time)
         self.keyboard_input(events)
@@ -89,11 +94,15 @@ class Player(Entity):
                     self.moving_up = False
 
     def detect_merge(self):
+        if self._merge_cooldown > 0:
+            return
         for entity in self.main.get_current_map().get_entities():
             if entity.get_name() == "Player" and entity is not self:
+                # Ensure the other player also passed their cooldown
+                if hasattr(entity, '_merge_cooldown') and getattr(entity, '_merge_cooldown') > 0:
+                    continue
                 if self.collision(entity):
                     self.__sound_library.play('merge')
-                    print("merge")
                     self.main.next_map()
 
 
