@@ -1,5 +1,6 @@
 # from entities.Entity import Entity
 from entities.Entity import Entity
+import tools.importer
 
 # temporary movement to test maps (movement.py)
 from entities.Movement import Movement
@@ -30,11 +31,27 @@ class Player(Entity):
             self.controls = keybinds_player2()
             texture_path = "assets/textures/entities/Player/Player_02.png"
         self.__texture = pygame.image.load(texture_path).convert_alpha()
+
+
+
+        self.__textures = [
+            tools.importer.image("assets/textures/entities/Player/Player_01.png"),
+            tools.importer.image("assets/textures/entities/Player/Player_01_Left.png"),
+            tools.importer.image("assets/textures/entities/Player/Player_01_Right.png"),
+        ]
         # Track previous position for collision resolution; updated at start of each game loop
         self.prev_x = self.get_x()
         self.prev_y = self.get_y()
     def get_texture(self):
-        return self.__texture
+        if not self.moving_right and not self.moving_left or (self.moving_right and self.moving_left):
+            return self.__textures[0]
+        elif self.moving_right:
+            self.speed_x = 3
+            return self.__textures[2]
+        elif self.moving_left:
+            self.speed_x = -3
+            return self.__textures[1]
+        return self.__textures[0]
     
  #    def move(self, keys):
  #        if keys[self.controls["left"]]:
@@ -76,10 +93,12 @@ class Player(Entity):
                     self.moving_up = False
         print(f"aktivated: {self.moving_left}, {self.moving_right}, {self.moving_up}")
         if self.on_floor and self.moving_up:
-            self.speed_y = -8
-        if self.moving_right:
+            self.speed_y = -10
+        if not self.moving_right and not self.moving_left or (self.moving_right and self.moving_left):
+            self.speed_x = 0
+        elif self.moving_right:
             self.speed_x = 3
-        if self.moving_left:
+        elif self.moving_left:
             self.speed_x = -3
 
 
