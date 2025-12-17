@@ -3,7 +3,7 @@ from entities.Entity import Entity
 import tools.importer
 
 # temporary movement to test maps (movement.py)
-from entities.Movement import Movement
+from garbage.Movement import Movement
 # -----------------------------
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 import pygame
@@ -12,7 +12,7 @@ from SoundLibrary import SoundLibrary
 
 class Player(Entity):
     def __init__(self, x, y, main, keybinds):
-        super().__init__(x, y, 15 , 25, main, solid=True, gravitation=1)
+        super().__init__(x, y, 15 , 25, main, solid=False, gravitation=1)
         self.__main = main
         self.moving_left = False
         self.moving_right = False
