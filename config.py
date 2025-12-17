@@ -173,13 +173,16 @@ def build_maps(main):
 
     map5 = Map("map5", 1000, 750)
 
-    # Players
-    map5.add_entity(Player(50, 700, main, 1))
-    map5.add_entity(Player(900, 700, main, 2))
+    # Left player
+    map5.add_entity(Player(150, 659, main, 1))
+    # Right player
+    map5.add_entity(Player(850, 659, main, 2))
 
     # Base structure
     map5.add_entity(Wall(0, 730, 1000, 50, main))      # Ground floor
-    map5.add_entity(Wall(490, 0, 20, 730, main))       # Center dividing wall
+    for x in range(0, 1000, 20):
+        map5.add_entity(Spike(x, 711, main))
+    map5.add_entity(Wall(490, 200, 20, 730, main))       
 
     # Left side - Player 1
     map5.add_entity(Wall(100, 685, 100, 20, main))
@@ -187,20 +190,22 @@ def build_maps(main):
     map5.add_entity(Wall(400, 555, 100, 20, main)) 
     map5.add_entity(Wall(250, 500, 100, 20, main)) 
     map5.add_entity(Wall(100, 445, 100, 20, main))
-    map5.add_entity(Wall(0, 390, 100, 20, main))
-    # map5.add_entity(Wall(230, 415, 100, 20, main))
-    # map5.add_entity(Wall(120, 370, 100, 20, main))
+    map5.add_entity(Wall(20, 390, 20, 20, main))
+    map5.add_entity(Wall(100, 325, 100, 20, main))
+    map5.add_entity(Wall(250, 260, 100, 20, main))
+    map5.add_entity(Wall(400, 195, 100, 20, main))
 
     # Right side - Player 2
-    map5.add_entity(Wall(890, 685, 100, 20, main))     # Step 1
-    map5.add_entity(Wall(780, 640, 100, 20, main))     # Step 2
-    map5.add_entity(Wall(670, 595, 100, 20, main))     # Step 3 (near center)
-    map5.add_entity(Wall(780, 550, 100, 20, main))     # Step 4 (back right)
-    map5.add_entity(Wall(890, 505, 100, 20, main))     # Step 5
-    map5.add_entity(Wall(780, 460, 100, 20, main))     # Step 6
-    map5.add_entity(Wall(670, 415, 100, 20, main))     # Step 7
-    map5.add_entity(Wall(780, 370, 100, 20, main))     # Step 8
-    map5.add_entity(Wall(750, 300, 200, 20, main))     # Finish platform (right)
+    map5.add_entity(Wall(800, 685, 100, 20, main))   
+    map5.add_entity(Wall(650, 620, 100, 20, main))   
+    map5.add_entity(Wall(500, 555, 100, 20, main))   
+    map5.add_entity(Wall(650, 500, 100, 20, main))   
+    map5.add_entity(Wall(800, 445, 100, 20, main))   
+    map5.add_entity(Wall(960, 390, 20, 20, main))    
+    map5.add_entity(Wall(800, 325, 100, 20, main))
+    map5.add_entity(Wall(650, 260, 100, 20, main))
+    map5.add_entity(Wall(500, 195, 100, 20, main))
+
 
 
     maps.append(map5)
