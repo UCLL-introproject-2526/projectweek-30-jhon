@@ -3,7 +3,7 @@ from entities.Entity import Entity
 import tools.importer
 
 # temporary movement to test maps (movement.py)
-from entities.Movement import Movement
+from garbage.Movement import Movement
 # -----------------------------
 from settings.keyboard_layout import keybinds_player1, keybinds_player2
 import pygame
