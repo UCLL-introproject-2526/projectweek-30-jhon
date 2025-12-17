@@ -47,7 +47,7 @@ def build_maps(main):
     
     # Middle platforms to cross
     map1.add_entity(Wall(100, 180, 30, 10, main))
-    map1.add_entity(Wall(190, 160, 30, 10, main))
+    map1.add_entity(Wall(190, 160, 30, 100, main))
     map1.add_entity(Wall(280, 180, 30, 10, main))
     
     # Merge detector - triggers when players touch ANYWHERE
