@@ -9,6 +9,7 @@ class SoundLibrary:
             'spikestab': 'spikedeath.wav',
             'merge': 'slimeysfx.wav',
             'spikeretract': 'swordsheathing.wav',
+            'wallmove': 'stoneslide.wav',
         }
         self.tracks = {
             'background1': 'soft-background-music-409193.mp3',
