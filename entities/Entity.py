@@ -1,4 +1,4 @@
-from fcntl import FASYNC
+# from fcntl import FASYNC
 
 import pygame
 

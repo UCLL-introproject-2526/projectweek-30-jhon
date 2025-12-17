@@ -90,13 +90,6 @@ def check_wall_collisions(player, main):
                             player.velocity_y = 0
                             py = player.get_y()
                             dy = py - prev_y
-    # Check collision with spikes (instant death -> restart level)
-    for entity in main.get_current_map().get_entities():
-        if hasattr(entity, '__class__') and entity.__class__.__name__ == 'Spike':
-            sx, sy, sw, sh = entity.get_render_data()
-            if (px < sx + sw and px + pw > sx and py < sy + sh and py + ph > sy):
-                main.restart_map()
-                return
 
     # Clamp to map bounds (x-axis)
     map_width, map_height = main.get_current_map().get_range()
