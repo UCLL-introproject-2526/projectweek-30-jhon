@@ -1,5 +1,3 @@
-from fcntl import FASYNC
-
 import pygame
 
 from tools.importer import image
