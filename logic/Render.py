@@ -33,9 +33,6 @@ class Render:
             if entity.get_texture() is not None:
                 scaled_entity_image = pygame.transform.scale(entity.get_texture(), (int(width * pixelsize), int(height * pixelsize)))
                 self.__screen.blit(scaled_entity_image, (offset_x + int(x * pixelsize), offset_y + int(y * pixelsize)))
-        
- 
-        print("Rendering frame..." + str(random.randint(0, 100)))
 
 
         pygame.display.flip()

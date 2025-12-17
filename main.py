@@ -24,7 +24,10 @@ class Main:
         self.__loop_controller.add_later_task(task, delay)
 
     def restart_map(self):
+        print(f"selectedMap: {self.__selected_map}, {len(self.__maps)}")
         self.__maps = build_maps(self)
+
+        print(f"Now selectedMap: {self.__selected_map}, {len(self.__maps)}")
 
 
 main = Main()

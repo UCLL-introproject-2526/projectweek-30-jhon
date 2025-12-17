@@ -19,7 +19,6 @@ class Loop_controller:
 
         while True:
             past_time = time() - self.__time
-            print("past time:", past_time)
             self.__time = time()
             events = pygame.event.get()
             self.__sound_library.sound_loop(past_time)

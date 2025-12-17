@@ -1,6 +1,5 @@
 from Map import Map
 from entities.Spike import Spike
-from entities.PlayerMerge import PlayerMerge
 from entities.Wall import Wall
 from entities.Player import Player
 from entities.MenuController import MenuController

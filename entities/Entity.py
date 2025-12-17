@@ -147,7 +147,6 @@ class Entity:
 
     def calc_movement(self, delta_time):
         self.speed_y += self.__gravitation * delta_time * 40
-        print(delta_time)
         dx = int(round(self.speed_x))
         dy = int(round(self.speed_y))
         self.move(dx, dy)

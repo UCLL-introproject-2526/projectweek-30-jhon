@@ -92,8 +92,9 @@ class Player(Entity):
         for entity in self.main.get_current_map().get_entities():
             if entity.get_name() == "Player" and entity is not self:
                 if self.collision(entity):
-                    self.__sound_library.play('willhelm')
-                    # self.main.next_map()
+                    self.__sound_library.play('merge')
+                    print("merge")
+                    self.main.next_map()
 
 
     def run_with_delay(self):
