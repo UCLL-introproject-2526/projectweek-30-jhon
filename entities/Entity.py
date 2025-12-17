@@ -3,7 +3,7 @@ import pygame
 from tools.importer import image
 
 class Entity:
-    def __init__(self, x, y, width, height, main, solid=True, texture=None, gravitation = False, weight = 100, bounce = 0):
+    def __init__(self, x, y, width, height, main, solid=True, texture=None, gravitation = False, weight = 100):
         self.__x = x
         self.__y = y
         self.__width = width
@@ -11,13 +11,11 @@ class Entity:
         self.__solid = solid
         self.__texture = texture
         self.__gravitation = gravitation
-        self.__bounce = bounce
         self.speed_x = 0
         self.speed_y = 0
         self.on_floor = False
         self.__main = main
         self.__weight = weight
-        self.friction = 0.1
         if texture:
             self.set_texture(texture)
 
