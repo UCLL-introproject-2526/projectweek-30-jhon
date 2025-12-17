@@ -1,5 +1,6 @@
 import pygame
 from entities.Entity import Entity
+from entities.Player import Player
 
 class Spike(Entity):
     def __init__ (self, x, y, main):
