@@ -56,7 +56,7 @@ def build_maps(main):
     maps.append(map1)
     
     # Map 2: Level 2 - Advanced Challenge (HARDER!)
-    map2 = Map("map1", 400, 250)
+    map2 = Map("background", 400, 250)
     
     # Players start at opposite ends AGAIN
     map2.add_entity(Player(10, 200, main, 1))  # Far left
