@@ -40,6 +40,9 @@ class Render:
                 if hasattr(entity, '__class__') and entity.__class__.__name__ == 'EndingScreen':
                     entity.render_ending_text(self.__screen)
                     break
+                # Draw menu UI overlay for MenuController
+                if hasattr(entity, '__class__') and entity.__class__.__name__ == 'MenuController':
+                    entity.render_menu_ui(self.__screen)
 
         pygame.display.flip()
     

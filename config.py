@@ -20,7 +20,7 @@ def build_maps(main):
     # ========================================================================
     # MAP 0: MAIN MENU
     # ========================================================================
-    map0 = Map("start_menu", 400, 250)
+    map0 = Map("map0", 400, 250)
 
     # Menu button callbacks
     def play_game():
@@ -46,7 +46,7 @@ def build_maps(main):
     # ========================================================================
     # MAP 1: LEVEL 1 - Platform Challenge
     # ========================================================================
-    map1 = Map("background", 400, 250)
+    map1 = Map("map1", 400, 250)
 
     map1.add_entity(Player(20, 180, main, 1))
     map1.add_entity(Player(360, 180, main, 2))
