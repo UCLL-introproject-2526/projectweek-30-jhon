@@ -5,7 +5,7 @@ from entities.Button import Button
 
 class MainMenu(Map):
     def __init__(self, main):
-        super().__init__("MainMenu", 500, 250, 40, 130, 335, 130, no_player=True)
+        super().__init__(main, "MainMenu", 500, 250, 40, 130, 335, 130, no_player=True)
         self.setup(main)
 
     def setup(self, main):
@@ -15,13 +15,13 @@ class MainMenu(Map):
         self.add_entity(Button(200, 160, main, "Settings", id="settings"),)
         self.add_entity(Button(200, 200, main, "Quit", id="quit"))
 
-    def update_map(self, past_time, events):
+    def update(self, past_time, events):
         if self.get_entity_by_id('start').is_clicked():
-            self.get_entity_by_id('start').main.next_map()
+            self.main.next_map()
 
         if self.get_entity_by_id('quit').is_clicked():
-            self.get_entity_by_id('quit').main.quit()
+            self.main.quit()
 
         if self.get_entity_by_id('settings').is_clicked():
-            self.get_entity_by_id('settings').main.settings()
+            self.main.settings()
 

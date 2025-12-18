@@ -4,7 +4,7 @@ from entities.Button import Button
 
 class Map1(Map):
     def __init__(self, main):
-        super().__init__('map1', 400, 250, 30, 180, 355, 180)
+        super().__init__(main, 'map1', 400, 250, 30, 180, 355, 180)
         self.setup(main)
 
     def setup(self, main):

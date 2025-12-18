@@ -1,5 +1,6 @@
 import pygame
 from entities.Entity import Entity
+from tools.Loop_controller import Loop_controller
 from tools.importer import image
 
 
@@ -18,3 +19,9 @@ class TextEntity(Entity):
         text_rect = text_surface.get_rect(center=surface.get_rect().center)
         surface.blit(text_surface, text_rect)
         return surface
+
+    def set_text(self, text):
+        self.text = text
+
+    def set_color(self, color):
+        self.color = color

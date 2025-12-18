@@ -10,7 +10,7 @@ class Main:
         self.__loop_controller.start()
 
 
-    def get_current_map(self):
+    def get_current_map(self): ##
         return self.__map_manager.get_current_map()
 
     def add_delayed_task(self, task, delay):
@@ -33,4 +33,20 @@ class Main:
 
     def settings(self):
         self.__map_manager.settings()
+
+    def map(self, number):
+        self.__map_manager.select_map(0)
+
+    def get_fps(self):
+        return self.__loop_controller.get_fps()
+
+    def set_fps(self, fps):
+        self.__loop_controller.set_fps(fps)
+
+    def get_p1(self):
+        return self.__map_manager.get_p1()
+
+    def get_p2(self):
+        return self.__map_manager.get_p2()
+
 Main()

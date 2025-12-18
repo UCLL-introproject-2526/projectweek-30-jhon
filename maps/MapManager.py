@@ -48,3 +48,9 @@ class MapManager:
     def settings(self):
         self.select_map(len(self.__maps) - 1)
 
+    def get_p1(self):
+        return self.__player1
+
+    def get_p2(self):
+        return self.__player2
+

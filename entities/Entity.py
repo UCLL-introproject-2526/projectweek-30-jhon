@@ -91,8 +91,8 @@ class Entity:
                 ex, ey, ew, eh = e.get_render_data()
 
                 if intersects_pixel(
-                        (self.x, sweep_y, self.width, sweep_h),
-                        (ex, ey, ew, eh)
+                        (int(self.x), int(sweep_y), int(self.width), int(sweep_h)),
+                        (int(ex), int(ey), int(ew), int(eh))
                 ):
                     if dy > 0:
                         # boven
@@ -145,9 +145,9 @@ class Entity:
 
     def gravity(self, delta_time):
         print("Speed: ", self.speed_y)
-        self.speed_y += self.__gravitation * delta_time * 50
-        dx = int(round(self.speed_x))
-        dy = int(round(self.speed_y))
+        self.speed_y += self.__gravitation * delta_time
+        dx = round(self.speed_x * delta_time)
+        dy = round(self.speed_y * delta_time)
         self.move(dx, dy)
 
     def game_loop(self, past_time, events):
@@ -155,8 +155,8 @@ class Entity:
 
     def calc_movement(self, delta_time):
         self.speed_y += self.__gravitation * delta_time * 40
-        dx = int(round(self.speed_x))
-        dy = int(round(self.speed_y))
+        dx = int(round(self.speed_x * delta_time * 60))
+        dy = int(round(self.speed_y * delta_time * 60))
         self.move(dx, dy)
 
     def get_colliding_objects(self):
@@ -165,8 +165,6 @@ class Entity:
             if self.collision(entity):
                 colliding_entities.append(entity)
         return colliding_entities
-
-
 
 def intersects_pixel(a, b):
     ax, ay, aw, ah = a

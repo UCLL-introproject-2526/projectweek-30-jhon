@@ -3,7 +3,7 @@ from entities.Wall import Wall
 
 class Map2(Map):
     def __init__(self, main):
-        super().__init__('map2', 400, 250, 25, 200, 370, 200)
+        super().__init__(main, 'map2', 400, 250, 25, 200, 370, 200)
         self.setup(main)
 
     def setup(self, main):

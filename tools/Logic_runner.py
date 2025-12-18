@@ -6,8 +6,6 @@ class LogicManager:
 
     def execute_loop(self, delta_time, events):
         self.__main.get_current_map().update_map(delta_time, events)
-        # for entity in self.__main.get_current_map().get_entities():
-        #     entity.game_loop(delta_time, events)
 
         for task in self.__open_tasks:
             if task.check_and_run(delta_time):

@@ -8,7 +8,7 @@ from tools.SoundLibrary import SoundLibrary
 
 class Loop_controller:
     def __init__(self, main):
-        self.fps = 60
+        self.__fps = 60
         self.main = main
         pygame.init()
         self.__renderer = Render("Merge Conflict", 1200, 750)
@@ -16,16 +16,21 @@ class Loop_controller:
         self.__time = time()
         self.__sound_library = SoundLibrary()
 
+    def get_fps(self):
+        return self.__fps
+
+    def set_fps(self, fps):
+        self.__fps = max(10, min(fps, 120))
+
     def start(self):
         clock = pygame.time.Clock()
 
         while True:
             self.game_loop()
-            clock.tick(self.fps)
+            clock.tick(self.__fps)
 
     def add_later_task(self, task, delay):
         self.__logic_manager.add_later_taks(task, delay)
-
 
     def quit(self):
         self.__renderer.quit()
