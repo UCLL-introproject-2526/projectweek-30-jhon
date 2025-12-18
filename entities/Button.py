@@ -16,6 +16,8 @@ class Button(Entity):
 
     def is_clicked(self):
         mouse_pos = self.main.get_mouse_pos()
+        if mouse_pos is None:
+            return False
         if (self.x <= mouse_pos[0] <= self.x + self.width and
             self.y <= mouse_pos[1] <= self.y + self.height) and self.clicked == False:
             if pygame.mouse.get_pressed()[0]:

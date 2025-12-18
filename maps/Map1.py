@@ -14,6 +14,3 @@ class Map1(Map):
         self.add_entity(Wall(100, 180, 30, 60, main)) 
         self.add_entity(Wall(190, 160, 30, 90, main)) 
         self.add_entity(Wall(280, 180, 30, 60, main))
-
-
-        self.add_entity(Button(100, 30, main, None, "Play", (0, 255, 0), (0, 0, 0)))
