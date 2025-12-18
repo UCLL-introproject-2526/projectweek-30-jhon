@@ -36,6 +36,8 @@ class Player(Entity):
 
 
     def get_texture(self):
+        if self.main.get_current_map().get_no_player():
+            return None
         if not self.moving_right and not self.moving_left or (self.moving_right and self.moving_left):
             return self.__textures[0]
         elif self.moving_right:
@@ -47,6 +49,8 @@ class Player(Entity):
         return self.__textures[0]
 
     def game_loop(self, delta_time, events):
+        if self.main.get_current_map().get_no_player():
+            return None
         self.detect_merge()
         self.calc_movement(delta_time)
         self.keyboard_input(events)

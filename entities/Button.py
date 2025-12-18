@@ -11,7 +11,7 @@ class Button(Entity):
         self.color = color
         self.main = main
         self.bg_color = bg_color
-        self.clicked = False
+        self.__clicked = False
         self.bg_img = image('entities/button/mylongbutton.png')
 
     def is_clicked(self):
@@ -19,17 +19,17 @@ class Button(Entity):
         if mouse_pos is None:
             return False
         if (self.x <= mouse_pos[0] <= self.x + self.width and
-            self.y <= mouse_pos[1] <= self.y + self.height) and self.clicked == False:
+            self.y <= mouse_pos[1] <= self.y + self.height) and self.__clicked == False:
             if pygame.mouse.get_pressed()[0]:
-                self.clicked = True
+                self.__clicked = True
                 return True
         if not pygame.mouse.get_pressed()[0]:
-            self.clicked = False
+            self.__clicked = False
         return False
 
 
     def reset_click(self):
-        self.clicked = False
+        self.__clicked = False
 
     def get_texture(self):
         font = pygame.font.SysFont('Arial', 160, bold=True)
@@ -38,8 +38,3 @@ class Button(Entity):
         text_rect = text_surface.get_rect(center=surface.get_rect().center)
         surface.blit(text_surface, text_rect)
         return surface
-
-    def game_loop(self, past_time, events):
-        mouse_pos = self.main.get_mouse_pos()
-        if self.is_clicked():
-            print('TTEEEESSST')

@@ -26,6 +26,10 @@ class Loop_controller:
     def add_later_task(self, task, delay):
         self.__logic_manager.add_later_taks(task, delay)
 
+
+    def quit(self):
+        self.__renderer.quit()
+
     def game_loop(self):
 
         # runtime

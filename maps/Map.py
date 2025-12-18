@@ -4,7 +4,7 @@ from entities.Player import Player
 from tools.importer import image
 
 class Map:
-    def __init__(self, name, width, height, start_pos1_x, start_pos1_y, start_pos2_x, start_pos2_y):
+    def __init__(self, name, width, height, start_pos1_x, start_pos1_y, start_pos2_x, start_pos2_y, no_player=False):
         self.__width = width
         self.__height = height
         self.__start_pos1_x = start_pos1_x
@@ -13,7 +13,11 @@ class Map:
         self.__start_pos2_y = start_pos2_y
         self.bg = image(f"background/{name}.png")
         self.fg = image(f"frontground/{name}.png")
+        self.__disable_players = no_player
         self.entities = []
+
+    def get_no_player(self):
+        return self.__disable_players
 
     def add_entity(self, entity):
         if entity not in self.entities:

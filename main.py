@@ -24,4 +24,7 @@ class Main:
 
     def get_mouse_pos(self):
         return self.__loop_controller.get_current_mouse_pos()
+
+    def quit(self):
+        self.__loop_controller.quit()
 Main()
