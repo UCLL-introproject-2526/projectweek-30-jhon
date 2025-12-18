@@ -57,7 +57,17 @@ class Render:
             screen_width = window_width
             screen_height = int(screen_width / map_aspect_ratio)
             offset_y = (window_height - screen_height) // 2
-        return (offset_x, offset_y, screen_width, screen_height)
+        return offset_x, offset_y, screen_width, screen_height
+
+    def get_cursor_position(self, main):
+        cursor_x, cursor_y = pygame.mouse.get_pos()
+        screen_x, screen_y, screen_width, screen_height = self.__get_usable_screen_area(main.get_current_map())
+        cursor_x -= screen_width // 2
+        cursor_y -= screen_height // 2
+        map_x, map_y = main.get_current_map().get_range()
+        return cursor_x / map_x, cursor_y / map_y
+
+
 
     def enter_fullscreen(self):
         if self.__fullscreen:

@@ -21,4 +21,7 @@ class Main:
 
     def restart_map(self):
         self.__map_manager.reset_map()
+
+    def get_mouse_pos(self):
+        return self.__loop_controller.get_current_mouse_pos()
 Main()

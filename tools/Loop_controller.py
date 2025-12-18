@@ -26,7 +26,6 @@ class Loop_controller:
     def add_later_task(self, task, delay):
         self.__logic_manager.add_later_taks(task, delay)
 
-
     def game_loop(self):
 
         # runtime
@@ -53,3 +52,6 @@ class Loop_controller:
         self.__logic_manager.execute_loop(past_time, events)
 
         self.__renderer.update(self.main)
+
+    def get_current_mouse_pos(self):
+        return self.__renderer.get_cursor_position(self.main)
