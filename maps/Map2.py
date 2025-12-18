@@ -8,12 +8,11 @@ class Map2(Map):
 
     def setup(self, main):
         self.add_entity(Wall(0, 240, 60, 20, main))
-        # self.add_entity(Wall(100, 240, 50, 20, main))
         self.add_entity(Wall(250, 240, 50, 20, main))
         self.add_entity(Wall(340, 240, 60, 20, main))
 
         #middle wall
-        self.add_entity(Wall(180,62,40,190,main))
+        self.add_entity(Wall(180,62,40,188,main))
         self.add_entity(Wall(180,0,40,25,main))
 
         #right platforms
@@ -28,7 +27,7 @@ class Map2(Map):
 
         #Side U Left
         self.add_entity(Wall(100,140,50,10, main))
-        self.add_entity(Wall(140,150,10,50, main))
+        self.add_entity(Wall(140,150,10,40, main))
 
 
         #Right top 2 platforms
@@ -36,7 +35,7 @@ class Map2(Map):
         self.add_entity(Wall(330,135,45,10, main))
 
         # + wall
-        self.add_entity(Wall(285,50,10,20, main))
+        self.add_entity(Wall(285,50,10,10, main))
 
         # lil platform
         self.add_entity(Wall(345,70,20,10,main))
@@ -51,12 +50,11 @@ class Map2(Map):
 
 
         #LEFT rest
-        self.add_entity(Wall(0,110,50,10, main))
-        self.add_entity(Wall(0,60,55,10, main))
+        self.add_entity(Wall(0,110,50,16, main))
+        self.add_entity(Wall(0,54,55,16, main))
         self.add_entity(Wall(140,90,10,50, main))
-        self.add_entity(Wall(100,90,50,10, main))
+        self.add_entity(Wall(100,90,40,10, main))
         self.add_entity(Wall(100,60,10,30, main))
-        self.add_entity(Wall(170,15,50,10, main))
 
 
 
