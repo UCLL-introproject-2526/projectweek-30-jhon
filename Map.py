@@ -2,6 +2,7 @@ import pygame
 
 class Map:
     def __init__(self, name, width, height):
+        self.name = name
         self.__width = width
         self.__height = height
         self.image = pygame.image.load(f"assets/textures/background/{name}.png").convert_alpha()
@@ -11,6 +12,9 @@ class Map:
     def add_entity(self, entity):
         if entity not in self.entities:
             self.entities.append(entity)
+
+    def get_name(self):
+        return self.name
 
     def remove_entity(self, entity):
         if entity in self.entities:

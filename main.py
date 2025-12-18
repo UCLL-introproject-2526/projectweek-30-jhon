@@ -5,14 +5,23 @@ class Main:
     def __init__(self):
         self.__loop_controller = Loop_controller(self, "Merge Conflict")
         self.__maps = build_maps(self)
-        self.__selected_map = 5
+        self.__selected_map = 0
         self.__loop_controller.start()
     def get_current_map(self):
         return self.__maps[self.__selected_map]
     
     def select_map(self, index):
-        if 0 <= index < len(self.__maps):
-            self.__selected_map = index
+        # Accept either an integer index or a map name (string).
+        if isinstance(index, str):
+            # find first map with matching name without using enumerate
+            for i in range(len(self.__maps)):
+                m = self.__maps[i]
+                if getattr(m, 'name', None) == index:
+                    self.__selected_map = i
+                    return
+        elif isinstance(index, int):
+            if 0 <= index < len(self.__maps):
+                self.__selected_map = index
 
     def next_map(self):
         self.__selected_map += 1

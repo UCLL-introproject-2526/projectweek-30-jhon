@@ -23,7 +23,10 @@ class Player(Entity):
         self.__footstep_delay = 0.3
 
         self.__textures = []
-        if keybinds == 1:
+        # store which keybind set this player uses (1 = player1, 2 = player2)
+        self.keybinds = keybinds
+        if self.keybinds == 1:
+            # initial controls (will be refreshed dynamically on each input pass)
             self.controls = keybinds_player1()
             self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_01.png"))
             self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_01_Left.png"))
@@ -77,20 +80,27 @@ class Player(Entity):
         self.main.restart_map()
 
     def keyboard_input(self, events):
+        # Fetch the current controls each frame so changes to the layout (qwerty/azerty)
+        # take effect immediately after the user toggles it in settings.
+        if self.keybinds == 1:
+            controls = keybinds_player1()
+        else:
+            controls = keybinds_player2()
+
         for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == self.controls["jump"]:
+                if event.key == controls["jump"]:
                     self.moving_up = True
-                if event.key == self.controls["left"]:
+                if event.key == controls["left"]:
                     self.moving_left = True
-                if event.key == self.controls["right"]:
+                if event.key == controls["right"]:
                     self.moving_right = True
             if event.type == pygame.KEYUP:
-                if event.key == self.controls["left"]:
+                if event.key == controls["left"]:
                     self.moving_left = False
-                if event.key == self.controls["right"]:
+                if event.key == controls["right"]:
                     self.moving_right = False
-                if event.key == self.controls["jump"]:
+                if event.key == controls["jump"]:
                     self.moving_up = False
 
     def detect_merge(self):
@@ -105,6 +115,12 @@ class Player(Entity):
                     self.__sound_library.play('merge')
                     self.main.next_map()
 
+    def get_controls(self):
+        """Return the current control mapping for this player (reflects runtime layout changes)."""
+        if self.keybinds == 1:
+            return keybinds_player1()
+        else:
+            return keybinds_player2()
 
     def run_with_delay(self):
         print("value")

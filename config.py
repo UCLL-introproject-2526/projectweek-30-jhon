@@ -7,6 +7,7 @@ from entities.Spike import Spike
 from entities.Wall import Wall
 from entities.Player import Player
 from entities.MenuController import MenuController
+from entities.Button import Button
 from entities.PressurePlate import PressurePlate
 from entities.SettingsMap import SettingsMap
 from entities.EndingScreen import EndingScreen
@@ -29,9 +30,9 @@ def build_maps(main):
         main.next_map()
 
     def settings():
-        """Open settings screen (Map 101)"""
+        """Open settings screen (settings)"""
         print("Settings clicked")
-        main.select_map(101)
+        main.select_map("settings")
 
     def quit_game():
         """Exit the game"""
@@ -39,7 +40,7 @@ def build_maps(main):
         print("Quitting...")
         sys.exit()
 
-    # Add menu controller with buttons
+    # Add menu controller with keyboard shortcuts
     map0.add_entity(MenuController(play_game, settings, quit_game))
     maps.append(map0)
 
