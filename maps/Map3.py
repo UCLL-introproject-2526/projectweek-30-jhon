@@ -24,7 +24,7 @@ class Map3(Map):
         self.add_entity(Wall(390, 0, 10, 250, main))
 
         # pressure_plates
-        self.add_entity(Pressure_plate(80, 225, main, "activator"))
+        self.add_entity(Pressure_plate(80, 229, main, "activator"))
 
         # spike
         self.add_entity(Spike(100, 225, main))

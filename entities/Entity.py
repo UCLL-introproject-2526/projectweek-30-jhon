@@ -72,6 +72,8 @@ class Entity:
     def move(self, dx, dy):
 
         entities = self.main.get_current_map().get_entities()
+        dx = int(round(dx))
+        dy = int(round(dy))
 
         # Y-Sweep
         if dy != 0:
@@ -145,18 +147,14 @@ class Entity:
     def gravity(self, delta_time):
         print("Speed: ", self.speed_y)
         self.speed_y += self.__gravitation * delta_time * 50
-        dx = int(round(self.speed_x))
-        dy = int(round(self.speed_y))
-        self.move(dx, dy)
+        self.move(self.speed_x * delta_time * 50, self.speed_y * delta_time * 50)
 
     def game_loop(self, past_time, events):
         pass
 
     def calc_movement(self, delta_time):
         self.speed_y += self.__gravitation * delta_time * 40
-        dx = int(round(self.speed_x))
-        dy = int(round(self.speed_y))
-        self.move(dx, dy)
+        self.move(self.speed_x * delta_time * 50, self.speed_y * delta_time * 50)
 
     def get_colliding_objects(self):
         colliding_entities = []
@@ -164,6 +162,10 @@ class Entity:
             if self.collision(entity):
                 colliding_entities.append(entity)
         return colliding_entities
+
+    def get_out(self):
+        pass
+
 
 
 

@@ -16,7 +16,7 @@ class Map1(Map):
         self.add_entity(Wall(390, 0, 10, 250, main))
 
 
-        self.add_entity(Wall(90, 180, 40, 70, main))
-        self.add_entity(Wall(180, 110, 40, 140, main))
-        self.add_entity(Wall(270, 180, 40, 70, main))
+        self.add_entity(Wall(90, 200, 40, 50, main))
+        self.add_entity(Wall(180, 150, 40, 100, main))
+        self.add_entity(Wall(270, 200, 40, 50, main))
 

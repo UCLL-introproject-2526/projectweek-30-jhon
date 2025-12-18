@@ -87,6 +87,9 @@ class Render:
     def is_fullscreen(self):
         return self.__fullscreen
 
+    def get_pixel_pos_by_screen_pos(self):
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+
     def quit(self):
         pygame.quit()
         print("Quitting application...")

@@ -42,8 +42,10 @@ class Loop_controller:
 
         # run sound loop
         self.__sound_library.sound_loop(past_time)
-
-
+        
+        # mouse pos
+        print(self.__renderer.get_pixel_pos_by_screen_pos())
+        
         # listen to quit event
         for event in events:
             if event.type == pygame.QUIT:
