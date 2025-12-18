@@ -18,8 +18,13 @@ class Button(Entity):
             if pygame.mouse.get_pressed()[0]:
                 self.clicked = True
                 return True
-        self.clicked = False
+        if not pygame.mouse.get_pressed()[0]:
+            self.clicked = False
         return False
+
+
+    def reset_click(self):
+        self.clicked = False
 
     def get_texture(self):
         font = pygame.font.SysFont('Arial', 30)
