@@ -1,15 +1,18 @@
 import pygame
 from entities.Entity import Entity
 from tools.Loop_controller import Loop_controller
+from tools.importer import image
+
 
 class Button(Entity):
-    def __init__(self, x, y, width, height, main, texture, text, color, bg_color):
-        super().__init__(x, y, width, height, main, texture=texture)
+    def __init__(self, x, y, main, texture, text, color, bg_color):
+        super().__init__(x, y, 100, 30, main, texture=texture)
         self.text = text
         self.color = color
         self.main = main
         self.bg_color = bg_color
         self.clicked = False
+        self.bg_img = image('entities/button/mylongbutton.png')
 
     def is_clicked(self):
         mouse_pos = self.main.get_mouse_pos()
@@ -27,8 +30,12 @@ class Button(Entity):
         self.clicked = False
 
     def get_texture(self):
-        font = pygame.font.SysFont('Arial', 30)
-        return font.render(self.text, True, self.color, self.bg_color)
+        font = pygame.font.SysFont('Arial', 160, bold=True)
+        surface = self.bg_img.copy()
+        text_surface = font.render(self.text, True, (74, 39, 10))
+        text_rect = text_surface.get_rect(center=surface.get_rect().center)
+        surface.blit(text_surface, text_rect)
+        return surface
 
     def game_loop(self, past_time, events):
         mouse_pos = self.main.get_mouse_pos()
