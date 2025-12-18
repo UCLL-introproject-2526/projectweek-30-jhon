@@ -3,27 +3,27 @@ from entities.Entity import Entity
 from tools.Loop_controller import Loop_controller
 
 class Button(Entity):
-    def __init__(self, x, y, width, height, main, texture, text, color):
+    def __init__(self, x, y, width, height, main, texture, text, color, bg_color):
         super().__init__(x, y, width, height, main, texture=texture)
         self.text = text
         self.color = color
+        self.main = main
+        self.bg_color = bg_color
 
-    def __get_screen_area(self, map_obj):
-        window_width = 600
-        window_height = 260
-        current_map_width, current_map_height = map_obj.get_range()
+    def is_clicked(self):
+        mouse_pos = self.main.get_mouse_pos()
+        if (self.x <= mouse_pos[0] <= self.x + self.width and
+            self.y <= mouse_pos[1] <= self.y + self.height):
+            if pygame.mouse.get_pressed()[0]:
+                return True
+        return False
 
-        window_aspect_ratio = window_width / window_height
-        map_aspect_ratio = current_map_width / current_map_height
+    def get_texture(self):
+        font = pygame.font.SysFont('Arial', 30)
+        return font.render(self.text, True, self.color, self.bg_color)
 
-        offset_x = 0
-        offset_y = 0
-        if window_aspect_ratio > map_aspect_ratio:
-            screen_height = window_height
-            screen_width = int(map_aspect_ratio * screen_height)
-            offset_x = (window_width - screen_width) // 2
-        else:
-            screen_width = window_width
-            screen_height = int(screen_width / map_aspect_ratio)
-            offset_y = (window_height - screen_height) // 2
-        return offset_x, offset_y, screen_width, screen_height
+    def game_loop(self, past_time, events):
+        mouse_pos = self.main.get_mouse_pos()
+        print(mouse_pos)
+        if self.is_clicked():
+            print('TTEEEESSST')

@@ -1,5 +1,6 @@
 from maps.Map import Map
 from entities.Wall import Wall
+from entities.Button import Button
 
 class Map1(Map):
     def __init__(self, main):
@@ -15,3 +16,4 @@ class Map1(Map):
         self.add_entity(Wall(280, 180, 30, 60, main))
 
 
+        self.add_entity(Button(150, 200, 100, 30, main, None, "OLLOOOO", (0, 255, 0), (0, 0, 0)))
