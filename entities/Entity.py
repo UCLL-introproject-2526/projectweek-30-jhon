@@ -16,6 +16,7 @@ class Entity:
         self.__id = id
         self.__restore = (x,y)
         self.__SoundLibrary = SoundLibrary()
+        self.on_floor = False
         if texture:
             self.set_texture(texture)
 

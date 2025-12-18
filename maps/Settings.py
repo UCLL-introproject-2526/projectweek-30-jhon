@@ -11,6 +11,8 @@ class Settings(Map):
     def setup(self, main):
         self.add_entity(Wall(0, 240, 400, 10, main))
 
+        self.add_entity(Button(200, 120, main, None, "Play", (0, 255, 0), (0, 0, 0), "start", is_big=False))
+
 
 
         # self.add_entity(Button(200, 110, main, None, "Play", (0, 255, 0), (0, 0, 0), "start"))

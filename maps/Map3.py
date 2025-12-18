@@ -7,7 +7,7 @@ from entities.Pressure_plate import Pressure_plate
 
 class Map3(Map):
     def __init__(self, main):
-        super().__init__('map3', 400, 250, 10, 180, 365, 0)
+        super().__init__('map3', 400, 250, 10, 180, 360, 0)
         self.setup(main)
 
     def setup(self, main):

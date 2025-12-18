@@ -8,9 +8,14 @@ class Map1(Map):
         self.setup(main)
 
     def setup(self, main):
-        self.add_entity(Wall(0, 240, 400, 30, main))
-        self.add_entity(Wall(-20, 0, 30, 250, main)) 
-        self.add_entity(Wall(400, 0, 30, 250, main)) 
-        self.add_entity(Wall(100, 180, 30, 60, main)) 
-        self.add_entity(Wall(190, 160, 30, 90, main)) 
-        self.add_entity(Wall(280, 180, 30, 60, main))
+        self.add_entity(Wall(0, 247, 400, 3, main))
+        self.add_entity(Wall(0, 0, 12, 250, main))
+        self.add_entity(Wall(388, 0, 12, 250, main))
+
+        self.add_entity(Wall(12, 224, 16, 23, main))
+        self.add_entity(Wall(372, 224, 16, 23, main))
+
+
+        self.add_entity(Wall(99, 180, 30, 67, main))
+        self.add_entity(Wall(184, 160, 42, 87, main))
+        self.add_entity(Wall(279, 180, 30, 67, main))

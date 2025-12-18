@@ -72,7 +72,6 @@ class Render:
         local_y = my - offset_y
 
         if local_x < 0 or local_y < 0 or local_x >= screen_width or local_y >= screen_height:
-            print("Outside map:", mx, my, local_x, local_y)
             return None
 
         grid_x = int(local_x / pixel_size)
