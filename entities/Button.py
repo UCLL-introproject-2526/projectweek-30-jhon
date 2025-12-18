@@ -24,6 +24,5 @@ class Button(Entity):
 
     def game_loop(self, past_time, events):
         mouse_pos = self.main.get_mouse_pos()
-        print(mouse_pos)
         if self.is_clicked():
             print('TTEEEESSST')

@@ -59,13 +59,36 @@ class Render:
             offset_y = (window_height - screen_height) // 2
         return offset_x, offset_y, screen_width, screen_height
 
-    def get_cursor_position(self, main):
-        cursor_x, cursor_y = pygame.mouse.get_pos()
-        screen_x, screen_y, screen_width, screen_height = self.__get_usable_screen_area(main.get_current_map())
-        cursor_x -= screen_width // 2
-        cursor_y -= screen_height // 2
-        map_x, map_y = main.get_current_map().get_range()
-        return cursor_x / map_x, cursor_y / map_y
+    # python
+    def get_cursor_position(self, main, mouse_pos=None):
+        """
+        Gibt die Mausposition als Grid-Koordinaten (x, y) zurück oder None, wenn außerhalb.
+        """
+        import pygame
+
+        map = main.get_current_map()
+        offset_x, offset_y, screen_width, screen_height = self.__get_usable_screen_area(map)
+        map_w, map_h = map.get_range()
+        pixel_size = min(screen_width / map_w, screen_height / map_h)
+
+        if mouse_pos is None:
+            mx, my = pygame.mouse.get_pos()
+        else:
+            mx, my = mouse_pos
+
+        local_x = mx - offset_x
+        local_y = my - offset_y
+
+        if local_x < 0 or local_y < 0 or local_x >= screen_width or local_y >= screen_height:
+            return None
+
+        grid_x = int(local_x / pixel_size)
+        grid_y = int(local_y / pixel_size)
+
+        grid_x = max(0, min(grid_x, map_w - 1))
+        grid_y = max(0, min(grid_y, map_h - 1))
+
+        return grid_x, grid_y
 
 
 
