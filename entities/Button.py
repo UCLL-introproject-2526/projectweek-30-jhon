@@ -5,8 +5,8 @@ from tools.importer import image
 
 
 class Button(Entity):
-    def __init__(self, x, y, main, texture, text, color, bg_color):
-        super().__init__(x, y, 100, 30, main, texture=texture)
+    def __init__(self, x, y, main, texture, text, color, bg_color, id=None):
+        super().__init__(x, y, 100, 30, main, texture=texture, id=id)
         self.text = text
         self.color = color
         self.main = main
