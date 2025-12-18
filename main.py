@@ -22,9 +22,15 @@ class Main:
     def restart_map(self):
         self.__map_manager.reset_map()
 
+    def open_settings(self):
+        self.__map_manager.settings()
+
     def get_mouse_pos(self):
         return self.__loop_controller.get_current_mouse_pos()
 
     def quit(self):
         self.__loop_controller.quit()
+
+    def settings(self):
+        self.__map_manager.settings()
 Main()

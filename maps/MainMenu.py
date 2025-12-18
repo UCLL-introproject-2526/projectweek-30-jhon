@@ -11,9 +11,9 @@ class MainMenu(Map):
     def setup(self, main):
         self.add_entity(Wall(0, 240, 400, 10, main))
 
-        self.add_entity(Button(200, 120, main, None, "Play", (0, 255, 0), (0, 0, 0), "start"))
-        self.add_entity(Button(200, 160, main, None, "Settings", (0, 255, 0), (0, 0, 0), "settings"))
-        self.add_entity(Button(200, 200, main, None, "Quit", (0, 255, 0), (0, 0, 0), "quit"))
+        self.add_entity(Button(200, 120, main, "Play", id="start"))
+        self.add_entity(Button(200, 160, main, "Settings", id="settings"),)
+        self.add_entity(Button(200, 200, main, "Quit", id="quit"))
 
     def update_map(self, past_time, events):
         if self.get_entity_by_id('start').is_clicked():
@@ -23,6 +23,5 @@ class MainMenu(Map):
             self.get_entity_by_id('quit').main.quit()
 
         if self.get_entity_by_id('settings').is_clicked():
-            pass
-            self.get_entity_by_id('settings').main.next_map()
+            self.get_entity_by_id('settings').main.settings()
 
