@@ -69,7 +69,7 @@ def build_maps(main):
     # ========================================================================
     # MAP 2: LEVEL 2 - Advanced Challenge
     # ========================================================================
-    map2 = Map("background", 400, 250)
+    map2 = Map("map2", 400, 250)
 
     # Players (starting at far opposite ends)
     map2.add_entity(Player(10, 200, main, 1))
