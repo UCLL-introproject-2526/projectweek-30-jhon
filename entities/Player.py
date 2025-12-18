@@ -19,9 +19,9 @@ class Player(Entity):
 
         if player_name == "p1":
             self.controls = Key_map(pygame.K_w, pygame.K_s, pygame.K_a, pygame.K_d)
-            self.__textures.append(tools.importer.image("entities/player/Player1.png"))
-            self.__textures.append(tools.importer.image("entities/player/Player1_left.png"))
-            self.__textures.append(tools.importer.image("entities/player/Player1_right.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_01.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_01_left.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_01_right.png"))
         else:
             self.controls = Key_map(pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT)
             self.__textures.append(tools.importer.image("entities/player/Player_02.png"))
