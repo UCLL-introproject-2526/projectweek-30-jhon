@@ -213,8 +213,8 @@ def build_maps(main):
     map5.add_entity(removable_wall_1)
 
     # Pressure plate in the center
-    map5.add_entity(PressurePlate(520, 188, main, remove_target=removable_wall))
-    map5.add_entity(PressurePlate(465, 188, main, remove_target=removable_wall_1))
+    map5.add_entity(PressurePlate(520, 188, main, remove_target=removable_wall, permanent=True))
+    map5.add_entity(PressurePlate(465, 188, main, remove_target=removable_wall_1, permanent=True))
 
     map5.add_entity(Wall(490, 200, 20, 730, main))       
 
