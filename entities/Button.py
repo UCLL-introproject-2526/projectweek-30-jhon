@@ -9,13 +9,16 @@ class Button(Entity):
         self.color = color
         self.main = main
         self.bg_color = bg_color
+        self.clicked = False
 
     def is_clicked(self):
         mouse_pos = self.main.get_mouse_pos()
         if (self.x <= mouse_pos[0] <= self.x + self.width and
-            self.y <= mouse_pos[1] <= self.y + self.height):
+            self.y <= mouse_pos[1] <= self.y + self.height) and self.clicked == False:
             if pygame.mouse.get_pressed()[0]:
+                self.clicked = True
                 return True
+        self.clicked = False
         return False
 
     def get_texture(self):
