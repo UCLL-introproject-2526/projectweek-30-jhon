@@ -1,33 +1,24 @@
-from logic.Loop_controller import Loop_controller
-from config import build_maps
+from maps.MapManager import MapManager
+from tools.Render import Render
+from tools.Loop_controller import Loop_controller
+
 
 class Main:
     def __init__(self):
-        self.__loop_controller = Loop_controller(self, "Merge Conflict")
-        self.__maps = build_maps(self)
-        self.__selected_map = 0
-
+        self.__loop_controller = Loop_controller(self)
+        self.__map_manager = MapManager(self)
         self.__loop_controller.start()
+
+
     def get_current_map(self):
-        return self.__maps[self.__selected_map]
-    
-    def select_map(self, index):
-        if 0 <= index < len(self.__maps):
-            self.__selected_map = index
+        return self.__map_manager.get_current_map()
 
-    def next_map(self):
-        self.__selected_map += 1
-        if self.__selected_map >= len(self.__maps):
-            self.__selected_map = 0
-
-    def add_later_task(self, task, delay):
+    def add_delayed_task(self, task, delay):
         self.__loop_controller.add_later_task(task, delay)
 
+    def next_map(self):
+        self.__map_manager.next_map()
+
     def restart_map(self):
-        print(f"selectedMap: {self.__selected_map}, {len(self.__maps)}")
-        self.__maps = build_maps(self)
-
-        print(f"Now selectedMap: {self.__selected_map}, {len(self.__maps)}")
-
-
-main = Main()
+        self.__map_manager.reset_map()
+Main()

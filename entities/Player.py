@@ -1,38 +1,39 @@
-# from entities.Entity import Entity
-from entities.Entity import Entity
-import tools.importer
-
-# temporary movement to test maps (movement.py)
-from garbage.Movement import Movement
-# -----------------------------
-from settings.keyboard_layout import keybinds_player1, keybinds_player2
 import pygame
+from entities.Entity import Entity
+from tools.SoundLibrary import SoundLibrary
+import tools.importer
+from settings import keyboard_layout
 
-from SoundLibrary import SoundLibrary
 
 class Player(Entity):
-    def __init__(self, x, y, main, keybinds):
-        super().__init__(x, y, 15 , 25, main, solid=False, gravitation=1, name="Player")
+    def __init__(self,x ,y ,main, player_name):
+        super().__init__(x,y,15,25, main, solid=False, gravitation=1)
         self.moving_left = False
         self.moving_right = False
         self.moving_up = False
-        # Prevent accidental merge right after (re)spawn or restart
-        self._merge_cooldown = 0.75
+        self.player_name = player_name
         self.__sound_library = SoundLibrary()
         self.__footstep_cooldown = 0
         self.__footstep_delay = 0.3
-
         self.__textures = []
-        if keybinds == 1:
-            self.controls = keybinds_player1()
-            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_01.png"))
-            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_01_Left.png"))
-            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_01_Right.png"))
+
+        if player_name == "p1":
+            self.controls = Key_map(pygame.K_w, pygame.K_s, pygame.K_a, pygame.K_d)
+            self.__textures.append(tools.importer.image("entities/player/Player1.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player1_left.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player1_right.png"))
         else:
-            self.controls = keybinds_player2()
-            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_02.png"))
-            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_02_Left.png"))
-            self.__textures.append(tools.importer.image("assets/textures/entities/Player/Player_02_Right.png"))
+            self.controls = Key_map(pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT)
+            self.__textures.append(tools.importer.image("entities/player/Player_02.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_02_right.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_02_left.png"))
+
+    def player_death(self):
+        self.main.restart_map()
+
+    def get_player_name(self):
+        return self.player_name
+
 
     def get_texture(self):
         if not self.moving_right and not self.moving_left or (self.moving_right and self.moving_left):
@@ -46,13 +47,12 @@ class Player(Entity):
         return self.__textures[0]
 
     def game_loop(self, delta_time, events):
-        # tick merge cooldown
-        if self._merge_cooldown > 0:
-            self._merge_cooldown -= delta_time
         self.detect_merge()
         self.calc_movement(delta_time)
         self.keyboard_input(events)
 
+
+        # keyboard input
         if self.on_floor and self.moving_up:
             self.speed_y = -10
             self.__sound_library.play('jump')
@@ -62,6 +62,7 @@ class Player(Entity):
             self.speed_x = 3
         elif self.moving_left:
             self.speed_x = -3
+
         # Walking sound
         if self.on_floor and (self.moving_right or self.moving_left):
             if self.__footstep_cooldown <= 0:
@@ -69,42 +70,42 @@ class Player(Entity):
                 self.__footstep_cooldown = self.__footstep_delay
         self.__footstep_cooldown -= delta_time
 
-        if self.get_y() > self.main.get_current_map().get_height() + self.get_height():
+        if self.y > self.main.get_current_map().get_height() + self.height:
             self.__sound_library.play('willhelm')
             self.player_death()
-
-    def player_death(self):
-        self.main.restart_map()
 
     def keyboard_input(self, events):
         for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == self.controls["jump"]:
+                if event.key == self.controls.jump:
                     self.moving_up = True
-                if event.key == self.controls["left"]:
+                if event.key == self.controls.left:
                     self.moving_left = True
-                if event.key == self.controls["right"]:
+                if event.key == self.controls.right:
                     self.moving_right = True
             if event.type == pygame.KEYUP:
-                if event.key == self.controls["left"]:
+                if event.key == self.controls.left:
                     self.moving_left = False
-                if event.key == self.controls["right"]:
+                if event.key == self.controls.right:
                     self.moving_right = False
-                if event.key == self.controls["jump"]:
+                if event.key == self.controls.jump:
                     self.moving_up = False
 
     def detect_merge(self):
-        if self._merge_cooldown > 0:
-            return
         for entity in self.main.get_current_map().get_entities():
-            if entity.get_name() == "Player" and entity is not self:
-                # Ensure the other player also passed their cooldown
-                if hasattr(entity, '_merge_cooldown') and getattr(entity, '_merge_cooldown') > 0:
-                    continue
+            if isinstance(entity, Player) and entity is not self:
                 if self.collision(entity):
                     self.__sound_library.play('merge')
                     self.main.next_map()
 
+    def reset_movement(self):
+        self.moving_right = False
+        self.moving_left = False
 
-    def run_with_delay(self):
-        print("value")
+
+class Key_map:
+    def __init__(self, jump, sneak, left, right):
+        self.jump = jump
+        self.sneak = sneak
+        self.left = left
+        self.right = right

@@ -1,41 +1,44 @@
-import pygame
 from entities.Entity import Entity
 from entities.Player import Player
+from tools.importer import image
 
 class Spike(Entity):
-    def __init__ (self, x, y, main, removable: bool = False):
-        super().__init__(x, y, 20, 20, main,solid=False,texture="block_models/Spike_model.png", name="Spike")
-        self._main = main
-        self._active = True
-        self.removable = bool(removable)
-    
-    def set_active(self, active: bool):
-        self._active = bool(active)
-
-    def is_active(self):
-        return self._active
-
-    def is_removable(self):
-        return self.removable
+    def __init__(self, x, y, main):
+        super().__init__(x, y, 16, 16, main)
+        self.__has_blood = False
+        self.textures = [
+            image('entities/spikes/Spike_model.png'),
+            image('entities/spikes/Spike_model_blood.png'),
+        ]
+        self.__active = True
 
     def get_texture(self):
-        # Hide texture when inactive so render skips it
-        if not self._active:
-            return None
-        return super().get_texture()
+        if self.__has_blood:
+            return self.textures[1]
+        return self.textures[0]
 
-    def game_loop(self, delta_time, events):
+    def game_loop(self, past_time, events):
+        if self.__active:
+            for entity in self.main.get_current_map().get_entities():
+                if self.collision(entity):
+                    if isinstance(entity, Player):
+                        entity.player_death()
+                        self.__has_blood = True
+                        self.play('spikestab')
 
-        """Check collision with players (instant death -> restart level)"""
-        if not self._active:
-            return
 
-        sx, sy, sw, sh = self.get_render_data()
-        
-        for entity in self._main.get_current_map().get_entities():
-            if hasattr(entity, '__class__') and entity.__class__.__name__ == 'Player':
-                px, py, pw, ph = entity.get_render_data()
-                if (px < sx + sw and px + pw > sx and py < sy + sh and py + ph > sy):
-                    self._main.restart_map()
-                    return
-            
+        pass
+
+    def disable(self):
+        if self.__active:
+            self.__active = False
+            self.height = 4
+            self.move(0, 12)
+            self.play('spikeretract')
+
+    def enable(self):
+        if not self.__active:
+            self.__active = True
+            self.height = 16
+            self.move(0, -12)
+            self.play('spikeretract')

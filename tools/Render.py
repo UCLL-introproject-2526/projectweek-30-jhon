@@ -1,42 +1,45 @@
 import pygame
-import random
 
 
 class Render:
-    def __init__(self, caption, width=400, height=250):
+    def __init__(self, caption, width=800, height=500):
         self.__width = width
         self.__height = height
+        print("setupDisplay")
         self.__screen = pygame.display.set_mode((self.__width, self.__height), pygame.RESIZABLE)
         pygame.display.set_caption(caption)
 
         self.__fullscreen = False
 
-
     def update(self, main):
         map = main.get_current_map()
         offset_x, offset_y, screen_width, screen_height = self.__get_usable_screen_area(map)
-        pixelsize = min(screen_width / map.get_range()[0], screen_height / map.get_range()[1])
+        pixel_size = min(screen_width / map.get_range()[0], screen_height / map.get_range()[1])
 
         # Clear screen
         self.__screen.fill((30, 30, 30))
 
         # Draw map background first
         pygame.draw.rect(self.__screen, (50, 50, 50), (offset_x, offset_y, screen_width, screen_height))
-        
-        # front image (background)
-        scaled_image = pygame.transform.scale(map.get_image(),(screen_width, screen_height))
+
+        # background image
+        scaled_image = pygame.transform.scale(map.get_bg(), (screen_width, screen_height))
         self.__screen.blit(scaled_image, (offset_x, offset_y))
 
         # Draw entities on top
         for entity in map.get_entities():
             x, y, width, height = entity.get_render_data()
             if entity.get_texture() is not None:
-                scaled_entity_image = pygame.transform.scale(entity.get_texture(), (int(width * pixelsize), int(height * pixelsize)))
-                self.__screen.blit(scaled_entity_image, (offset_x + int(x * pixelsize), offset_y + int(y * pixelsize)))
+                scaled_entity_image = pygame.transform.scale(entity.get_texture(),
+                                                             (int(width * pixel_size), int(height * pixel_size)))
+                self.__screen.blit(scaled_entity_image, (offset_x + int(x * pixel_size), offset_y + int(y * pixel_size)))
 
+        # front image
+        scaled_image = pygame.transform.scale(map.get_fg(), (screen_width, screen_height))
+        self.__screen.blit(scaled_image, (offset_x, offset_y))
 
         pygame.display.flip()
-    
+
     def __get_usable_screen_area(self, map):
         window_width, window_height = self.__screen.get_size()
         current_map_width, current_map_height = map.get_range()
@@ -55,7 +58,6 @@ class Render:
             screen_height = int(screen_width / map_aspect_ratio)
             offset_y = (window_height - screen_height) // 2
         return (offset_x, offset_y, screen_width, screen_height)
-
 
     def enter_fullscreen(self):
         if self.__fullscreen:
@@ -84,7 +86,6 @@ class Render:
 
     def is_fullscreen(self):
         return self.__fullscreen
-
 
     def quit(self):
         pygame.quit()

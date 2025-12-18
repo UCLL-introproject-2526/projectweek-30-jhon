@@ -1,5 +1,6 @@
 import pygame
 
+
 class SoundLibrary:
     def __init__(self):
         self.sfx = {
@@ -9,6 +10,7 @@ class SoundLibrary:
             'spikestab': 'spikedeath.wav',
             'merge': 'slimeysfx.wav',
             'spikeretract': 'swordsheathing.wav',
+            'wallmove': 'stoneslide.wav',
         }
         self.tracks = {
             'background1': 'soft-background-music-409193.mp3',
@@ -19,7 +21,6 @@ class SoundLibrary:
         self.total_time = 0
         self.__load_sounds()
 
-
     def __load_sounds(self):
         for key, path in self.sfx.items():
             self.loaded_sfx[key] = pygame.mixer.Sound(f'assets/audio/sfx/{path}')
@@ -28,12 +29,14 @@ class SoundLibrary:
         if name in self.loaded_sfx:
             pygame.mixer.Sound.play(self.loaded_sfx[name])
             return
-        
-        if name in self.tracks:
+
+        elif name in self.tracks:
             if not pygame.mixer.music.get_busy() or self.current_track != name:
                 pygame.mixer.music.load(f'assets/audio/music/{self.tracks[name]}')
                 pygame.mixer.music.play()
                 self.current_track = name
+        else:
+            print("Unknown sound player name")
 
     def stop(self):
         pygame.mixer.music.stop()
