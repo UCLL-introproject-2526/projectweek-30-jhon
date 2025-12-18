@@ -183,7 +183,6 @@ def build_maps(main):
     map5.add_entity(Wall(0, 730, 1000, 50, main))      # Ground floor
     for x in range(0, 1000, 20):
         map5.add_entity(Spike(x, 711, main))
-    map5.add_entity(Wall(490, 200, 20, 730, main))       
 
     # Left side - Player 1
     map5.add_entity(Wall(100, 685, 100, 20, main))
@@ -207,7 +206,17 @@ def build_maps(main):
     map5.add_entity(Wall(650, 260, 100, 20, main))
     map5.add_entity(Wall(500, 195, 100, 20, main))
 
+    # Wall thats opens if pressure plate is activated and stays open
+    removable_wall = Wall(495, 100, 20, 100, main)
+    removable_wall_1 = Wall(485, 100, 20, 100, main)
+    map5.add_entity(removable_wall)
+    map5.add_entity(removable_wall_1)
 
+    # Pressure plate in the center
+    map5.add_entity(PressurePlate(520, 188, main, remove_target=removable_wall))
+    map5.add_entity(PressurePlate(465, 188, main, remove_target=removable_wall_1))
+
+    map5.add_entity(Wall(490, 200, 20, 730, main))       
 
     maps.append(map5)
 
