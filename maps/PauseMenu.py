@@ -13,13 +13,14 @@ class PauseMenu:
     
     def setup(self):        
         # Title (centered, yellow/gold color)
-        self.add_entity(TextEntity(150, 65, self.main, "PAUSED", (255, 215, 0), id="pause_title", has_bg=True))
+        self.add_entity(TextEntity(150, 55, self.main, "PAUSED", (255, 215, 0), id="pause_title", has_bg=True))
         
         # Menu buttons (centered, stacked vertically)
-        self.add_entity(Button(150, 100, self.main, "Resume", id="resume", is_big=True))
+        self.add_entity(Button(150, 80, self.main, "Resume", id="resume", is_big=True))
+        self.add_entity(Button(150, 105, self.main, "Settings", id="settings", is_big=True))
         self.add_entity(Button(150, 130, self.main, "Reset Level", id="restart", is_big=True))
-        self.add_entity(Button(150, 160, self.main, "Main Menu", id="main_menu", is_big=True))
-        self.add_entity(Button(150, 190, self.main, "Quit", id="quit", is_big=True))
+        self.add_entity(Button(150, 155, self.main, "Main Menu", id="main_menu", is_big=True))
+        self.add_entity(Button(150, 180, self.main, "Quit", id="quit", is_big=True))
     
     def add_entity(self, entity):
         self.entities.append(entity)
@@ -46,6 +47,10 @@ class PauseMenu:
         # Check button clicks BEFORE updating entities (same pattern as MainMenu/Ending)
         if self.get_entity_by_id('resume').is_clicked():
             self.close()
+            return True
+        
+        if self.get_entity_by_id('settings').is_clicked():
+            self.main.settings()
             return True
         
         if self.get_entity_by_id('restart').is_clicked():

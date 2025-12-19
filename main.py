@@ -34,6 +34,9 @@ class Main:
 
     def settings(self):
         self.__map_manager.settings()
+    
+    def back_from_settings(self):
+        self.__map_manager.back_from_settings()
 
     def map(self, number):
         self.__map_manager.select_map(0)

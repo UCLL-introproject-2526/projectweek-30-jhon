@@ -4,6 +4,7 @@ from entities.Player import Player
 class MapManager:
     def __init__(self, main):
         self.__current_map = 0
+        self.__previous_map = 0
         self.__maps = build_maps(main)
         self.__player1 = Player(0, 0, main, "p1")
         self.__player2 = Player(1, 0, main, "p2")
@@ -46,7 +47,11 @@ class MapManager:
         map.add_entity(entity)
 
     def settings(self):
+        self.__previous_map = self.__current_map
         self.select_map(len(self.__maps) - 1)
+    
+    def back_from_settings(self):
+        self.select_map(self.__previous_map)
 
     def get_p1(self):
         return self.__player1

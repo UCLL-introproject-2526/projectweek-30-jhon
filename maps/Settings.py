@@ -104,7 +104,7 @@ class Settings(Map):
 
         self.get_entity_by_id('fps').set_text(str(self.main.get_fps()))
         if self.get_entity_by_id('back').is_clicked():
-            self.main.map(0)
+            self.main.back_from_settings()
 
         self.get_entity_by_id('p1j').set_text(pygame.key.name(self.__keymap_p1.jump))
         self.get_entity_by_id('p1j').set_color((255, 255, 255) if self.__selected_key == (0, 'jump') else (200, 200, 200))
