@@ -1,3 +1,4 @@
+import asyncio
 from maps.MapManager import MapManager
 from tools.Render import Render
 from tools.Loop_controller import Loop_controller
@@ -7,10 +8,10 @@ class Main:
     def __init__(self):
         self.__loop_controller = Loop_controller(self)
         self.__map_manager = MapManager(self)
-        self.__loop_controller.start()
+        asyncio.create_task(self.__loop_controller.start())
 
 
-    def get_current_map(self): ##
+    def get_current_map(self):
         return self.__map_manager.get_current_map()
 
     def add_delayed_task(self, task, delay):
@@ -49,4 +50,10 @@ class Main:
     def get_p2(self):
         return self.__map_manager.get_p2()
 
-Main()
+async def main():
+    game = Main()
+    await asyncio.sleep(0)
+    while True:
+        await asyncio.sleep(0)
+
+asyncio.run(main())

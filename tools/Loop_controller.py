@@ -1,3 +1,4 @@
+import asyncio
 import pygame
 from time import time
 
@@ -21,12 +22,13 @@ class Loop_controller:
     def set_fps(self, fps):
         self.__fps = max(10, min(fps, 120))
 
-    def start(self):
+    async def start(self):
         clock = pygame.time.Clock()
 
         while True:
             self.game_loop()
             clock.tick(self.__fps)
+            await asyncio.sleep(0)
 
     def add_later_task(self, task, delay):
         self.__logic_manager.add_later_taks(task, delay)

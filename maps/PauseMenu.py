@@ -11,10 +11,7 @@ class PauseMenu:
         self.entities = []
         self.setup()
     
-    def setup(self):
-        # Menu background panel (centered on screen)
-        self.add_entity(Wall(75, 50, 250, 160, self.main))
-        
+    def setup(self):        
         # Title (centered, yellow/gold color)
         self.add_entity(TextEntity(150, 65, self.main, "PAUSED", (255, 215, 0), id="pause_title", has_bg=True))
         
