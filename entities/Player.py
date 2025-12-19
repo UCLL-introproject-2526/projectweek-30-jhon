@@ -19,18 +19,22 @@ class Player(Entity):
         if player_name == "p1":
             self.controls = Key_map(pygame.K_w, pygame.K_a, pygame.K_d)
             self.__textures.append("entities/player/Player_01.png")
-            self.__textures.append("entities/player/Player_01_right.png")
-            self.__textures.append("entities/player/Player_02_right_animation_1.png")
+            self.__textures.append("entities/player/Player_01_Right.png")
+            self.__textures.append("entities/player/Player_01_Right_Middle_Animation.png")
+            self.__textures.append("entities/player/Player_01_Right_Animation_1.png")
             self.__textures.append("entities/player/Player_01_Left.png")
-            self.__textures.append("entities/player/Player_02_left_animation_1.png")
+            self.__textures.append("entities/player/Player_01_Left_Middle_Animation.png")
+            self.__textures.append("entities/player/Player_02_Left_animation_1.png")
 
         else:
             self.controls = Key_map(pygame.K_UP, pygame.K_LEFT, pygame.K_RIGHT)
             self.__textures.append("entities/player/Player_02.png")
-            self.__textures.append("entities/player/Player_02_right.png")
-            self.__textures.append("entities/player/Player_02_right_animation_1.png")
-            self.__textures.append("entities/player/Player_02_left.png")
-            self.__textures.append("entities/player/Player_02_left_animation_1.png")
+            self.__textures.append("entities/player/Player_02_Right.png")
+            self.__textures.append("entities/player/Player_02_Right_Middle_Animation.png")
+            self.__textures.append("entities/player/Player_02_Right_animation_1.png")
+            self.__textures.append("entities/player/Player_02_Left.png")
+            self.__textures.append("entities/player/Player_02_Left_Middle_Animation.png")
+            self.__textures.append("entities/player/Player_02_Left_animation_1.png")
 
 
     def player_death(self):
