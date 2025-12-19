@@ -29,7 +29,7 @@ class Map3(Map):
         self.add_entity(Spike(100, 231, main))
 
         # moving element
-        self.add_entity(Moving_Element(140, 220, 10, 10, main, "mover", texture='wall/platform', speed=40))
+        self.add_entity(Moving_Element(140, 220, 10, 20, main, "mover", texture='wall/platform', speed=40))
 
     def update(self, past_time, events):
         if self.get_entity_by_id('activator').get_pressure():
