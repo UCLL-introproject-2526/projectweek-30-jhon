@@ -1,32 +1,31 @@
 import pygame
 
-
 class SoundLibrary:
     def __init__(self):
         self.__sounds = []
+        self.current_volume = 1.0
 
     def play(self, path):
         for sound in self.__sounds:
             if sound.name == path:
+                sound.sound.set_volume(self.current_volume)
                 pygame.mixer.Sound.play(sound.sound)
                 return
-        self.__sounds.append(Sound(path))
+        self.__sounds.append(Sound(path, self.current_volume))
 
     def volume(self, volume):
+        self.current_volume = volume / 100
         for sound in self.__sounds:
-            sound.set_volume(volume/100)
+            sound.sound.set_volume(self.current_volume)
         print("setting sound volume to", volume)
 
 
 class Sound:
-    def __init__(self, sound_name):
+    def __init__(self, sound_name, volume=1.0):
         self.name = sound_name
         self.sound = pygame.mixer.Sound(f'assets/audio/sfx/{sound_name}')
+        self.sound.set_volume(volume)
         pygame.mixer.Sound.play(self.sound)
-
-
-
-
 
 
 class Musik:
@@ -60,8 +59,6 @@ class Musik:
     def sound_loop(self, past_time):
         self.total_time += past_time
         self.play('soft-background-music-409193.mp3')
-
-
 
 
 sound_library = SoundLibrary()
