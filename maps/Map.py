@@ -1,6 +1,9 @@
 import pygame
 
 from entities.Player import Player
+from entities.TextEntity import TextEntity
+from entities.Button import Button
+from maps.PauseMenu import PauseMenu
 from tools.ImageLibary import image_library
 
 class Map:
@@ -16,6 +19,9 @@ class Map:
         self.__disable_players = no_player
         self.main = main
         self.entities = []
+        
+        # Add pause menu for levels with players
+        self.pause_menu = PauseMenu(main) if not no_player else None
 
     def get_no_player(self):
         return self.__disable_players
@@ -39,7 +45,11 @@ class Map:
         return image_library.get_image(self.fg)
 
     def get_entities(self):
-        return self.entities
+        entities = self.entities.copy()
+        # Add pause menu entities if open
+        if self.pause_menu and self.pause_menu.is_open:
+            entities.extend(self.pause_menu.get_entities())
+        return entities
 
     def get_height(self):
         return self.__height
@@ -53,6 +63,18 @@ class Map:
                 return entity
 
     def update_map(self, past_time, events):
+        # Check for ESC key to toggle pause menu
+        for event in events:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                if self.pause_menu:
+                    self.pause_menu.toggle()
+        
+        # Update pause menu if open
+        if self.pause_menu and self.pause_menu.is_open:
+            self.pause_menu.update(past_time, events)
+            # Don't update game entities while paused
+            return
+        
         self.update(past_time, events)
         for entity in self.entities:
             entity.game_loop(past_time, events)
