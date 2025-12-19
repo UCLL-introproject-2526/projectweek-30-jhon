@@ -8,6 +8,7 @@ from maps.Map5 import Map5
 from maps.map6 import Map6
 from maps.map7 import Map7
 from maps.Ending import Ending
+from maps.Ending_or_not import Ending_or_not
 from maps.Settings import Settings
 
 
@@ -24,6 +25,7 @@ def build_maps(main):
     map7 = Map7(main)
     map5 = Map5(main)
     ending = Ending(main)
+    ending_screen = Ending_or_not(main)
 
     settings= Settings(main)
     maps.append(main_menu)
@@ -34,6 +36,7 @@ def build_maps(main):
     maps.append(map5)
     maps.append(map7)
 
+    maps.append(ending_screen)
     maps.append(map2)
     maps.append(ending)
     maps.append(settings)
