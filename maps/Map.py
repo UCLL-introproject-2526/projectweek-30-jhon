@@ -92,6 +92,7 @@ class Map:
                 player.x = self.__start_pos2_x
 
     def restart_map(self):
+        self.restart()
         for entity in self.entities:
             self.place_player(entity)
 
