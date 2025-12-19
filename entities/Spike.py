@@ -1,21 +1,23 @@
 from entities.Entity import Entity
 from entities.Player import Player
-from tools.importer import image
+from tools.ImageLibary import image_library
+from tools.SoundLibrary import sound_library
+
 
 class Spike(Entity):
     def __init__(self, x, y, main):
         super().__init__(x, y, 16, 16, main)
         self.__has_blood = False
         self.textures = [
-            image('entities/spikes/Spike_model.png'),
-            image('entities/spikes/Spike_model_blood.png'),
+            'entities/spikes/Spike_model.png',
+            'entities/spikes/Spike_model_blood.png',
         ]
         self.__active = True
 
     def get_texture(self):
         if self.__has_blood:
-            return self.textures[1]
-        return self.textures[0]
+            return image_library.get_image(self.textures[1])
+        return image_library.get_image(self.textures[0])
 
     def game_loop(self, past_time, events):
         if self.__active:
@@ -24,7 +26,7 @@ class Spike(Entity):
                     if isinstance(entity, Player):
                         entity.player_death()
                         self.__has_blood = True
-                        self.play('spikestab')
+                        self.play('swordsheathing.wav')
 
 
         pass
@@ -34,11 +36,11 @@ class Spike(Entity):
             self.__active = False
             self.height = 4
             self.move(0, 12)
-            self.play('spikeretract')
+            sound_library.play('spikedeath.wav')
 
     def enable(self):
         if not self.__active:
             self.__active = True
             self.height = 16
             self.move(0, -12)
-            self.play('spikeretract')
+            sound_library.play('spikedeath.wav')

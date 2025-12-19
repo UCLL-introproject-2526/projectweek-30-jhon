@@ -3,7 +3,14 @@ from maps.Map1 import Map1
 from maps.Map2 import Map2
 from maps.Map3 import Map3
 from maps.Map4 import Map4
+<<<<<<< HEAD
 from maps.Map5 import Map5
+=======
+from maps.map5 import Map5
+from maps.map6 import Map6
+from maps.map7 import Map7
+from maps.Ending import Ending
+>>>>>>> 7e23b8e2857a46c1da8c66d4cae2c55a97dce6ac
 from maps.Settings import Settings
 
 
@@ -12,19 +19,26 @@ def build_maps(main):
 
     main_menu = MainMenu(main)
     map1 = Map1(main)
+    map6 = Map6(main)
+
     map2 = Map2(main)
-    map3 = Map3(main)
+    # map3 = Map3(main)
     map4 = Map4(main)
+    map7 = Map7(main)
     map5 = Map5(main)
+    ending = Ending(main)
 
     settings= Settings(main)
     maps.append(main_menu)
     maps.append(map1)
-    maps.append(map3)
+    maps.append(map6)
+    # maps.append(map3)
     maps.append(map4)
     maps.append(map5)
+    maps.append(map7)
+
     maps.append(map2)
-
-
+    maps.append(ending)
     maps.append(settings)
+
     return maps
