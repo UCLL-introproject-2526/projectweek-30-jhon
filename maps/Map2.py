@@ -7,8 +7,8 @@ class Map2(Map):
         self.setup(main)
 
     def setup(self, main):
-        self.add_entity(Wall(0, 240, 60, 20, main))
-        self.add_entity(Wall(250, 240, 50, 20, main))
+        self.add_entity(Wall(0, 240, 70, 20, main))
+        self.add_entity(Wall(249, 240, 55, 20, main))
         self.add_entity(Wall(340, 240, 60, 20, main))
 
         #middle wall
@@ -45,13 +45,12 @@ class Map2(Map):
         self.add_entity(Wall(0,0,400,1, main))
 
         #EASIER
-        self.add_entity(Wall(190,62,20,10,main))
         self.add_entity(Wall(220,62,20,10,main))
 
 
         #LEFT rest
         self.add_entity(Wall(0,110,50,16, main))
-        self.add_entity(Wall(0,54,55,16, main))
+        self.add_entity(Wall(0,53,50,16, main))
         self.add_entity(Wall(140,90,10,50, main))
         self.add_entity(Wall(100,90,40,10, main))
         self.add_entity(Wall(100,60,10,30, main))

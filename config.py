@@ -3,7 +3,7 @@ from maps.Map1 import Map1
 from maps.Map2 import Map2
 from maps.Map3 import Map3
 from maps.Map4 import Map4
-from maps.map5 import Map5
+from maps.Map5 import Map5
 from maps.Settings import Settings
 
 
