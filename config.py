@@ -3,14 +3,11 @@ from maps.Map1 import Map1
 from maps.Map2 import Map2
 from maps.Map3 import Map3
 from maps.Map4 import Map4
-<<<<<<< HEAD
 from maps.Map5 import Map5
-=======
-from maps.map5 import Map5
+from maps.Map5 import Map5
 from maps.map6 import Map6
 from maps.map7 import Map7
 from maps.Ending import Ending
->>>>>>> 7e23b8e2857a46c1da8c66d4cae2c55a97dce6ac
 from maps.Settings import Settings
 
 

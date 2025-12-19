@@ -14,7 +14,8 @@ class SoundLibrary:
 
     def volume(self, volume):
         for sound in self.__sounds:
-            sound.set_volume(sound.base_volume * volume)
+            sound.set_volume(volume/100)
+        print("setting sound volume to", volume)
 
 
 class Sound:
@@ -53,6 +54,7 @@ class Musik:
     def set_volume(self, volume):
         self.__volume = max(min(volume, 100), 0)
         pygame.mixer.music.set_volume(volume / 100)
+        sound_library.volume(self.__volume)
 
     def sound_loop(self, past_time):
         self.total_time += past_time
