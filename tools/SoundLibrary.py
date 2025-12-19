@@ -1,8 +1,10 @@
 import pygame
+from pygame.examples.music_drop_fade import volume
 
 
 class SoundLibrary:
     def __init__(self):
+<<<<<<< Updated upstream
         self.sfx = {
             'footstep': 'footstep.wav',
             'jump': 'boink.wav',
@@ -20,6 +22,52 @@ class SoundLibrary:
         self.current_track = None
         self.total_time = 0
         self.__load_sounds()
+=======
+        self.__sounds = []
+        self.__volume = 100
+
+    def play(self, path):
+        for sound in self.__sounds:
+            if sound.name == path:
+                pygame.mixer.Sound.play(sound.sound)
+                return
+        sound = Sound(path)
+        self.__sounds.append(sound)
+        sound.sound.set_volume(sound.sound.base_volume * self.__volume / 100)
+
+    def set_volume(self, volume):
+        self.__volume = max(0, min(150, volume))
+        for sound in self.__sounds:
+            sound.sound.set_volume(sound.sound.base_volume * self.__volume / 100)
+
+    def get_volume(self):
+        return self.__volume
+
+class Sound:
+    def __init__(self, sound_name):
+        self.name = sound_name
+        self.sound = pygame.mixer.Sound(f'assets/audio/sfx/{sound_name}')
+        pygame.mixer.Sound.play(self.sound)
+
+
+
+
+
+
+class Musik:
+    def __init__(self):
+        self.__is_playing = None
+        self.total_time = 0
+        self.__volume = 100
+
+    def set_volume(self, volume):
+        self.__volume = min(150, max(0, volume))
+        pygame.mixer.music.set_volume(volume / 100)
+
+
+    def get_volume(self):
+        return self.__volume
+>>>>>>> Stashed changes
 
     def __load_sounds(self):
         for key, path in self.sfx.items():
@@ -46,9 +94,6 @@ class SoundLibrary:
 
     def unpause(self):
         pygame.mixer.music.unpause()
-
-    def set_volume(self, volume):
-        pygame.mixer.music.set_volume(volume)
 
     def sound_loop(self, past_time):
         self.total_time += past_time

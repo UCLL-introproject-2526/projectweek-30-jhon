@@ -4,6 +4,8 @@ from maps.Map import Map
 from entities.Wall import Wall
 from entities.TextEntity import TextEntity
 from entities.Button import Button
+from tools.SoundLibrary import musik, sound_library
+
 
 class Settings(Map):
     def __init__(self, main):
@@ -45,9 +47,9 @@ class Settings(Map):
 
         # volume
         self.add_entity(TextEntity(195, 175, main, "Volume", (200, 200, 200), has_bg=True))
-        self.add_entity(Button(195, 200, main, "-", (255, 255, 255), is_big=False))
-        self.add_entity(Button(235, 200, main, "100%", (200, 200, 200), is_big=False, is_animated=False))
-        self.add_entity(Button(275, 200, main, "+", (255, 255, 255), is_big=False))
+        self.add_entity(Button(195, 200, main, "-", (255, 255, 255), is_big=False, callback=self.reduce_volume))
+        self.add_entity(Button(235, 200, main, "100%", (200, 200, 200), is_big=False, is_animated=False, id='volume'))
+        self.add_entity(Button(275, 200, main, "+", (255, 255, 255), is_big=False, callback=self.increase_volume))
 
         # full screen
         self.add_entity(Button(340, 30, main, "Full Screen", (200, 200, 200)))
@@ -77,7 +79,6 @@ class Settings(Map):
                 key_map.jump = key
         self.__selected_key = (key, key)
 
-
     def reduce_fps(self):
         print("Reducing FPS")
         self.main.set_fps(self.main.get_fps() - 5)
@@ -85,6 +86,14 @@ class Settings(Map):
     def increase_fps(self):
         print("Increasing FPS")
         self.main.set_fps(self.main.get_fps() + 5)
+
+    def reduce_volume(self):
+        musik.set_volume(musik.get_volume() - 5)
+        sound_library.set_volume(musik.get_volume() - 5)
+
+    def increase_volume(self):
+        musik.set_volume(musik.get_volume() + 5)
+        sound_library.set_volume(musik.get_volume() + 5)
 
     def update(self, past_time, events):
         if self.__keymap_p1 is None or self.__keymap_p2 is None:
@@ -110,6 +119,8 @@ class Settings(Map):
         self.get_entity_by_id('p2l').set_color((255, 255, 255) if self.__selected_key == (1, 'left') else (200, 200, 200))
         self.get_entity_by_id('p2r').set_text(pygame.key.name(self.__keymap_p2.right))
         self.get_entity_by_id('p2r').set_color((255, 255, 255) if self.__selected_key == (1, 'right') else (200, 200, 200))
+
+        self.get_entity_by_id('volume').set_text(str(musik.get_volume()))
 
     def restart(self):
         self.__selected_key = None
