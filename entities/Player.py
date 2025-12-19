@@ -1,7 +1,8 @@
 import pygame
 from entities.Entity import Entity
-from tools.ImageLibary import image_library
-from tools.SoundLibrary import sound_library
+from tools.SoundLibrary import SoundLibrary
+import tools.importer
+from settings import keyboard_layout
 
 
 class Player(Entity):
@@ -11,20 +12,21 @@ class Player(Entity):
         self.moving_right = False
         self.moving_up = False
         self.player_name = player_name
+        self.__sound_library = SoundLibrary()
         self.__footstep_cooldown = 0
         self.__footstep_delay = 0.3
         self.__textures = []
 
         if player_name == "p1":
             self.controls = Key_map(pygame.K_w, pygame.K_a, pygame.K_d)
-            self.__textures.append("entities/player/Player_01.png")
-            self.__textures.append("entities/player/Player_01_left.png")
-            self.__textures.append("entities/player/Player_01_right.png")
+            self.__textures.append(tools.importer.image("entities/player/Player_01.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_01_left.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_01_right.png"))
         else:
             self.controls = Key_map(pygame.K_UP, pygame.K_LEFT, pygame.K_RIGHT)
-            self.__textures.append("entities/player/Player_02.png")
-            self.__textures.append("entities/player/Player_02_right.png")
-            self.__textures.append("entities/player/Player_02_left.png")
+            self.__textures.append(tools.importer.image("entities/player/Player_02.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_02_right.png"))
+            self.__textures.append(tools.importer.image("entities/player/Player_02_left.png"))
 
     def player_death(self):
         self.main.restart_map()
@@ -37,14 +39,14 @@ class Player(Entity):
         if self.main.get_current_map().get_no_player():
             return None
         if not self.moving_right and not self.moving_left or (self.moving_right and self.moving_left):
-            return image_library.get_image(self.__textures[0])
+            return self.__textures[0]
         elif self.moving_right:
             self.speed_x = 3
-            return image_library.get_image(self.__textures[2])
+            return self.__textures[2]
         elif self.moving_left:
             self.speed_x = -3
-            return image_library.get_image(self.__textures[1])
-        return image_library.get_image(self.__textures[0])
+            return self.__textures[1]
+        return self.__textures[0]
 
     def game_loop(self, delta_time, events):
         if self.main.get_current_map().get_no_player():
@@ -57,7 +59,7 @@ class Player(Entity):
         # keyboard input
         if self.on_floor and self.moving_up:
             self.speed_y = -10
-            sound_library.play("boink.wav")
+            self.__sound_library.play('jump')
         if not self.moving_right and not self.moving_left or (self.moving_right and self.moving_left):
             self.speed_x = 0
         elif self.moving_right:
@@ -68,12 +70,12 @@ class Player(Entity):
         # Walking sound
         if self.on_floor and (self.moving_right or self.moving_left):
             if self.__footstep_cooldown <= 0:
-                sound_library.play('footstep.wav')
+                self.__sound_library.play('footstep')
                 self.__footstep_cooldown = self.__footstep_delay
         self.__footstep_cooldown -= delta_time
 
         if self.y > self.main.get_current_map().get_height() + self.height:
-            sound_library.play('willhelm.wav')
+            self.__sound_library.play('willhelm')
             self.player_death()
 
     def keyboard_input(self, events):
@@ -97,7 +99,7 @@ class Player(Entity):
         for entity in self.main.get_current_map().get_entities():
             if isinstance(entity, Player) and entity is not self:
                 if self.collision(entity):
-                    sound_library.play('slimeysfx.wav')
+                    self.__sound_library.play('merge')
                     self.main.next_map()
 
     def reset_movement(self):

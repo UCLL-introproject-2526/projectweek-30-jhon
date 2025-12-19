@@ -1,6 +1,5 @@
-from tools.ImageLibary import image_library
-from tools.SoundLibrary import sound_library
-
+from tools.importer import image
+from tools.SoundLibrary import SoundLibrary
 
 class Entity:
     def __init__(self, x, y, width, height, main, solid=False, texture=None, gravitation=False, id=None):
@@ -16,12 +15,13 @@ class Entity:
         self.__gravitation = gravitation
         self.__id = id
         self.__restore = (x,y)
+        self.__SoundLibrary = SoundLibrary()
         self.on_floor = False
         if texture:
             self.set_texture(texture)
 
     def play(self, sound):
-        sound_library.play(sound)
+        self.__SoundLibrary.play(sound)
 
     def set_id(self, id):
         self.__id = id
@@ -36,7 +36,7 @@ class Entity:
         return self.__is_solid
 
     def set_texture(self, texture):
-        self.texture = f"entities/{texture}.png"
+        self.texture = image(f"entities/{texture}.png")
 
     def restore_entity(self):
         self.restore()
@@ -50,7 +50,7 @@ class Entity:
         print(f"position has been restored to {self.x}, {self.y}")
 
     def get_texture(self):
-        return image_library.get_image(self.texture)
+        return self.texture
 
     def get_render_data(self):
         return self.x, self.y, self.width, self.height

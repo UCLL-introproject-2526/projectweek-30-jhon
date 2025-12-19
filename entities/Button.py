@@ -1,6 +1,6 @@
 import pygame
 from entities.Entity import Entity
-from tools.ImageLibary import image_library
+from tools.importer import image
 
 
 class Button(Entity):
@@ -14,6 +14,10 @@ class Button(Entity):
         self.__clicked = False
         self.__is_big = is_big
         self.__is_animated = is_animated
+        self.imagessssiooo = [
+            image('entities/button/long_button.png'),
+            image('entities/button/small_button.png')
+        ]
         self.callback = callback
 
     def is_clicked(self):
@@ -46,7 +50,7 @@ class Button(Entity):
         self.__clicked = False
 
     def __get_img(self):
-        return image_library.get_image('entities/button/long_button.png') if self.__is_big else image_library.get_image('entities/button/small_button.png')
+        return  self.imagessssiooo[0] if self.__is_big else self.imagessssiooo[1]
 
     def get_texture(self):
         font = pygame.font.SysFont('Arial', 130, bold=True)

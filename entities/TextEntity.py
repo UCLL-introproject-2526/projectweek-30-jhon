@@ -1,6 +1,7 @@
 import pygame
 from entities.Entity import Entity
-from tools.ImageLibary import image_library
+from tools.Loop_controller import Loop_controller
+from tools.importer import image
 
 
 class TextEntity(Entity):
@@ -9,11 +10,11 @@ class TextEntity(Entity):
         self.text = text
         self.color = color
         self.main = main
-        self.__img = 'entities/button/long_button.png' if has_bg else 'entities/text/long_button.png'
+        self.__img = image('entities/button/long_button.png') if has_bg else image('entities/text/long_button.png')
 
     def get_texture(self):
         font = pygame.font.SysFont('Arial', 100)
-        surface = image_library.get_image(self.__img).copy()
+        surface = self.__img.copy()
         text_surface = font.render(self.text, True, self.color)
         text_rect = text_surface.get_rect(center=surface.get_rect().center)
         surface.blit(text_surface, text_rect)

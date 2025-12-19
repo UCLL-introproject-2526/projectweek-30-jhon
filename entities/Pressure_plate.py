@@ -1,15 +1,19 @@
 from entities.Entity import Entity
 from entities.Player import Player
-from tools.ImageLibary import image_library
+from tools.importer import image
 
 
 class Pressure_plate(Entity):
     def __init__(self, x, y, main, id):
         super().__init__(x, y, 16, 16, main, id=id)
         self.__pressure = False
+        self.textures = [
+            image("entities/pressure_plate/in.png"),
+            image("entities/pressure_plate/out.png")
+        ]
 
     def get_texture(self):
-        return image_library.get_image("entities/pressure_plate/in.png") if self.__pressure else image_library.get_image("entities/pressure_plate/out.png")
+        return self.textures[0] if self.__pressure else self.textures[1]
 
     def get_pressure(self):
         return self.__pressure

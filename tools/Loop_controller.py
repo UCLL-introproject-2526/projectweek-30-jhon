@@ -3,7 +3,7 @@ from time import time
 
 from tools.Logic_runner import LogicManager
 from tools.Render import Render
-from tools.SoundLibrary import musik
+from tools.SoundLibrary import SoundLibrary
 
 
 class Loop_controller:
@@ -14,6 +14,7 @@ class Loop_controller:
         self.__renderer = Render("Merge Conflict", 1200, 750)
         self.__logic_manager = LogicManager(main)
         self.__time = time()
+        self.__sound_library = SoundLibrary()
 
     def get_fps(self):
         return self.__fps
@@ -48,7 +49,7 @@ class Loop_controller:
         # loops
 
         # run sound loop
-        musik.sound_loop(past_time)
+        self.__sound_library.sound_loop(past_time)
 
 
         # listen to quit event
