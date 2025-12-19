@@ -1,6 +1,5 @@
 import pygame
 
-
 class Render:
     def __init__(self, caption, width=800, height=500):
         self.__width = width
@@ -12,6 +11,8 @@ class Render:
         self.__fullscreen = False
 
     def update(self, main):
+        if not pygame.display.get_init() or self.__screen is None:
+            return
         map = main.get_current_map()
         offset_x, offset_y, screen_width, screen_height = self.__get_usable_screen_area(map)
         pixel_size = min(screen_width / map.get_range()[0], screen_height / map.get_range()[1])
@@ -41,7 +42,14 @@ class Render:
         pygame.display.flip()
 
     def __get_usable_screen_area(self, map):
-        window_width, window_height = self.__screen.get_size()
+        if not pygame.display.get_init() or self.__screen is None:
+            window_width, window_height = self.__width, self.__height
+        else:
+            try:
+                window_width, window_height = self.__screen.get_size()
+            except Exception:
+                window_width, window_height = self.__width, self.__height
+
         current_map_width, current_map_height = map.get_range()
 
         window_aspect_ratio = window_width / window_height
@@ -60,6 +68,8 @@ class Render:
         return offset_x, offset_y, screen_width, screen_height
 
     def get_cursor_position(self, main):
+        if not pygame.display.get_init() or self.__screen is None:
+            return None
 
         map = main.get_current_map()
         offset_x, offset_y, screen_width, screen_height = self.__get_usable_screen_area(map)
@@ -114,5 +124,5 @@ class Render:
 
     def quit(self):
         pygame.quit()
-        print("Quitting application...")
-        raise SystemExit
+        self.__screen = None
+        exit('Game was closed.')

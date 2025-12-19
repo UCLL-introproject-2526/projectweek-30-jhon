@@ -26,6 +26,8 @@ class Loop_controller:
         clock = pygame.time.Clock()
 
         while True:
+            if not pygame.display.get_init():
+                break
             self.game_loop()
             clock.tick(self.__fps)
             await asyncio.sleep(0)
@@ -37,7 +39,8 @@ class Loop_controller:
         self.__renderer.quit()
 
     def game_loop(self):
-
+        if not pygame.display.get_init():
+            return
         # runtime
         past_time = time() - self.__time
         self.__time = time()
