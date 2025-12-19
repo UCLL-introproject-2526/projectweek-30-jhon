@@ -52,6 +52,7 @@ class Musik:
 
     def set_volume(self, volume):
         self.__volume = max(min(volume, 100), 0)
+        # lol
         pygame.mixer.music.set_volume(volume / 100)
 
     def sound_loop(self, past_time):
