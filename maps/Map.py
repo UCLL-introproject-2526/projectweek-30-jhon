@@ -1,7 +1,7 @@
 import pygame
 
 from entities.Player import Player
-from tools.importer import image
+from tools.ImageLibary import image_library
 
 class Map:
     def __init__(self, main, name, width, height, start_pos1_x, start_pos1_y, start_pos2_x, start_pos2_y, no_player=False):
@@ -11,8 +11,8 @@ class Map:
         self.__start_pos1_y = start_pos1_y
         self.__start_pos2_x = start_pos2_x
         self.__start_pos2_y = start_pos2_y
-        self.bg = image(f"background/{name}.png")
-        self.fg = image(f"frontground/{name}.png")
+        self.bg = f"background/{name}.png"
+        self.fg = f"frontground/{name}.png"
         self.__disable_players = no_player
         self.main = main
         self.entities = []
@@ -33,10 +33,10 @@ class Map:
         return self.__width, self.__height
 
     def get_bg(self):
-        return self.bg
+        return image_library.get_image(self.bg)
 
     def get_fg(self):
-        return self.fg
+        return image_library.get_image(self.fg)
 
     def get_entities(self):
         return self.entities
