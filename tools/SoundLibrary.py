@@ -32,6 +32,7 @@ class Musik:
     def __init__(self):
         self.__is_playing = None
         self.total_time = 0
+        self.__volume = 100
 
     def play(self, path):
         if not pygame.mixer.music.get_busy() and self.__is_playing != path:
@@ -40,6 +41,9 @@ class Musik:
             pygame.mixer.music.play()
             self.__is_playing = path
 
+    def get_volume(self):
+        return self.__volume
+
     def pause(self):
         pygame.mixer.music.pause()
 
@@ -47,7 +51,8 @@ class Musik:
         pygame.mixer.music.unpause()
 
     def set_volume(self, volume):
-        pygame.mixer.music.set_volume(volume)
+        self.__volume = max(min(volume, 100), 0)
+        pygame.mixer.music.set_volume(volume / 100)
 
     def sound_loop(self, past_time):
         self.total_time += past_time
