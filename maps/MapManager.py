@@ -3,10 +3,6 @@ from entities.Player import Player
 
 class MapManager:
     def __init__(self, main):
-
-        self.__current_map = 5
-        self.__current_map = 7
-        self.__current_map = 0
         self.__current_map = 0
         self.__maps = build_maps(main)
         self.__player1 = Player(0, 0, main, "p1")
