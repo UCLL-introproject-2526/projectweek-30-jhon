@@ -66,5 +66,14 @@ class Loop_controller:
 
         self.__renderer.update(self.main)
 
+    def toggle_fullscreen(self):
+        if self.__renderer.is_fullscreen():
+            self.__renderer.leave_fullscreen()
+            return
+        self.__renderer.enter_fullscreen()
+
+    def get_fullscreen(self):
+        return self.__renderer.is_fullscreen()
+
     def get_current_mouse_pos(self):
         return self.__renderer.get_cursor_position(self.main)

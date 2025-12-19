@@ -52,7 +52,7 @@ class Settings(Map):
         self.add_entity(Button(275, 200, main, "+", (255, 255, 255), is_big=False, callback=self.increase_volume))
 
         # full screen
-        self.add_entity(Button(340, 30, main, "Full Screen", (200, 200, 200)))
+        self.add_entity(Button(340, 30, main, "Window" if self.main.get_fullscreen() else "Full Screen", (200, 200, 200), id='window', callback= self.toggle_fullscreen))
 
     def select_key(self, player, key):
         self.__selected_key = (player, key)
@@ -118,9 +118,14 @@ class Settings(Map):
         self.get_entity_by_id('p2l').set_color((255, 255, 255) if self.__selected_key == (1, 'left') else (200, 200, 200))
         self.get_entity_by_id('p2r').set_text(pygame.key.name(self.__keymap_p2.right))
         self.get_entity_by_id('p2r').set_color((255, 255, 255) if self.__selected_key == (1, 'right') else (200, 200, 200))
+        self.get_entity_by_id('window').set_text("Window" if self.main.get_fullscreen() else "Full Screen")
 
 
         self.get_entity_by_id('volume').set_text(str(musik.get_volume()))
+
+    def toggle_fullscreen(self):
+        print("Toggling Fullscreen")
+        self.main.toggle_fullscreen()
 
     def restart(self):
         self.__selected_key = None

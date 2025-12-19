@@ -53,6 +53,12 @@ class Main:
     def get_p2(self):
         return self.__map_manager.get_p2()
 
+    def toggle_fullscreen(self):
+        self.__loop_controller.toggle_fullscreen()
+
+    def get_fullscreen(self):
+        return self.__loop_controller.get_fullscreen()
+
 async def main():
     game = Main()
     await asyncio.sleep(0)
