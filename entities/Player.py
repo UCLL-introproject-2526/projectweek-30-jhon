@@ -13,18 +13,25 @@ class Player(Entity):
         self.player_name = player_name
         self.__footstep_cooldown = 0
         self.__footstep_delay = 0.3
+        self.__measure_time = 0
         self.__textures = []
 
         if player_name == "p1":
             self.controls = Key_map(pygame.K_w, pygame.K_a, pygame.K_d)
             self.__textures.append("entities/player/Player_01.png")
-            self.__textures.append("entities/player/Player_01_left.png")
             self.__textures.append("entities/player/Player_01_right.png")
+            self.__textures.append("entities/player/Player_02_right_animation_1.png")
+            self.__textures.append("entities/player/Player_01_Left.png")
+            self.__textures.append("entities/player/Player_02_left_animation_1.png")
+
         else:
             self.controls = Key_map(pygame.K_UP, pygame.K_LEFT, pygame.K_RIGHT)
             self.__textures.append("entities/player/Player_02.png")
             self.__textures.append("entities/player/Player_02_right.png")
+            self.__textures.append("entities/player/Player_02_right_animation_1.png")
             self.__textures.append("entities/player/Player_02_left.png")
+            self.__textures.append("entities/player/Player_02_left_animation_1.png")
+
 
     def player_death(self):
         self.main.restart_map()
@@ -40,13 +47,18 @@ class Player(Entity):
             return image_library.get_image(self.__textures[0])
         elif self.moving_right:
             self.speed_x = 3
-            return image_library.get_image(self.__textures[2])
+            if round(self.__measure_time * 4) % 2 == 0:
+                return image_library.get_image(self.__textures[2])
+            return image_library.get_image(self.__textures[1])
         elif self.moving_left:
             self.speed_x = -3
-            return image_library.get_image(self.__textures[1])
+            if round(self.__measure_time * 4) % 2 == 0:
+                return image_library.get_image(self.__textures[4])
+            return image_library.get_image(self.__textures[3])
         return image_library.get_image(self.__textures[0])
 
     def game_loop(self, delta_time, events):
+        self.__measure_time += delta_time
         if self.main.get_current_map().get_no_player():
             return None
         self.detect_merge()
@@ -60,9 +72,14 @@ class Player(Entity):
             sound_library.play("boink.wav")
         if not self.moving_right and not self.moving_left or (self.moving_right and self.moving_left):
             self.speed_x = 0
+            self.__measure_time = 0
         elif self.moving_right:
+            if self.speed_x < 0:
+                self.__measure_time = 0
             self.speed_x = 3
         elif self.moving_left:
+            if self.speed_x > 0:
+                self.__measure_time = 0
             self.speed_x = -3
 
         # Walking sound
