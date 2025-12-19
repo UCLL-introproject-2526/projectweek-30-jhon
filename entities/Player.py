@@ -24,7 +24,7 @@ class Player(Entity):
             self.__textures.append("entities/player/Player_01_Right_Animation_1.png")
             self.__textures.append("entities/player/Player_01_Left.png")
             self.__textures.append("entities/player/Player_01_Left_Middle_Animation.png")
-            self.__textures.append("entities/player/Player_02_Left_animation_1.png")
+            self.__textures.append("entities/player/Player_01_Left_animation_1.png")
 
         else:
             self.controls = Key_map(pygame.K_UP, pygame.K_LEFT, pygame.K_RIGHT)
@@ -51,14 +51,20 @@ class Player(Entity):
             return image_library.get_image(self.__textures[0])
         elif self.moving_right:
             self.speed_x = 3
-            if round(self.__measure_time * 4) % 2 == 0:
+            if round(self.__measure_time * 4) % 3 == 0:
+                return image_library.get_image(self.__textures[1])
+            elif round(self.__measure_time * 4) % 3 == 1:
                 return image_library.get_image(self.__textures[2])
-            return image_library.get_image(self.__textures[1])
+            elif round(self.__measure_time * 4) % 3 == 2:
+                return image_library.get_image(self.__textures[3])
         elif self.moving_left:
             self.speed_x = -3
-            if round(self.__measure_time * 4) % 2 == 0:
+            if round(self.__measure_time * 4) % 3 == 0:
                 return image_library.get_image(self.__textures[4])
-            return image_library.get_image(self.__textures[3])
+            elif round(self.__measure_time * 4) % 3 == 1:
+                return image_library.get_image(self.__textures[5])
+            elif round(self.__measure_time * 4) % 3 == 2:
+                return image_library.get_image(self.__textures[6])
         return image_library.get_image(self.__textures[0])
 
     def game_loop(self, delta_time, events):
