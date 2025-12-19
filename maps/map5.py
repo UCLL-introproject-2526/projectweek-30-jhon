@@ -53,7 +53,7 @@ class Map5(Map):
         self.add_entity(Pressure_plate(170, 189, main, "plate_spawn_wall"))
 
         # Plate 3: Koppelen we aan de spikes
-        self.add_entity(Pressure_plate(260, 68, main, "plate_remove_spikes"))
+        self.add_entity(Pressure_plate(260, 64, main, "plate_remove_spikes"))
 
     def update(self, past_time, events):
         if self.get_entity_by_id("plate_remove_wall").get_pressure():
