@@ -3,12 +3,11 @@ from entities.Player import Player
 
 class MapManager:
     def __init__(self, main):
-<<<<<<< Updated upstream
+
         self.__current_map = 5
         self.__current_map = 7
-=======
         self.__current_map = 0
->>>>>>> Stashed changes
+        self.__current_map = 0
         self.__maps = build_maps(main)
         self.__player1 = Player(0, 0, main, "p1")
         self.__player2 = Player(1, 0, main, "p2")
