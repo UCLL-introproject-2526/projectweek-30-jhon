@@ -1,5 +1,5 @@
 from maps.Map import Map
-from entities.Wall import Wall
+from entities.Wall2 import Wall2  # Import aangepast naar Wall2
 from entities.Button import Button
 
 class Map1(Map):
@@ -8,11 +8,12 @@ class Map1(Map):
         self.setup(main)
 
     def setup(self, main):
-        self.add_entity(Wall(0, 247, 400, 3, main))
+        # Alle Walls vervangen door Wall2
+        self.add_entity(Wall2(0, 247, 400, 3, main))
 
-        self.add_entity(Wall(0, 0, 12, 250, main))
-        self.add_entity(Wall(388, 0, 12, 250, main))
+        self.add_entity(Wall2(0, 0, 12, 250, main))
+        self.add_entity(Wall2(388, 0, 12, 250, main))
 
-        self.add_entity(Wall(100, 180, 30, 67, main))
-        self.add_entity(Wall(184, 160, 42, 87, main))
-        self.add_entity(Wall(280, 180, 30, 67, main))
+        self.add_entity(Wall2(100, 180, 30, 67, main))
+        self.add_entity(Wall2(184, 160, 42, 87, main))
+        self.add_entity(Wall2(280, 180, 30, 67, main))
