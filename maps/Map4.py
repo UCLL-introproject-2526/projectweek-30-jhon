@@ -10,7 +10,7 @@ class Map4(Map):
 
     def setup(self, main):
         # --- Ground and boundaries ---
-        self.add_entity(Wall(0, 240, 400, 30, main))     # Ground floor
+        self.add_entity(Wall(0, 243, 400, 30, main))     # Ground floor
         self.add_entity(Wall(-20, 0, 30, 250, main))     # Left boundary
         self.add_entity(Wall(370, 0, 30, 250, main))     # Right boundary
 
@@ -22,7 +22,7 @@ class Map4(Map):
         # --- Spikes ---
         self.add_entity(Spike(150, 59, main))            # Top spike 1
         self.add_entity(Spike(200, 59, main))            # Top spike 2
-        self.add_entity(Spike(300, 226, main))           # Bottom spike 1
-        self.add_entity(Spike(100, 226, main))           # Bottom spike 2
-        self.add_entity(Spike(150, 226, main))           # Bottom spike 3
-        self.add_entity(Spike(260, 226, main))           # Bottom spike 4
+        self.add_entity(Spike(300, 227, main))           # Bottom spike 1
+        self.add_entity(Spike(100, 227, main))           # Bottom spike 2
+        self.add_entity(Spike(150, 227, main))           # Bottom spike 3
+        self.add_entity(Spike(260, 227, main))           # Bottom spike 4
