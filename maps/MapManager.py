@@ -54,3 +54,4 @@ class MapManager:
     def get_p2(self):
         return self.__player2
 
+
